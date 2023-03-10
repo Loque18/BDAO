@@ -7,6 +7,11 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('src/app/pages/treasury/treasury.module').then((m) => m.TreasuryModule),
 	},
+	{
+		path: 'staking',
+		loadChildren: () =>
+			import('src/app/pages/staking/staking.module').then((m) => m.StakingModule),
+	},
 ];
 
 @NgModule({

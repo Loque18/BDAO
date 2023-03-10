@@ -12,7 +12,7 @@ import { MainComponent } from './main/main.component';
 		CommonModule
 	],
 	exports: [
-		
+		MainComponent
 	],
 })
 export class LayoutModule {}

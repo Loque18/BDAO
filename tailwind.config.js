@@ -1,10 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
 	content: ['./src/**/*.{html,ts}'],
-	purge: {
-		enabled: true,
-	},
-	darkMode: false, // or 'media' or 'class'
+
 	theme: {
 		extend: {
 			fontFamily: {
@@ -38,6 +36,7 @@ module.exports = {
 					900: '#0D0D0D',
 				},
 				gray: {
+					c50: 'AEAEAE',
 					50: '#F9FAFB',
 					100: '#F3F4F6',
 					200: '#E5E7EB',
@@ -49,6 +48,16 @@ module.exports = {
 					800: '#1F2937',
 					900: '#111827',
 				},
+			},
+			borderWidth: {
+				3: '3px',
+			},
+			borderRadius: {
+				sm: '5px',
+			},
+
+			shadow: {
+				cstm: '24px -10px 0px 1px #000000',
 			},
 		},
 	},
