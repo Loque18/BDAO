@@ -5,11 +5,64 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+.primary-button {
+	width: 100%;
+
+	@apply relative;
+	@apply px-4;
+	@apply py-3;
+
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-secondary;
+
+	@apply bg-secondary;
+	@apply text-primary;
+
+	@apply text-xl;
+	@apply font-semibold;
+
+	@apply transition-colors;
+	@apply duration-200;
+	@apply ease-in-out;
+
+	// @apply hover:bg-secondary;
+	// @apply hover:text-primary;
+	@apply hover:before:opacity-100;
+
+	@apply focus:outline-none;
+	// @apply focus:after:
+
+	@apply active:bg-secondary-700;
+	@apply active:border-secondary-700;
+	@apply active:text-primary;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
+
+		width: 100%;
+		height: 100%;
+
+		@apply opacity-0;
+
+		@apply bg-primary;
+		@apply rounded-sm;
+		@apply border-3;
+		@apply border-secondary;
+
+		z-index: -1;
+	}
+}
+
 .secondary-button {
 	// @extend .rounded-sm; .px-4; .py-3 .border-3 .border-primary .text-primary .font-semibold .bg-secondary .hover:bg-primary .hover:text-secondary .text-xl .transition-colors .duration-200 .ease-in-out .focus:outline-none .focus:bg-gray-100 .active:bg-primary;
 
 	width: 100%;
 
+	@apply relative;
 	@apply px-4;
 	@apply py-3;
 
@@ -27,39 +80,33 @@
 	@apply duration-200;
 	@apply ease-in-out;
 
-	@apply hover:bg-secondary;
-	@apply hover:text-primary;
+	// @apply hover:bg-secondary;
+	// @apply hover:text-primary;
+	@apply hover:before:opacity-100;
 
 	@apply focus:outline-none;
-	@apply focus:bg-gray-100;
+	// @apply focus:after:
 
-	@apply active:bg-secondary-800 #{'!important'};
-	@apply active:bg-secondary-50;
-}
+	@apply active:bg-secondary-700;
+	@apply active:border-secondary-700;
+	@apply active:text-primary;
 
-.button {
-	padding: 10px 20px;
-	background-color: blue;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
 
-.button:hover {
-	background-color: darkblue;
-}
+		width: 100%;
+		height: 100%;
 
-.button:focus {
-	outline: none;
-	box-shadow: 0 0 3px 3px rgba(0, 0, 255, 0.3);
-}
+		@apply opacity-0;
 
-.button:active {
-	background-color: lightblue;
-}
+		@apply bg-primary;
+		@apply rounded-sm;
+		@apply border-3;
+		@apply border-secondary;
 
-.button:disabled {
-	background-color: grey;
-	cursor: not-allowed;
+		z-index: -1;
+	}
 }
