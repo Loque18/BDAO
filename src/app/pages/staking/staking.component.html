@@ -4,16 +4,41 @@
 		<!-- 1st column -->
 		<div class="grid grid-cols-1 gap-4">
 			<!-- Stake col -->
-			<div class="grid lg:grid-cols-12 lg:gap-4">
+			<div class="grid lg:grid-cols-12 lg:gap-10">
 				<div class="lg:col-span-4 md:col-span-12">
-					<div class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-4">
+					<div class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5">
 						<form>
-							<div class="field">
-								<input
-									type="text"
-									class="border-3 border-secondary rounded-sm px-4 py-2 w-full focus:shadow-cstm text-right"
-									placeholder="Amount"
+							<div
+								class="flex justify-between items-center border-3 border-secondary rounded-sm px-4 py-3"
+							>
+								<img
+									src="/assets/icons/wallet.svg"
+									alt=""
+									[style]="{ width: '32px' }"
 								/>
+								<div type="text" class="text-right text-secondary font-semibold">
+									$5680.00
+								</div>
+							</div>
+
+							<br />
+
+							<div class="field">
+								<div class="grid grid-cols-12 gap-3">
+									<div class="col-span-8">
+										<input
+											type="text"
+											id="my-input"
+											name="my-input"
+											class="rounded-sm w-full px-4 py-3 text-seconday font-semibold border-3 border-gray-300 text-xl focus:bg-gray-50 focus:outline-none placeholder:text-gray-c50 placeholder:font-semibold text-base"
+											placeholder="Amount"
+										/>
+									</div>
+
+									<div class="col-span-4">
+										<button class="button" type="button">MAX</button>
+									</div>
+								</div>
 							</div>
 						</form>
 					</div>
