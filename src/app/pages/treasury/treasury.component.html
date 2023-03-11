@@ -17,60 +17,59 @@
     </div>
     <div class="main-content ml-12 pl-12">
         <div class="flex gap-4 mt-12">
-            <button class=" bg-transparent py-2 px-6 border-2 border-gray-500">
-               <p class="text-lg font-bold flex">Properties<img class="ml-8" width="30px" src="/assets/tabler-icon-building-estate.png" ></p>
+            <button class=" bg-transparent py-3 px-6 border-2 border-gray-500">
+               <p class="text-2xl font-bold flex">
+                   Properties
+                   <img class="ml-10" width="30px" src="/assets/tabler-icon-building-estate.svg" >
+               </p>
              </button>
              <button class="bg-transparent py-2 px-6 border-2 border-gray-500">
-                <img width="10px" src="/assets/Vector.png">
+                <img width="12px" src="/assets/Vector2.svg">
              </button>
         </div>
-        <div class="columns-3 mt-2 gap-12">
-            <div class="container border-2 border-gray-500">
+        <div class="columns-3 gap-12 mt-2">
+            <div *ngFor="let item of items" class="container animation border-2 border-gray-500">
                 <div class="small-container bg-gray-200">
-                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">$5946</p>
+                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">
+                        {{item.amount}}
+                    </p>
                 </div>
-                <p class="font-bold text-xl ml-7 mt-3">Property</p>
-                <div class="flex gap-5 ml-7">
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        <p class="flex gap-3 pr-2 font-bold">
-                            <img width="20px" src="/assets/Vector (1).png">More info</p>
+                <p class="font-bold text-2xl ml-7 mt-4 mb-3">Property</p>
+                <div class="flex gap-5 ml-7 mb-6">
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500">
+                        <p class="flex gap-3 pr-2 font-semibold">
+                            <img width="20px" [src]="item.firstLogo">More info
+                        </p>
                     </button>
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        5
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500 font-semibold">
+                        <p class="flex">
+                            <img class="mr-7" width="25px" [src]="item.secondLogo">{{item.number}}
+                        </p>
                     </button>
                 </div>
             </div>
-            <div class="container border-2 border-gray-500">
+        </div>
+        <div class="columns-3 mt-12 mb-24 gap-12">
+            <div *ngFor="let item of items" class="container border-2 border-gray-500">
                 <div class="small-container bg-gray-200">
-                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">$5946</p>
+                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">
+                        {{item.amount}}
+                    </p>
                 </div>
-                <p class="font-bold text-xl ml-7 mt-3">Property</p>
-                <div class="flex gap-5 ml-7">
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        <p class="flex gap-3 pr-2 font-bold"
-                        ><img width="20px" src="/assets/Vector (1).png">More info</p>
+                <p class="font-bold text-2xl ml-7 mt-4 mb-3">Property</p>
+                <div class="flex gap-5 ml-7 mb-6">
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500">
+                        <p class="flex gap-3 pr-2 font-semibold">
+                            <img width="20px" [src]="item.firstLogo">More info
+                        </p>
                     </button>
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        5
-                    </button>
-                </div>
-            </div>
-            <div class="container border-2 border-gray-500">
-                <div class="small-container bg-gray-200">
-                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">$5946</p>
-                </div>
-                <p class="font-bold text-xl ml-7 mt-3">Property</p>
-                <div class="flex gap-5 ml-7">
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        <p class="flex gap-3 pr-2 font-bold">
-                            <img width="20px" src="/assets/Vector (1).png">More info</p>
-                    </button>
-                    <button class="bg-transparent py-3 px-6 border-2 border-black">
-                        5
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500 font-semibold">
+                        <p class="flex">
+                            <img class="mr-7" width="25px" [src]="item.secondLogo">{{item.number}}
+                        </p>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-ggggggg

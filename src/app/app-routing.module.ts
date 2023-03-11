@@ -7,6 +7,7 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('src/app/pages/treasury/treasury.module').then((m) => m.TreasuryModule),
 	},
+	
 ];
 
 @NgModule({
