@@ -13,10 +13,8 @@
     border-radius: 6px;
 }
 
-/*.animation:hover{
-    ::after{
-        position: absolute;
-        border: 3px solid black;
-        transform: translatey(-10px);
-    }
-}*/
+.animation:hover{
+    transform: translate(10px,-20px);
+    border: solid 3px black;
+}
+

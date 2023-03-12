@@ -1,20 +1,22 @@
 <div class="container mt-12 ml-12 pl-12">
     <p class="text-2xl font-semibold mb-7">{{title}}</p>
     <div class="grid grid-rows-3 grid-flow-col gap-10">
-        <div class="box  animation border-2 border-gray-500" *ngFor="let item of items">
+        <div class="box border-2 black border-gray-500" *ngFor="let item of items">
+            <div class="border-2 border-gray-500 animation bg-white">
                 <button class="text1 text-lg bg-black px-5 py-2">
                     <img [src]="item.status">
                 </button>
                 <div class="flex gap-20 mt-3 ml-9">
                     <span>
-                        <p class="text-2xl ml-1 font-semibold"> {{item.text1}} </p>
-                        <p class="text-2xl ml-1 font-semibold"> {{item.text2}} </p>
+                        <p class="text-2xl ml-1 font-semibold">{{item.text1}}</p>
+                        <p class="text-2xl ml-1 font-semibold">{{item.text2}}</p>
                     </span>
                     <img class="clock py-2 px-3" width="90px" [src]="item.image">
                 </div>
                 <button class="border-2 border-gray-500 py-1 px-2 rounded font-semibold ml-9 mb-4">
                     {{item.smallText}}
                 </button>
+            </div>
         </div>
         <div class="box border-2 border-black mr-48 ">
             <div class=" flex flex-col items-center">
