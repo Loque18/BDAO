@@ -1,6 +1,6 @@
 <section class="h-screen">
 	<!-- container -->
-	<div class="b_container h-full">
+	<div class="container h-full gap-y-8">
 		<!-- Stake col -->
 		<div
 			id="stake col"
@@ -71,15 +71,23 @@
 			<!-- Stats box -->
 			<div class="lg:col-span-8 md:col-span-12">
 				<!-- box -->
-				<div class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full">
-					<div class="grid lg:grid-cols-5 lg:grid-rows-2 lg:gap-4 lg:gap-y-8 gap-y-8">
+				<div
+					class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full flex flex-col justify-center"
+				>
+					<div
+						class="grid grid-rows-1 gap-y-8 lg:grid-cols-4 lg:grid-rows-2 lg:gap-x-4 lg:gap-y-8 xl:gap-x-[12rem]"
+					>
 						<!-- stake box -->
 						<div class="lg:col-span-2">
 							<div class="stat_box">
 								<img src="/assets/icons/eth_d.svg" alt="" width="48" />
 								<div>
-									<div class="text-secondary text-3xl font-semibold">586.00</div>
-									<div class="text-secondary text-2xl font-semibold">
+									<div class="text-secondary 2xl:text-3xl text-xl font-semibold">
+										586.00
+									</div>
+									<div
+										class="text-secondary 2xl:text-2xl text-base font-semibold"
+									>
 										Amount Staked
 									</div>
 								</div>
@@ -87,12 +95,14 @@
 						</div>
 
 						<!-- stake box -->
-						<div class="lg:col-span-2 lg:col-start-4">
+						<div class="lg:col-span-2">
 							<div class="stat_box black">
 								<img src="/assets/icons/eth_l.svg" alt="" width="48" />
 								<div>
-									<div class="text-green-1 text-3xl font-semibold">586.00</div>
-									<div class="text-primary text-2xl font-semibold">
+									<div class="text-green-1 2xl:text-3xl text-xl font-semibold">
+										586.00
+									</div>
+									<div class="text-primary 2xl:text-2xl text-base font-semibold">
 										Amount Staked
 									</div>
 								</div>
@@ -104,89 +114,30 @@
 							<div class="stat_box">
 								<img src="/assets/icons/spots.svg" alt="" width="48" />
 								<div>
-									<div class="text-secondary text-3xl font-semibold">2</div>
-									<div class="text-secondary text-2xl font-semibold">Spots</div>
+									<div class="text-secondary 2xl:text-3xl text-xl font-semibold">
+										2
+									</div>
+									<div
+										class="text-secondary 2xl:text-2xl text-base font-semibold"
+									>
+										Spots
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- stake box -->
-						<div class="lg:col-span-2 lg:col-start-4">
+						<div class="lg:col-span-2">
 							<div class="stat_box">
 								<img src="/assets/icons/spots.svg" alt="" width="48" />
 								<div>
-									<div class="text-secondary text-3xl font-semibold">$450.00</div>
-									<div class="text-secondary text-2xl font-semibold">
+									<div class="text-secondary 2xl:text-3xl text-xl font-semibold">
+										$450.00
+									</div>
+									<div
+										class="text-secondary 2xl:text-2xl text-base font-semibold"
+									>
 										Total Profit
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- flex cols -->
-					<div class="justify-between hidden">
-						<!-- stake box -->
-						<div class="rounded-sm border-3 border-black px-4 py-4">
-							<div class="flex justify-content-betwen gap-8">
-								<div class="">
-									<img src="https://picsum.photos/64" alt="" />
-								</div>
-								<div>
-									<div class="text-secondary text-3xl font-semibold">586.00</div>
-
-									<div class="text-secondary text-2xl font-semibold">
-										Amount Staked
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- stake box -->
-						<div class="rounded-sm border-3 border-secondary bg-secondary px-4 py-4">
-							<div class="flex justify-content-betwen gap-8">
-								<div class="">
-									<img src="https://picsum.photos/64" alt="" />
-								</div>
-								<div>
-									<div class="text-green-400 text-3xl font-semibold">586.00</div>
-
-									<div class="text-primary text-2xl font-semibold">
-										Amount Staked
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<br />
-
-					<!-- flex cols -->
-					<div class="hidden justify-between">
-						<!-- stake box -->
-						<div class="rounded-sm border-3 border-black px-4 py-4">
-							<div class="flex justify-content-betwen gap-8">
-								<div class="">
-									<img src="https://picsum.photos/64" alt="" />
-								</div>
-								<div>
-									<div class="text-secondary text-3xl font-semibold">2</div>
-
-									<div class="text-secondary text-2xl font-semibold">Spots</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- stake box -->
-						<div class="rounded-sm border-3 border-secondary bg-secondary px-4 py-4">
-							<div class="flex justify-content-betwen gap-8">
-								<div class="">
-									<img src="https://picsum.photos/64" alt="" />
-								</div>
-								<div>
-									<div class="text-green-400 text-3xl font-semibold">586.00</div>
-
-									<div class="text-primary text-2xl font-semibold">
-										Amount Staked
 									</div>
 								</div>
 							</div>
@@ -197,7 +148,7 @@
 		</div>
 
 		<!-- History col -->
-		<div class="flex-grow flex flex-col hidden">
+		<div class="flex-grow flex flex-col">
 			<h1 class="text-2xl text-black font-semibold">Rewards History</h1>
 
 			<div class="flex-grow overflow-y-scroll">

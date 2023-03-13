@@ -63,13 +63,13 @@ module.exports = {
 				cstm: '24px -10px 0px 1px #000000',
 			},
 		},
-	},
-	variants: {
-		extend: {
-			backgroundColor: ['active'],
-			textColor: ['active'],
-			borderColor: ['active'],
-			ringColor: ['hover', 'active'],
+
+		container: {
+			center: true,
+			padding: {
+				DEFAULT: '1rem',
+				'2xl': '4rem',
+			},
 		},
 	},
 	plugins: [require('postcss-import'), require('tailwindcss'), require('autoprefixer')],
