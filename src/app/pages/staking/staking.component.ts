@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { FormGroup, FormControl } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 type Tx = {
 	amount: number;
@@ -34,7 +35,9 @@ function genTxs() {
 export class StakingComponent {
 	txs = genTxs();
 
-	constructor() {}
+	constructor(private titleService: Title) {
+		this.titleService.setTitle('BDAO • Staking');
+	}
 
 	// *~~*~~*~~ FORM ~~*~~*~~* //
 	form: FormGroup = new FormGroup({

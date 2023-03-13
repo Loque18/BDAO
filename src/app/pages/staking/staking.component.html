@@ -1,8 +1,11 @@
-<layout-main>
+<section class="h-screen">
 	<!-- container -->
-	<div class="b_container mx-auto px-[] py-2">
+	<div class="b_container h-full">
 		<!-- Stake col -->
-		<div class="grid lg:grid-cols-12 lg:gap-14 md:grid-cols-1 md:gap-4 lg:auto-rows-[1fr]">
+		<div
+			id="stake col"
+			class="grid grid-cols-1 gap-8 sm:col-span-1 lg:grid-cols-12 lg:gap-14 lg:auto-rows-[1fr]"
+		>
 			<!-- Staking box -->
 			<div class="lg:col-span-4 md:col-span-12">
 				<div class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full">
@@ -193,42 +196,44 @@
 			</div>
 		</div>
 
-		<br />
-
 		<!-- History col -->
-		<div class="">
+		<div class="flex-grow flex flex-col hidden">
 			<h1 class="text-2xl text-black font-semibold">Rewards History</h1>
 
-			<table class="table">
-				<tbody>
-					<tr *ngFor="let tx of txs">
-						<td class="text-secondary text-sm">
-							<h1 class="text-3xl font-semibold">{{ tx.amount.toFixed(2) }}</h1>
-							<h1 class="text-2xl font-medium">ETH</h1>
-						</td>
+			<div class="flex-grow overflow-y-scroll">
+				<table class="table">
+					<tbody>
+						<tr *ngFor="let tx of txs">
+							<td class="text-secondary text-sm">
+								<h1 class="text-3xl font-semibold">
+									{{ tx.amount.toFixed(2) }}
+								</h1>
+								<h1 class="text-2xl font-medium">ETH</h1>
+							</td>
 
-						<td class="text-secondary text-sm">
-							<h1 class="text-3xl font-semibold">
-								{{ tx.date | date : 'MM/dd/yyyy' }}
-							</h1>
-							<h1 class="text-2xl font-medium">date</h1>
-						</td>
+							<td class="text-secondary text-sm">
+								<h1 class="text-3xl font-semibold">
+									{{ tx.date | date : 'MM/dd/yyyy' }}
+								</h1>
+								<h1 class="text-2xl font-medium">date</h1>
+							</td>
 
-						<td class="text-secondary text-sm">
-							<h1 class="text-3xl font-semibold">
-								{{ tx.totalDividends.toFixed(2) }}
-							</h1>
-							<h1 class="text-2xl font-medium">Total dividends</h1>
-						</td>
+							<td class="text-secondary text-sm">
+								<h1 class="text-3xl font-semibold">
+									{{ tx.totalDividends.toFixed(2) }}
+								</h1>
+								<h1 class="text-2xl font-medium">Total dividends</h1>
+							</td>
 
-						<td class="text-secondary text-sm">
-							<button class="secondary-button">
-								<img src="https://picsum.photos/32" alt="" />
-							</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+							<td class="text-secondary text-sm">
+								<button class="secondary-button">
+									<img src="https://picsum.photos/32" alt="" />
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-</layout-main>
+</section>

@@ -22,10 +22,10 @@ $container-max-width: $fullhd !default;
 	// 	width: 100%;
 	// }
 
-	// @media screen and (max-width: calc($mobile - 1px)) {
-	// 	padding-left: 0.5rem;
-	// 	padding-right: 0.5rem;
-	// }
+	@media screen and (max-width: calc($mobile - 1px)) {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
 
 	@media screen and (min-width: $desktop) {
 		max-width: calc($desktop - $container-offset);
