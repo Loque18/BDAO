@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { FormGroup, FormControl } from '@angular/forms';
+
 type Tx = {
 	amount: number;
 	date: Date;
@@ -26,11 +28,29 @@ function genTxs() {
 
 @Component({
 	selector: 'app-staking',
-	templateUrl: './test.html',
+	templateUrl: './staking.component.html',
 	styleUrls: ['./staking.component.scss'],
 })
 export class StakingComponent {
 	txs = genTxs();
 
 	constructor() {}
+
+	// *~~*~~*~~ FORM ~~*~~*~~* //
+	form: FormGroup = new FormGroup({
+		amount: new FormControl(0),
+	});
+
+	max() {
+		// set amount to max
+		this.form.controls['amount'].setValue(100);
+	}
+
+	stake() {
+		alert(JSON.stringify(this.form.value));
+	}
+
+	unstake() {
+		console.log(this.form.value);
+	}
 }

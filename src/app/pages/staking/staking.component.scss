@@ -1,9 +1,15 @@
-input:not(:placeholder-shown) + label,
-input:focus + label {
-	transform: translate(-0.25rem, -1.5rem);
-	font-size: 0.75rem;
-	color: #4299e1;
+.stat_box {
+	display: flex;
+	@apply gap-8;
+	@apply px-4 py-6;
+	@apply rounded-sm border-3 border-secondary;
+
+	&.black {
+		@apply bg-secondary;
+	}
 }
+
+// *~~*~~*~~ TABLE ~~*~~*~~* //
 
 .table {
 	border-spacing: 0 24px;
