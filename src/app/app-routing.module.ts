@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { TestComponent } from './pages/test/test.component';
 
 const routes: Routes = [
 	{
@@ -11,6 +12,11 @@ const routes: Routes = [
 		path: 'staking',
 		loadChildren: () =>
 			import('src/app/pages/staking/staking.module').then((m) => m.StakingModule),
+	},
+
+	{
+		path: 'test',
+		component: TestComponent,
 	},
 ];
 
