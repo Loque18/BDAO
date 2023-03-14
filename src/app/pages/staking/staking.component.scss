@@ -1,8 +1,10 @@
 .container {
-	overflow: hidden;
+	// overflow: hidden;
 
 	display: flex;
 	flex-direction: column;
+
+	row-gap: 3rem;
 }
 
 // *~~*~~*~~ STAT BOX ~~*~~*~~* //

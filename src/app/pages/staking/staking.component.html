@@ -1,6 +1,6 @@
 <section class="h-screen">
 	<!-- container -->
-	<div class="container h-full gap-y-8">
+	<div class="container h-full gap-y-8 py-16">
 		<!-- Stake col -->
 		<div
 			id="stake col"
@@ -41,7 +41,7 @@
 
 								<div class="col-span-3">
 									<button
-										class="secondary-button text-xl"
+										class="secondary-button text-xl w-full"
 										type="button"
 										(click)="max()"
 									>
@@ -61,12 +61,12 @@
 						<div class="field">
 							<div class="grid grid-cols-2 gap-6">
 								<div class="col-span-1">
-									<button class="primary-button text-xl" type="submit">
+									<button class="primary-button text-xl w-full" type="submit">
 										Stake
 									</button>
 								</div>
 								<div class="col-span-1">
-									<button class="secondary-button text-xl">UnStake</button>
+									<button class="secondary-button text-xl w-full">UnStake</button>
 								</div>
 							</div>
 						</div>
@@ -138,10 +138,10 @@
 		</div>
 
 		<!-- History col -->
-		<div class="flex-grow flex flex-col">
+		<div class="flex-grow flex flex-col min-h-0">
 			<h1 class="text-xl text-black font-semibold">Rewards History</h1>
 
-			<div class="flex-grow overflow-y-scroll">
+			<div class="flex-grow flex-shrink overflow-y-auto min-h-0 pr-2">
 				<table class="table">
 					<tbody>
 						<tr *ngFor="let tx of txs">
@@ -166,9 +166,9 @@
 								<h1 class="text-xl font-medium">Total dividends</h1>
 							</td>
 
-							<td class="text-secondary">
-								<button class="secondary-button">
-									<img src="https://picsum.photos/32" alt="" />
+							<td class="text-secondary flex justify-end">
+								<button class="primary-button !p-1">
+									<img src="/assets/icons/cube.svg" alt="" width="32" />
 								</button>
 							</td>
 						</tr>
