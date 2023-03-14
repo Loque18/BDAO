@@ -1,0 +1,44 @@
+.clock{
+    background-color: #1D1B1B;
+    border-radius: 6px;
+}
+
+.box{
+    border-radius: 3px;
+}
+
+.text1{
+    background-color: black;
+    pointer-events: none;
+    border-radius: 3px;
+}
+
+.bg-semi-black{
+    background-color: #1D1B1B;
+}
+
+a{
+    color: #3954E5;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.btn{
+    border: 3px solid black;
+    width: 90%;
+}
+
+.last{
+    background:linear-gradient(0deg, #3954E5, #3954E5);
+    width: 25%;
+}
+
+.first{
+    background:linear-gradient(0deg, #8EFF71, #8EFF71);
+    width: 50%;
+}
+
+.middle{
+    background:linear-gradient(0deg, #E53939, #E53939);
+    width: 30%;
+}

@@ -1,0 +1,75 @@
+<div class="ml-12 pl-12">
+    <p class="font-bold text-2xl">{{title}}</p>
+    <div class="flex gap-12">
+        <div class="container">
+            <div class="box wide-box border-2 border-black">
+                <button class="text1 text-lg bg-black px-5 py-2">
+                    <img src="/assets/PENDING.svg">
+                </button>
+                <div class="flex gap-20 mt-3 ml-9">
+                    <span>
+                        <p class="text-2xl ml-1 font-semibold">{{text1}}</p>
+                        <p class="text-2xl ml-1 font-semibold">{{text2}}</p>
+                    </span>
+                    <img class="clock py-2 px-3" width="90px" src="/assets/tabler-icon-clock-hour-9.svg">
+                </div>
+                <div class="flex">
+                    <button class="border-2 border-black py-1 px-2 rounded font-semibold ml-9 mb-4">
+                        {{smallText}}
+                    </button>
+                    <button class="px-1 py-1 bg-semi-black rounded font-semibold ml-9 mb-4">
+                        <img width="40px" src="/assets/tabler-icon-cube-send.svg">
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-9 mt-9">
+                <div class="box border-2 border-gray-500 px-5" *ngFor="let item of items; let first = first; let last = last">
+                    <div class="w-full bg-black h-3.5 mb-4 mt-3">
+                        <div class="border-2 border-black h-3.5"
+                        [ngClass]="{ first: first, last: last }"                        
+                        ></div>
+                    </div>
+                    <div class="small-box border-2 border-black rounded">
+                        <p class="font-semibold text-2xl ml-4 mt-1">{{item.votesCount}}</p>
+                        <p class="font-medium text-xl ml-4 pb-3">Votes</p>
+                    </div>
+                    <div class="flex gap-24 mt-5">
+                        <p class="text-xs font-medium">Addresses</p>
+                        <p class="text-xs font-medium">Voting Weight</p>
+                    </div>
+                    <div class="flex gap-32 mt-1">
+                        <a class="text-xs">{{item.addresses}}</a>
+                        <p class="text-xs font-semibold">{{item.voteWeight}}</p>
+                    </div>
+                    <div class=" flex flex-col items-center mt-24 mb-6">
+                        <button class="btn text-2xl font-medium py-2 rounded hover:bg-black hover:text-white">
+                            {{item.status}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box border-2 border-black mr-56">
+            <div class="flex flex-col items-center">
+                <div class="flex">
+                    <button class="bg-semi-black rounded">
+                        <img src="/assets/tabler-icon-circle-check.svg">
+                    </button>
+                    <span class="font-semibold">
+                        <p>Created</p>
+                        <p>03 Mar 2023 4:44 PM</p>
+                    </span>
+                </div>
+                <div class="flex mt-4">
+                    <button class="border-2 border-gray-500 rounded">
+                        <img src="/assets/tabler-icon-clock-hour-9.svg">
+                    </button>
+                    <span class="font-semibold">
+                        <p>Executed</p>
+                        <p>pending...</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
