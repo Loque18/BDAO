@@ -1,1 +1,75 @@
-<p>treasury works!</p>
+<div class="containers">
+    <div class="head mt-12">
+        <p class="font-bold text-5xl text-center">{{title}}</p>
+        <p class="text-center text-lg mt-3">{{text1}}</p>
+        <p class="text-center text-lg">{{text2}}</p>
+        <p class="text-center text-lg">{{text3}}</p>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="flex flex-col items-center">
+        <button class="bg-transparent py-3 px-6 border-2 border-black">
+           <p class="flex ml-3 text-lg">Connect<img class="arrow ml-10" src="/assets/Arrow 1.png" /></p>
+         </button>
+    </div>
+    <div class="main-content ml-12 pl-12">
+        <div class="flex gap-4 mt-12">
+            <button class=" bg-transparent py-3 px-6 border-2 border-gray-500">
+               <p class="text-2xl font-bold flex">
+                   Properties
+                   <img class="ml-10" width="30px" src="/assets/tabler-icon-building-estate.svg" >
+               </p>
+             </button>
+             <button class="bg-transparent py-2 px-6 border-2 border-gray-500">
+                <img width="12px" src="/assets/Vector2.svg">
+             </button>
+        </div>
+        <div class="grid grid-cols-3 xl:w-5/6 gap-12 mt-24">
+            <div *ngFor="let item of items" class="box border-2 border-gray-500">
+                <div class="small-container bg-gray-200">
+                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">
+                        {{item.amount}}
+                    </p>
+                </div>
+                <p class="font-bold text-2xl ml-7 mt-4 mb-3">Property</p>
+                <div class="flex gap-5 ml-7 mb-6">
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500">
+                        <p class="flex gap-3 pr-2 font-semibold">
+                            <img width="20px" [src]="item.firstLogo">More info
+                        </p>
+                    </button>
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500 font-semibold">
+                        <p class="flex">
+                            <img class="mr-7" width="25px" [src]="item.secondLogo">{{item.number}}
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 xl:w-5/6 mt-12 mb-24 gap-12">
+            <div *ngFor="let item of items" class="box border-2 border-gray-500">
+                <div class="small-container bg-gray-200">
+                    <p class="amount text-end font-medium text-2xl mr-5 pt-3">
+                        {{item.amount}}
+                    </p>
+                </div>
+                <p class="font-bold text-2xl ml-7 mt-4 mb-3">Property</p>
+                <div class="flex gap-5 ml-7 mb-6">
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500">
+                        <p class="flex gap-3 pr-2 font-semibold">
+                            <img width="20px" [src]="item.firstLogo">More info
+                        </p>
+                    </button>
+                    <button class="bg-transparent py-3 px-6 border-2 border-gray-500 font-semibold">
+                        <p class="flex">
+                            <img class="mr-7" width="25px" [src]="item.secondLogo">{{item.number}}
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

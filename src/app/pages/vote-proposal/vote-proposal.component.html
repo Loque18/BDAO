@@ -1,0 +1,94 @@
+<div class="ml-12 pl-12">
+    <p class="font-bold text-2xl">{{title}}</p>
+    <div class="flex gap-12 mt-8">
+        <div class="container">
+            <div class="box wide-box border-3 border-black">
+                <button class="text1 text-lg bg-black px-5 py-2">
+                    <img src="/assets/PENDING.svg">
+                </button>
+                <div class="flex gap-20 mt-3 ml-9">
+                    <span>
+                        <p class="text-2xl ml-1 font-semibold">{{text1}}</p>
+                        <p class="text-2xl ml-1 font-semibold">{{text2}}</p>
+                    </span>
+                    <img class="clock py-2 px-3" width="90px" src="/assets/tabler-icon-clock-hour-9.svg">
+                </div>
+                <div class="flex">
+                    <button class="border-3 border-black py-1 px-2 rounded font-semibold ml-9 mb-4">
+                        {{smallText}}
+                    </button>
+                    <button class="px-1 py-1 bg-semi-black rounded font-semibold ml-9 mb-4">
+                        <img width="40px" src="/assets/tabler-icon-cube-send.svg">
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-3 gap-9 mt-9">
+                <div class="box border-3 border-gray-500 px-5" *ngFor="let item of items; let first = first; let last = last">
+                    <div class="w-full bg-black h-3.5 mb-4 mt-3">
+                        <div class="border-2 bg-red-600 border-black h-3.5"
+                        [ngClass]="{ first: first, last: last }"                        
+                        ></div>
+                    </div>
+                    <div class="small-box border-3 border-black rounded">
+                        <p class="font-semibold text-2xl ml-4 mt-1">{{item.votesCount}}</p>
+                        <p class="font-medium text-xl ml-4 pb-3">Votes</p>
+                    </div>
+                    <div class="flex gap-11 mt-5">
+                        <p class="text-xs font-medium">Addresses</p>
+                        <p class="text-xs font-medium">Voting Weight</p>
+                    </div>
+                    <div class="flex gap-24 mt-1">
+                        <a class="text-xs">{{item.addresses}}</a>
+                        <p class="text-xs font-semibold">{{item.voteWeight}}</p>
+                    </div>
+                    <div class=" flex flex-col items-center mt-24 mb-6">
+                        <button class="btn text-2xl font-medium py-2 rounded hover:bg-black hover:text-white">
+                            {{item.status}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box right-box border-3 border-black mr-56">
+            <div class="flex-col ml-5 mt-5">
+                <div class="flex">
+                    <button class="bg-semi-black rounded px-2 py-2">
+                        <img class="small-icons" src="/assets/tabler-icon-circle-check.svg">
+                    </button>
+                    <span class="font-semibold ml-5">
+                        <p>Created</p>
+                        <p>03 Mar 2023 4:44 PM</p>
+                    </span>
+                </div>
+                <div class="flex mt-6 mb-4">
+                    <button class="border-3 border-gray-500 rounded px-1 py-1">
+                        <img class="small-icons" src="/assets/tabler-icon-clock-hour-9.svg">
+                    </button>
+                    <span class="font-semibold ml-5">
+                        <p>Executed</p>
+                        <p>pending...</p>
+                    </span>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="footer mt-12 border-3 border-gray-500 rounded mr-52 pb-36">
+        <p class="text-2xl font-semibold ml-7 mt-7">Description</p>
+        <p class="font-medium text-lg ml-7 mt-6">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
+        </p>
+        <p class="font-medium text-lg ml-7">
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
+        </p>
+        <p class="font-medium text-lg ml-7">
+            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+        </p>
+        <p class="font-medium text-lg ml-7">
+            dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+        </p>
+        <p class="font-medium text-lg ml-7">
+            officia deserunt mollit anim id est laborum.
+        </p>
+    </div>
+</div>
