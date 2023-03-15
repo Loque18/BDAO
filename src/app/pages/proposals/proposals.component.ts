@@ -8,7 +8,6 @@ import { Iproposals , items } from 'src/app/constants/proposals';
 })
 export class ProposalsComponent {
 title = "Proposals"
-firstBox = "VIP-101 Risk Parameters Adjustments for SXP, TRX and ETH"
 
 items : Iproposals[] = items;
 }
