@@ -5,10 +5,10 @@
 			<!-- Stake col -->
 			<div
 				id="stake col"
-				class="grid grid-cols-1 gap-8 sm:col-span-1 lg:grid-cols-12 lg:gap-14 lg:auto-rows-[1fr]"
+				class="grid grid-cols-1 xl:grid-cols-12 gap-8 xl:gap-14 lg:auto-rows-[1fr]"
 			>
 				<!-- Staking box -->
-				<div class="lg:col-span-4 md:col-span-12">
+				<div class="col-span-12 xl:col-span-4">
 					<div
 						class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full"
 					>
@@ -80,13 +80,13 @@
 				</div>
 
 				<!-- Stats box -->
-				<div class="lg:col-span-8 md:col-span-12">
+				<div class="col-span-12 xl:col-span-8">
 					<!-- box -->
 					<div
 						class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full flex flex-col justify-center"
 					>
 						<div
-							class="grid grid-rows-1 gap-y-8 lg:grid-cols-4 lg:grid-rows-2 lg:gap-x-4 lg:gap-y-8 xl:gap-x-[12rem]"
+							class="grid grid-rows-1 gap-y-8 lg:grid-cols-5 lg:grid-rows-2 lg:gap-x-4a lg:gap-y-8 axl:gap-x-[12rem]"
 						>
 							<!-- stake box -->
 							<div class="lg:col-span-2">
@@ -104,7 +104,7 @@
 							</div>
 
 							<!-- stake box -->
-							<div class="lg:col-span-2">
+							<div class="lg:col-span-2 lg:col-start-4">
 								<div class="stat_box black">
 									<img src="/assets/icons/eth_l.svg" alt="" width="48" />
 									<div>
@@ -132,7 +132,7 @@
 							</div>
 
 							<!-- stake box -->
-							<div class="lg:col-span-2">
+							<div class="lg:col-span-2 lg:col-start-4">
 								<div class="stat_box">
 									<img src="/assets/icons/spots.svg" alt="" width="48" />
 									<div>
@@ -154,11 +154,13 @@
 			<div class="flex-grow flex flex-col min-h-0">
 				<div class="flex justify-between">
 					<h1 class="text-xl text-black font-semibold">Rewards History</h1>
-					<h1 class="text-xl text-secondary font-semibold"><u>View all</u></h1>
+					<h1 class="text-xl text-secondary font-semibold">
+						<u><a>View all</a></u>
+					</h1>
 				</div>
 
-				<div class="flex-grow flex-shrink overflow-y-auto min-h-0 pr-2">
-					<table class="table">
+				<div class="flex-grow overflow-y-auto min-h-0 pr-2 max-xl:max-h-[300px]">
+					<table class="table" style="table-layout: fixed">
 						<tbody>
 							<tr *ngFor="let tx of txs">
 								<td class="text-secondary">
@@ -168,7 +170,7 @@
 									<h1 class="text-xl font-medium">ETH</h1>
 								</td>
 
-								<td class="text-secondary">
+								<!-- <td class="text-secondary">
 									<h1 class="text-2xl font-semibold">
 										{{ tx.date | date : 'MM/dd/yyyy' }}
 									</h1>
@@ -182,11 +184,11 @@
 									<h1 class="text-xl font-medium">Total dividends</h1>
 								</td>
 
-								<td class="text-secondary flex justify-end">
+								<td class="text-secondary flex justify-end h-full">
 									<button class="primary-button !p-1">
 										<img src="/assets/icons/cube.svg" alt="" width="32" />
 									</button>
-								</td>
+								</td> -->
 							</tr>
 						</tbody>
 					</table>
