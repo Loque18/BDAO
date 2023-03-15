@@ -1,0 +1,47 @@
+$color1: #1d1b1b;
+$color2: #fff;
+
+/* width */
+.coolscroll::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/* Track */
+.coolscroll::-webkit-scrollbar-track {
+	background: $color2;
+}
+
+/* Handle */
+.coolscroll::-webkit-scrollbar-thumb {
+	background: $color1;
+	border-radius: 8px;
+}
+
+/* Handle on hover */
+.coolscroll::-webkit-scrollbar-thumb:hover {
+	background: lighten($color1, 10%);
+}
+
+// small
+
+.coolscroll-small::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+
+.coolscroll-small::-webkit-scrollbar-track {
+	background: $color2;
+	border-radius: 10px;
+}
+
+.coolscroll-small::-webkit-scrollbar-thumb {
+	background: black;
+	border-radius: 10px;
+	// border: 2px solid $color1;
+	background: $color1;
+}
+
+.coolscroll-small::-webkit-scrollbar-thumb:hover {
+	background: lighten($color1, 5%);
+}

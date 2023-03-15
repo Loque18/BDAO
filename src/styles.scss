@@ -8,6 +8,7 @@
 @import 'src/scss/components/buttons';
 @import 'src/scss/components/form';
 @import 'src/scss/components/b-container';
+@import 'src/scss/coolscroll';
 
 // html {
 // 	// make font responsive
@@ -29,4 +30,6 @@
 
 body {
 	// padding-top: 60px;
+
+	@extend .coolscroll;
 }

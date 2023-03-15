@@ -38,6 +38,14 @@
 	border-spacing: 0 24px;
 	border-collapse: separate;
 	width: 100%;
+
+	tr:first-child {
+		border-top: none;
+	}
+
+	tr:last-child {
+		border-bottom: none;
+	}
 }
 
 $br: 5px;

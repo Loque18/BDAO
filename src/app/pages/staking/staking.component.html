@@ -154,13 +154,10 @@
 			<div class="flex-grow flex flex-col min-h-0">
 				<div class="flex justify-between">
 					<h1 class="text-xl text-black font-semibold">Rewards History</h1>
-					<h1 class="text-xl text-secondary font-semibold">
-						<u><a>View all</a></u>
-					</h1>
 				</div>
 
-				<div class="flex-grow overflow-y-auto min-h-0 pr-2 max-xl:max-h-[300px]">
-					<table class="table" style="table-layout: fixed">
+				<div class="flex-grow overflow-y-auto min-h-0 pr-2 max-xl:max-h-[300px] coolscroll">
+					<table class="table">
 						<tbody>
 							<tr *ngFor="let tx of txs">
 								<td class="text-secondary">
