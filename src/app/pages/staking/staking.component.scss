@@ -1,3 +1,8 @@
+.root {
+	height: 0px;
+	min-height: 110vh;
+}
+
 .container {
 	// overflow: hidden;
 
@@ -5,6 +10,19 @@
 	flex-direction: column;
 
 	row-gap: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+	.root {
+		height: auto;
+		min-height: unset;
+	}
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1280px) {
+	.root {
+		min-height: 120vh;
+	}
 }
 
 // *~~*~~*~~ STAT BOX ~~*~~*~~* //
