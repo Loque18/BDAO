@@ -1,7 +1,7 @@
 <layout-main>
 	<section class="root">
 		<!-- container -->
-		<div class="container h-full gap-y-8 py-8">
+		<div class="container h-full gap-y-8 py-4">
 			<!-- Stake col -->
 			<div
 				id="stake col"
@@ -33,7 +33,7 @@
 
 							<div class="field">
 								<div class="grid grid-cols-12 gap-3">
-									<div class="col-span-9">
+									<div class="col-span-8 md:col-span-9">
 										<input
 											type="text"
 											class="rounded-sm w-full px-4 py-3 text-seconday font-semibold border-3 border-gray-c50 text-xl focus:bg-gray-50 focus:outline-none placeholder:text-gray-c50 placeholder:font-semibold"
@@ -42,7 +42,7 @@
 										/>
 									</div>
 
-									<div class="col-span-3">
+									<div class="col-span-4 md:col-span-3">
 										<button
 											class="secondary-button text-xl w-full"
 											type="button"
@@ -152,40 +152,44 @@
 
 			<!-- History col -->
 			<div class="flex-grow flex flex-col min-h-0">
-				<div class="flex justify-between">
+				<div class="flex justify-between mb-4">
 					<h1 class="text-xl text-black font-semibold">Rewards History</h1>
 				</div>
 
-				<div class="flex-grow overflow-y-auto min-h-0 pr-2 max-xl:max-h-[300px] coolscroll">
+				<div
+					class="flex-grow overflow-y-auto min-h-0 pr-2 max-xl:max-h-[300px] transparent-scroll"
+				>
 					<table class="table">
 						<tbody>
 							<tr *ngFor="let tx of txs">
 								<td class="text-secondary">
-									<h1 class="text-2xl font-semibold">
+									<h1 class="text-xl md:text-2xl font-semibold">
 										{{ tx.amount.toFixed(2) }}
 									</h1>
-									<h1 class="text-xl font-medium">ETH</h1>
-								</td>
-
-								<!-- <td class="text-secondary">
-									<h1 class="text-2xl font-semibold">
-										{{ tx.date | date : 'MM/dd/yyyy' }}
-									</h1>
-									<h1 class="text-xl font-medium">date</h1>
+									<h1 class="text-base md:text-xl font-medium">ETH</h1>
 								</td>
 
 								<td class="text-secondary">
+									<h1 class="text-xl md:text-2xl font-semibold">
+										{{ tx.date | date : 'MM/dd/yyyy' }}
+									</h1>
+									<h1 class="text-base md:text-xl font-medium">date</h1>
+								</td>
+
+								<td class="text-secondary hidden md:block">
 									<h1 class="text-2xl font-semibold">
 										{{ tx.totalDividends.toFixed(2) }}
 									</h1>
-									<h1 class="text-xl font-medium">Total dividends</h1>
+									<h1 class="text-base md:text-xl font-medium">
+										Total dividends
+									</h1>
 								</td>
 
-								<td class="text-secondary flex justify-end h-full">
-									<button class="primary-button !p-1">
-										<img src="/assets/icons/cube.svg" alt="" width="32" />
+								<td class="text-secondary text-right">
+									<button class="primary-button btn !p-1 min-w-[32px]">
+										<img src="/assets/icons/cube.svg" alt="" width="32px" />
 									</button>
-								</td> -->
+								</td>
 							</tr>
 						</tbody>
 					</table>

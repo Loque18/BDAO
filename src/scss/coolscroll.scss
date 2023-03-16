@@ -45,3 +45,7 @@ $color2: #fff;
 .coolscroll-small::-webkit-scrollbar-thumb:hover {
 	background: lighten($color1, 5%);
 }
+
+.transparent-scroll::-webkit-scrollbar {
+	display: none;
+}

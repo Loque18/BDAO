@@ -8,8 +8,6 @@
 
 	display: flex;
 	flex-direction: column;
-
-	row-gap: 3rem;
 }
 
 @media screen and (max-width: 1280px) {
@@ -39,20 +37,12 @@
 	border-collapse: separate;
 	width: 100%;
 
-	tr:first-child {
-		border-top: none;
-	}
-
-	tr:last-child {
-		border-bottom: none;
-	}
+	margin-top: -24px;
 }
 
 $br: 5px;
 
 tr {
-	// border-radius: 5px;
-
 	position: relative;
 
 	&::after {
@@ -83,5 +73,21 @@ td {
 
 	td:last-child {
 		border-radius: 0 #{$br} #{$br} 0;
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.table {
+		tr {
+			td {
+				padding: 1rem 1rem;
+			}
+		}
+	}
+}
+
+.btn {
+	&:hover {
+		background-color: rgba(#1d1b1b, 0.9);
 	}
 }
