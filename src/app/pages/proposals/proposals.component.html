@@ -1,33 +1,45 @@
-<div class="container mt-12 ml-12 pl-12">
-    <p class="text-2xl font-semibold mb-7">{{title}}</p>
-    <div class="grid grid-rows-3 grid-flow-col gap-10">
-        <div class="box border-3 border-gray-500" *ngFor="let item of items">
+<div class="container mt-12">
+    <p class="text-2xl font-semibold mb-7 ml-12 lg:ml-0">{{title}}</p>
+    <div class="lg:grid lg:grid-rows-3 grid-flow-col gap-10">
+        <div class="box lg:w-full w-9/12 border-3 border-gray-500 m-auto lg:mt-0 mt-6" *ngFor="let item of items">
             <div class="border-3 border-gray-500 bg-white animation">
                 <button class="text1 text-lg bg-black px-5 py-2">
                     <img [src]="item.status">
                 </button>
-                <div class="flex gap-20 mt-3 ml-9">
-                    <span>
+                <div class="flex gap-20 mt-3 md:ml-9 ml-5">
+                    <span class="lg:hidden">
+                        <p class="text-xl font-semibold">{{mobileText1}}</p>
+                        <p class="text-xl font-semibold">{{mobileText2}}</p>
+                        <p class="text-xl font-semibold">{{mobileText3}}</p>
+                    </span>
+                    <span class="hidden lg:block">
                         <p class="text-2xl ml-1 font-semibold">{{item.text1}}</p>
                         <p class="text-2xl ml-1 font-semibold">{{item.text2}}</p>
                     </span>
-                    <img class="clock py-2 px-3" width="90px" [src]="item.image">
+                    <img class="clock py-4 px-4 hidden md:block" width="90px" [src]="item.image">
                 </div>
-                <button class="border-3 border-gray-500 py-1 px-2 rounded font-semibold ml-9 mb-4">
-                    {{item.smallText}}
-                </button>
+                <div class="flex gap-40">
+                    <div class="md:mt-0 mt-7 lg:mb-3">
+                        <button class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 ml-5">
+                            {{item.smallText}}
+                        </button>
+                    </div>
+                    <div>
+                        <img class="clock py-3 px-3 visible md:hidden mb-2" width="70px" [src]="item.image">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="box border-3 border-black mr-48 ">
-            <div class=" flex flex-col items-center">
+        <div class="right-box border-3 border-black w-9/12 mt-5 lg:m-auto lg:m-0 m-auto">
+            <div class="flex flex-col items-center">
                 <button class="bg-black text-white text-2xl mt-6 px-10 py-3">
                     Create Proposal
                 </button>
             </div>
             <p class="font-bold text-2xl mt-6 ml-14">0</p>
-            <p class="font-medium text-lg ml-14">Voting Weight</p>
+            <p class="font-medium text-lg ml-14 pb-7 lg:pb-0">Voting Weight</p>
         </div>
-        <div class="box border-3 border-black row-span-2 mr-48">
+        <div class="right-box border-3 border-black row-span-2 w-9/12 h-fit lg:h-full pb-7 lg:pb-0 mt-5 mb-7 lg:mt-0 lg:m-0 m-auto">
             <p class="text-center mt-6 text-xl font-medium">To vote you should</p>
             <div>
                 <button class="small-box border-3 mt-6 ml-3 py-1 px-3 border-gray-400">
