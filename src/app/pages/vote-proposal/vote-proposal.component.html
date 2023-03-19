@@ -1,16 +1,16 @@
 <div class="mt-12">
-    <p class="font-bold text-2xl ml-7 mt-3 hidden lg:block">{{title}}</p>
-    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col lg:ml-20 hidden">
-            <div class="box border-3 border-black w-11/12">
+    <p class="font-bold text-2xl ml-20 mt-3 hidden lg:block">{{title}}</p>
+    <div class="lg:grid lg:grid-rows-1 lg:grid-flow-col lg:ml-20 lg:mt-3 hidden gap-24">
+            <div class="box border-3 border-black">
                 <button class="text1 text-lg bg-black px-5 py-2">
                     <img src="/assets/PENDING.svg">
                 </button>
-                <div class="flex gap-20 mt-3 ml-9">
+                <div class="flex space mt-3 ml-9">
                     <span>
                         <p class="text-2xl ml-1 font-semibold">{{text1}}</p>
                         <p class="text-2xl ml-1 font-semibold">{{text2}}</p>
                     </span>
-                    <img class="clock py-4 px-4" width="90px" src="/assets/tabler-icon-clock-hour-9.svg">
+                    <img class="clock py-4 px-4 mr-12" width="90px" src="/assets/tabler-icon-clock-hour-9.svg">
                 </div>
                 <div class="flex">
                     <button class="border-3 border-black py-1 px-2 rounded font-semibold ml-9 mb-4">
@@ -21,7 +21,7 @@
                     </button>
                 </div>
             </div>
-            <div class="box right-box border-3 border-black w-9/12">
+            <div class="box right-box border-3 border-black w-9/12 mr-10">
                 <div class="ml-5 mt-5">
                     <div class="flex">
                         <button class="bg-semi-black rounded px-2 py-2">
@@ -44,8 +44,9 @@
                 </div>
             </div>
     </div>
-    <div class="lg:grid lg:grid-cols-3 gap-12 mt-9 w-8/12 lg:ml-20 m-auto">
-        <div class="small-boxs border-3 border-gray-500 px-5 mt-7 md:mt-0" *ngFor="let item of items; let first = first; let last = last">
+    <p class="font-bold text-2xl ml-20 lg:hidden">Voting</p>
+    <div class="lg:grid lg:grid-cols-3 gap-12 lg:mt-9 xl:w-7/12 lg:w-10/12 w-8/12 lg:ml-20 m-auto">
+        <div class="small-boxs border-3 border-gray-500 px-5 mt-7 lg:mt-0" *ngFor="let item of items; let first = first; let last = last">
             <div class="w-full bg-black h-3.5 mb-4 mt-3">
                 <div class="border-2 bg-red-600 border-black h-3.5"
                 [ngClass]="{ first: first, last: last }"                        
@@ -55,11 +56,11 @@
                 <p class="font-semibold text-2xl ml-4 mt-1">{{item.votesCount}}</p>
                 <p class="font-medium text-xl ml-4 pb-3">Votes</p>
             </div>
-            <div class="flex gap-11 mt-5">
+            <div class="flex space mt-5">
                 <p class="text-xs font-medium">Addresses</p>
                 <p class="text-xs font-medium">Voting Weight</p>
             </div>
-            <div class="flex gap-24 mt-1">
+            <div class="flex space mt-1">
                 <a class="text-xs">{{item.addresses}}</a>
                 <p class="text-xs font-semibold">{{item.voteWeight}}</p>
             </div>
@@ -70,9 +71,9 @@
             </div>
         </div>
     </div>
-    <p class="font-bold text-2xl ml-7 mt-3 lg:hidden">{{title}}</p>
-    <div class="grid grid-rows-2 w-8/12 lg:hidden m-auto mt-7">
-        <div class="box right-box border-3 border-black w-full">
+    <p class="font-bold text-2xl ml-20 mt-12 lg:hidden">{{title}}</p>
+    <div class="grid grid-rows-2 w-8/12 lg:hidden m-auto mt-2">
+        <div class="box right-box border-3 border-black w-full h-fit pb-6">
             <div class="ml-5 mt-5">
                 <div class="flex">
                     <button class="bg-semi-black rounded px-2 py-2">
@@ -98,26 +99,32 @@
             <button class="text1 text-lg bg-black px-5 py-2">
                 <img src="/assets/PENDING.svg">
             </button>
-            <div class="flex gap-20 mt-3 ml-9">
+            <div class="mt-3">
                 <span>
-                    <p class="text-2xl ml-1 font-semibold">{{text1}}</p>
-                    <p class="text-2xl ml-1 font-semibold">{{text2}}</p>
+                    <p class="text-xl ml-5 font-semibold">{{text1Mobile}}</p>
+                    <p class="text-xl ml-5 font-semibold">{{text2Mobile}}</p>
+                    <p class="text-xl ml-5 font-semibold">{{text3Mobile}}</p>
                 </span>
-                <img class="clock py-4 px-4" width="90px" src="/assets/tabler-icon-clock-hour-9.svg">
             </div>
-            <div class="flex">
-                <button class="border-3 border-black py-1 px-2 rounded font-semibold ml-9 mb-4">
-                    {{smallText}}
-                </button>
-                <button class="px-1 py-1 bg-semi-black rounded font-semibold ml-9 mb-4">
-                    <img width="40px" src="/assets/tabler-icon-cube-send.svg">
-                </button>
+            <div class="flex gap-3">
+                <div>
+                    <button class="border-3 border-black py-2 px-2 rounded font-semibold  ml-5 mt-8 mb-4">
+                        {{smallText}}
+                    </button>
+                </div>
+                <div>
+                    <button class="px-1 py-1 bg-semi-black rounded font-semibold mt-8">
+                        <img width="35px" src="/assets/tabler-icon-cube-send.svg">
+                    </button>
+                </div>
+                <div>
+                    <img class="clock py-4 px-4 visible md:hidden ml-7" width="80px" src="/assets/tabler-icon-clock-hour-9.svg">
+                </div>
             </div>
         </div>
-</div>
-
-    <div class="container">
-        <div class="footer mt-12 mx-7 border-3 border-gray-500 rounded pb-32 mb-7">
+    </div>
+    <div class="">
+        <div class="footer border-3 border-gray-500 rounded lg:pb-32 mb-7 mt-12 lg:w-11/12 w-8/12 lg:ml-20 m-auto">
             <p class="text-2xl font-semibold ml-7 mt-7">Description</p>
             <p class="font-medium text-lg ml-7 mt-6">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et 
@@ -137,3 +144,4 @@
         </div>
     </div>
 </div>
+
