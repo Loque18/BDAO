@@ -26,3 +26,20 @@
 .border-3{
     border-width:3px ;
 }
+
+.bg-gray-500{
+    background-color: #AEAEAE;
+}
+
+.border-gray-500{
+    border-color: #AEAEAE;
+}
+@media only screen and (max-width: 1025px) {
+    .active{
+        display: block;
+    }
+    
+    .none{
+        display: none;
+    }
+}

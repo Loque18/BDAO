@@ -13,4 +13,25 @@ mobileText2 = "Adjustments for SXP, TRX"
 mobileText3 = "and ETH"
 
 items : Iproposals[] = items;
+
+id  = 0;
+
+slideRight(id:number) :void {
+  id = id + 1
+  console.log(id)
+  this.id = id
+  if (this.id > 2){
+    this.id =0
+  }
+}
+
+slideLeft(id:number):void{
+  id = id - 1
+  console.log(id)
+  this.id = id
+  if (this.id < 0){
+    this.id = 2
+  }
+}
+
 }
