@@ -1,0 +1,42 @@
+<!-- dropdown -->
+<div class="dropdown relative">
+	<!-- dropdown button -->
+	<div class="w-full" type="button" (click)="toggle()" class="cursor-pointer select-none">
+		<div class="flex gap-x-4">
+			<!-- dropdown text -->
+			<div
+				class="py-4 px-4 border-3 border-gray-c50 rounded-sm h-full flex gap-x-4 flex-grow"
+			>
+				<div class="text-2xl font-bold">{{ selected.label }}</div>
+
+				<img width="32px" src="/assets/tabler-icon-building-estate.svg" />
+			</div>
+
+			<!-- dropdown arrow -->
+			<div
+				class="py-4 px-4 border-3 border-gray-c50 rounded-sm grid place-items-center h-[70px] w-[70px]"
+			>
+				<img width="12px" src="/assets/Vector2.svg" />
+			</div>
+		</div>
+	</div>
+
+	<!-- Dropdown menu -->
+	<div
+		id="dropdown-menu"
+		class="z-10 bg-primary divide-y divide-gray-100 rounded-sm shadow border-3 border-gray-c50 w-full absolute translate-y-[10px]"
+		*ngIf="open"
+	>
+		<ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDefaultButton">
+			<li *ngFor="let item of items">
+				<button
+					class="block px-4 py-2 hover:bg-gray-100 w-full text-left text-xl font-semibold"
+					(click)="select(item)"
+					[ngClass]="{ 'bg-gray-100': item.label === selected.label }"
+				>
+					{{ item.label }}
+				</button>
+			</li>
+		</ul>
+	</div>
+</div>
