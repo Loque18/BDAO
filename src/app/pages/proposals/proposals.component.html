@@ -1,18 +1,18 @@
 <div class="container mt-12 mb-9">
-    <p class="text-2xl font-semibold mb-7 ml-12 lg:ml-0 hidden lg:block 2xl:ml-20">{{title}}</p>
+    <p class="text-2xl font-semibold mb-7 ml-16 translate lg:ml-0 2xl:ml-20">{{title}}</p>
     <div class="lg:grid lg:grid-rows-3 grid grid-rows-5 lg:grid-flow-col gap-10 2xl:ml-20">
-        <div class="box lg:w-full w-9/12 border-3 border-gray-500 m-auto lg:mt-0" 
+        <div class="box lg:w-full w-9/12 border-3 rounded border-gray-500 mx-auto lg:mt-0 mt-5" 
          *ngFor="let item of items; let i = index"
-         [ngClass]="i===id ? 'active' : 'none'">
-            <div class="border-3 border-gray-500 bg-white animation">
+         [ngClass]="i===id ? 'slide-right' : 'none'">
+            <div class="bg-white animation rounded">
                 <button class="text1 text-lg bg-black px-5 py-2">
                     <img [src]="item.status">
                 </button>
                 <div class="flex gap-20 mt-3 md:ml-9 ml-5">
                     <span class="lg:hidden">
-                        <p class="text-xl font-semibold">{{mobileText1}}</p>
-                        <p class="text-xl font-semibold">{{mobileText2}}</p>
-                        <p class="text-xl font-semibold">{{mobileText3}}</p>
+                        <p class="text-lg font-semibold">{{mobileText1}}</p>
+                        <p class="text-lg font-semibold">{{mobileText2}}</p>
+                        <p class="text-lg font-semibold">{{mobileText3}}</p>
                     </span>
                     <span class="hidden lg:block">
                         <p class="text-2xl ml-1 font-semibold">{{item.text1}}</p>
@@ -20,7 +20,7 @@
                     </span>
                     <img class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0" width="90px" [src]="item.image">
                 </div>
-                <div class="flex gap-40">
+                <div class="flex gap-36">
                     <div class="md:mt-0 mt-7 lg:mb-3">
                         <button class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 md:mb-3 md:mt-3 ml-5">
                             {{item.smallText}}
@@ -32,15 +32,15 @@
                 </div>
             </div>
         </div>
-        <div class="flex gap-20 lg:hidden">
+        <div class="flex gap-5 m-auto lg:hidden">
             <div>
-                <button (click)="slideLeft(id)" class="small-box border-3 mt-7 ml-3 py-1 px-3 border-gray-400">
-                    1
+                <button (click)="slideLeft(id)" class="slide ml-3 px-2 py-1 bg-neon">
+                    <img class="w-5 h-5" src="/assets/arrow_back_ios.svg">
                 </button>
             </div>
             <div>
-                <button (click)="slideRight(id)" class="small-box border-3 mt-7 ml-3 py-1 px-3 border-gray-400">
-                    2
+                <button (click)="slideRight(id)" class="slide ml-3 px-2 py-1 bg-neon">
+                    <img class="w-5 h-5" src="/assets/arrow_forward_ios.svg">
                 </button>
             </div>
         </div>

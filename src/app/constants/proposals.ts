@@ -26,7 +26,7 @@ const items : Iproposals[] = [
         image : '/assets/tabler-icon-circle-check.svg',
         text1 : 'VIP-101 Risk Parameters Adjustments for',
         text2 : ' SXP, TRX and ETH',
-        smallText : '#002'
+        smallText : '#003'
     },
 ]
 

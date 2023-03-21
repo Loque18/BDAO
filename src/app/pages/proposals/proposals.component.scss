@@ -4,7 +4,6 @@
 
 .right-box{
     border-radius: 3px;
-
 }
 
 .text1{
@@ -18,11 +17,6 @@
     border-radius: 6px;
 }
 
-.animation:hover{
-    transform: translate(10px,-20px);
-    border: solid 3px black;
-}
-
 .border-3{
     border-width:3px ;
 }
@@ -34,6 +28,7 @@
 .border-gray-500{
     border-color: #AEAEAE;
 }
+
 @media only screen and (max-width: 1025px) {
     .active{
         display: block;
@@ -41,5 +36,33 @@
     
     .none{
         display: none;
+    }
+}
+
+.bg-neon{
+    background-image: linear-gradient(to bottom right ,#FF416C, #FF4B2B);
+}
+
+.slide{
+    border:solid 3px white;
+    border-radius: 8px;
+}
+
+@media only screen and (max-width:1024px){
+    .translate{
+        transform: translateY(37rem);
+    }
+}
+
+@media only screen and (max-width:1024px) and (min-width:768px){
+    .translate{
+        transform: translateY(36rem);
+    }
+}
+
+@media only screen and (min-width:1024px){
+    .animation:hover{
+        transform: translate(10px,-20px);
+        border: solid 3px black;
     }
 }
