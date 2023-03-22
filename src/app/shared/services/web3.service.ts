@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { from } from 'rxjs';
 
 import { ProviderType } from '../celeste/celeste-types';
@@ -24,6 +24,9 @@ export class Web3Service {
 			this.init();
 		}, 500);
 	}
+
+	// *~~*~~*~~ service events ~~*~~*~~* //
+	public readyEvent = new EventEmitter<null>();
 
 	// *~~*~~*~~ Service internal data ~~*~~*~~* //
 
@@ -79,18 +82,28 @@ export class Web3Service {
 	init(): void {
 		from(import('src/app/shared/celeste/celeste')).subscribe((m) => {
 			this._celesteInstance = new m.Celeste();
-			this._celesteInstance.init(config);
-
 			this._celesteLoaded = true;
 
-			this._loading = false;
+			from(this._celesteInstance.init(config)).subscribe(() => {
+				console.log(this._celesteInstance);
+
+				this.readyEvent.emit();
+				this._loading = false;
+			});
 		});
 	}
 
-	requestConnection(providerType: ProviderType) {
-		if (!this.canExecute()) return;
+	requestConnection(providerType: ProviderType): Promise<void> {
+		const p = new Promise<void>((resolve, reject) => {
+			if (!this.canExecute())
+				reject('Web3Service: requestConnection: cannot execute, web3 not ready');
 
-		this._celesteInstance.requestConnection(providerType);
+			this._celesteInstance.requestConnection(providerType).then(() => {
+				resolve();
+			});
+		});
+
+		return p;
 	}
 
 	requestDisconnection() {

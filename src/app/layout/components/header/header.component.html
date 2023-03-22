@@ -59,12 +59,22 @@
 				</li> -->
 
 				<li>
-					<button class="secondary-button !rounded-none">
+					<button
+						class="secondary-button !rounded-none"
+						(click)="connectWallet()"
+						*ngIf="!web3Svc.walletData.isLoggedIn; else address"
+					>
 						<div class="flex items-center gap-x-8">
 							<div class="font-medium">Connect</div>
 							<div><img src="/assets/icons/arrow-right.png" alt="" width="24" /></div>
 						</div>
 					</button>
+
+					<ng-template #address>
+						<div>
+							{{ web3Svc.walletData.address }}
+						</div>
+					</ng-template>
 				</li>
 			</ul>
 		</div>

@@ -1,5 +1,7 @@
 import { Asset } from '../models/asset';
 
+import { Reward } from '../models/reward';
+
 type ApiResponse = {
 	success: boolean;
 	statusCode: number;
@@ -14,4 +16,14 @@ type TreasuryResponse = ApiResponse & {
 	};
 };
 
-export { TreasuryResponse };
+type StakingResponse = ApiResponse & {
+	data?: {
+		rewardsHistory: Reward[];
+		totalProfit: number;
+		spots: number;
+		activeStaked: number;
+		totalStaked: number;
+	};
+};
+
+export { TreasuryResponse, StakingResponse };

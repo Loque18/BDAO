@@ -59,8 +59,6 @@ export class TreasuryService {
 
 	changeSelected(selected: string): void {
 		this._selected = selected as 'properties' | 'crypto';
-
-		console.log(selected);
 	}
 
 	// *~~*~~*~~ HANDLE ERRORS ~~*~~*~~* //
