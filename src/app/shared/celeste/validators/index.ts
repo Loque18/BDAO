@@ -1,5 +1,5 @@
 import { providers } from '../constants';
-import { Web3Config } from '../types';
+import { Web3Config } from '../celeste-types';
 
 // function validateProviderType(providerType: string) {
 //     if (!providerType)
@@ -11,15 +11,16 @@ import { Web3Config } from '../types';
 // }
 
 function validateConfig(config: Web3Config) {
-    const { rpcs } = config;
+	const { rpcs } = config;
 
-    // if (isMultichain === null || isMultichain === undefined)
-    //     throw new Error('celeste JS: isMultichain must be specified');
+	// if (isMultichain === null || isMultichain === undefined)
+	//     throw new Error('celeste JS: isMultichain must be specified');
 
-    // prettier-ignore
-    if(!rpcs) throw new Error('celeste JS: rpcs must be specified in celeste.config.js');
+	// prettier-ignore
+	if(!rpcs) throw new Error('celeste JS: rpcs must be specified in celeste.config.js');
 
-    if (Object.keys(rpcs).length === 0) throw new Error('celeste JS: config rpcs must contain at least one element');
+	if (Object.keys(rpcs).length === 0)
+		throw new Error('celeste JS: config rpcs must contain at least one element');
 }
 
 // function validateIfLoggedIn() {
