@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, Subject } from 'rxjs';
+import { from } from 'rxjs';
 
 import { ProviderType } from '../celeste/celeste-types';
 
@@ -32,6 +32,12 @@ export class Web3Service {
 	public get walletData(): WalletData {
 		if (this._celesteInstance) return this._celesteInstance.walletData;
 		else return new WalletData();
+	}
+
+	private _loading = true;
+
+	public get loading(): boolean {
+		return this._loading;
 	}
 
 	/**
@@ -70,15 +76,14 @@ export class Web3Service {
 
 	private _celesteInstance!: ICeleste;
 
-	private eventSubject: Subject<any> = new Subject<any>();
-	public event$: Observable<any> = this.eventSubject.asObservable();
-
 	init(): void {
 		from(import('src/app/shared/celeste/celeste')).subscribe((m) => {
 			this._celesteInstance = new m.Celeste();
 			this._celesteInstance.init(config);
 
 			this._celesteLoaded = true;
+
+			this._loading = false;
 		});
 	}
 
