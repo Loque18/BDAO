@@ -1,0 +1,69 @@
+.box {
+	border-radius: 3px;
+}
+
+.right-box {
+	border-radius: 3px;
+}
+
+.text1 {
+	background-color: black;
+	pointer-events: none;
+	border-radius: 3px;
+}
+
+.clock {
+	background-color: #1d1b1b;
+	border-radius: 6px;
+}
+
+.border-3 {
+	border-width: 3px;
+}
+
+.bg-gray-500 {
+	background-color: #aeaeae;
+}
+
+.border-gray-500 {
+	border-color: #aeaeae;
+}
+
+@media only screen and (max-width: 1025px) {
+	.active {
+		display: block;
+	}
+
+	.none {
+		display: none;
+	}
+}
+
+.bg-neon {
+	background-image: linear-gradient(to bottom right, #ff416c, #ff4b2b);
+}
+
+.slide {
+	border: solid 3px white;
+	border-radius: 8px;
+}
+
+@media only screen and (max-width: 1024px) {
+	.translate {
+		transform: translateY(37rem);
+	}
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 768px) {
+	.translate {
+		transform: translateY(35.2rem);
+		margin-left: 6rem;
+	}
+}
+
+@media only screen and (min-width: 1024px) {
+	.animation:hover {
+		transform: translate(10px, -20px);
+		border: solid 3px black;
+	}
+}
