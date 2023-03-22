@@ -4,7 +4,7 @@
         <div class="box lg:w-full w-9/12 border-3 rounded border-gray-500 mx-auto lg:mt-0 mt-5" 
          *ngFor="let item of items; let i = index"
          [ngClass]="i===id ? 'slide-right' : 'none'">
-            <div class="bg-white animation rounded">
+            <div class="lg:border-3 border-gray-500 bg-white animation">
                 <button class="text1 text-lg bg-black px-5 py-2">
                     <img [src]="item.status">
                 </button>
