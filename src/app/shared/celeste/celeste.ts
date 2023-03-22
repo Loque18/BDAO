@@ -133,7 +133,7 @@ export class Celeste implements ICeleste {
 		const s = [injectedSession, linkedSession].find((s) => s.accounts.length > 0);
 
 		if (s) {
-			this.storeWalletData(s.providerType, this._providerInstances[s.providerType]);
+			await this.storeWalletData(s.providerType, this._providerInstances[s.providerType]);
 		}
 	}
 

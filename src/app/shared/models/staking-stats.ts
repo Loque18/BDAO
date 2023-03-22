@@ -1,4 +1,4 @@
-import { Reward } from './reward';
+import { Reward } from './staking/reward';
 
 type StakingStats = {
 	rewardsHistory: Reward[];

@@ -7,19 +7,36 @@ import { StakingResponse } from 'src/app/shared/api/responses';
 
 import { api } from 'src/app/shared/api';
 import { environment } from 'src/environments/environment';
+import { StakingStats } from 'src/app/shared/models/staking/stats';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class StakingService {
+	data: StakingStats = {
+		activeStaked: 0,
+		spots: 0,
+		totalProfit: 0,
+		totalStaked: 0,
+		rewardsHistory: [],
+	};
+
+	loading: boolean = false;
+	error: boolean = false;
+
 	constructor(private http: HttpClient) {}
 
 	fetchUserStats(address: string): void {
+		this.loading = true;
+
 		this.getUserStats(address).subscribe((res) => {
+			this.loading = false;
+
 			if (res.success) {
 				// do something
-
-				console.log(res);
+				this.data = res.data as StakingStats;
+			} else {
+				this.error = true;
 			}
 		});
 	}

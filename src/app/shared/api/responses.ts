@@ -1,6 +1,6 @@
 import { Asset } from '../models/asset';
 
-import { Reward } from '../models/reward';
+import { Reward } from '../models/staking/reward';
 
 type ApiResponse = {
 	success: boolean;

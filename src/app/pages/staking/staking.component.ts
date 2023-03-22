@@ -41,22 +41,13 @@ export class StakingComponent implements OnInit {
 	constructor(
 		private titleService: Title,
 		protected web3Svc: Web3Service,
-		private stakingSvc: StakingService
+		protected stakingSvc: StakingService
 	) {
 		this.titleService.setTitle('BDAO • Staking');
 	}
 
 	ngOnInit(): void {
-		// throw new Error('Method not implemented.');
-
-		// const address = '0x0';
-		// this.stakingSvc.getUserStats(address).subscribe((res) => {
-		// 	console.log(res);
-		// });
-
 		this.web3Svc.readyEvent.subscribe(() => {
-			console.log(this.web3Svc.walletData);
-
 			const address = this.web3Svc.walletData.address;
 
 			if (!this.web3Svc.walletData.isLoggedIn || !address) return;

@@ -79,16 +79,18 @@ export class Web3Service {
 
 	private _celesteInstance!: ICeleste;
 
+	/**
+	 * @description initializes the celeste library and emits the readyEvent to notify the subscribers
+	 *
+	 */
 	init(): void {
 		from(import('src/app/shared/celeste/celeste')).subscribe((m) => {
 			this._celesteInstance = new m.Celeste();
 			this._celesteLoaded = true;
 
 			from(this._celesteInstance.init(config)).subscribe(() => {
-				console.log(this._celesteInstance);
-
-				this.readyEvent.emit();
 				this._loading = false;
+				this.readyEvent.emit();
 			});
 		});
 	}
