@@ -13,6 +13,11 @@ const routes: Routes = [
 		loadChildren: () =>
 			import('src/app/pages/staking/staking.module').then((m) => m.StakingModule),
 	},
+	{
+		path: 'proposals',
+		loadChildren: () =>
+			import('src/app/pages/proposals/proposals.module').then((m) => m.ProposalsModule),
+	},
 
 	{
 		path: 'test',
