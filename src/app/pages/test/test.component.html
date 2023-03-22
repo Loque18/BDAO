@@ -1,0 +1,58 @@
+<!-- <h1 class="text-9xl">Text 9xl</h1>
+<h1 class="text-8xl">Text 8xl</h1>
+<h1 class="text-7xl">Text 7xl</h1>
+<h1 class="text-6xl">Text 6xl</h1>
+<h1 class="text-5xl">Text 5xl</h1>
+<h1 class="text-4xl">Text 4xl</h1>
+<h1 class="text-3xl">Text 3xl</h1>
+<h1 class="text-2xl">Text 2xl</h1>
+<h1 class="text-xl">Text xl</h1>
+<h1 class="text-lg">Text lg</h1>
+<h1 class="text-base">Text base</h1>
+<h1 class="text-sm">Text sm</h1>
+<h1 class="text-xs">Text xs</h1> -->
+
+<div>
+	<section class="section">
+		<h1 class="has-text-white">Wallet data</h1>
+
+		<div class="is-flex">
+			<div class="has-text-white box has-background-blue100">
+				Address: {{ web3Svc.walletData.address }}
+			</div>
+			<div class="has-text-white box has-background-blue100">
+				Chain id: {{ web3Svc.walletData.chainId }}
+			</div>
+			<div class="has-text-white box has-background-blue100">
+				Provider type: {{ web3Svc.walletData.provider }}
+			</div>
+			<div class="has-text-white box has-background-blue100">
+				Connected: {{ web3Svc.walletData.isLoggedIn }}
+			</div>
+		</div>
+
+		<hr />
+
+		<div class="is-flex">
+			<button class="primary-button" (click)="metamaskConnect()">Connect Metamask</button>
+			<button class="primary-button" (click)="wcConnect()">Connect WC</button>
+		</div>
+
+		<hr />
+
+		<button class="primary-button" (click)="disconnect()">Disconnect</button>
+
+		<!-- <hr />
+		<button class="button" (click)="signMessage()">Sign message</button>
+
+
+
+		<hr />
+
+		<h1 class="subtitle has-text-white">Faucets</h1>
+
+		<button class="button" (click)="faucet('ETH')">ETH</button>
+		<button class="button" (click)="faucet('BNB')">BNB</button>
+		<button class="button" (click)="faucet('MATIC')">MATIC</button> -->
+	</section>
+</div>

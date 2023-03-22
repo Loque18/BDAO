@@ -1,0 +1,148 @@
+.primary-button {
+	@apply relative;
+	@apply px-4;
+	@apply py-3;
+
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-secondary;
+
+	@apply bg-secondary;
+	@apply text-primary;
+
+	@apply font-semibold;
+
+	@apply transition-colors;
+	@apply duration-200;
+	@apply ease-in-out;
+
+	@apply hover:bg-primary;
+	@apply hover:text-secondary;
+	// @apply hover:before:opacity-100;
+
+	@apply focus:outline-none;
+	// @apply focus:after:
+
+	@apply active:bg-secondary-700;
+	@apply active:border-secondary-700;
+	@apply active:text-primary;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
+
+		width: 100%;
+		height: 100%;
+
+		@apply opacity-0;
+
+		@apply bg-primary;
+		@apply rounded-sm;
+		@apply border-3;
+		@apply border-secondary;
+
+		z-index: -1;
+	}
+}
+
+.secondary-button {
+	// @extend .rounded-sm; .px-4; .py-3 .border-3 .border-primary .text-primary .font-semibold .bg-secondary .hover:bg-primary .hover:text-secondary .text-xl .transition-colors .duration-200 .ease-in-out .focus:outline-none .focus:bg-gray-100 .active:bg-primary;
+
+	@apply relative;
+	@apply px-4;
+	@apply py-3;
+
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-secondary;
+
+	@apply bg-primary;
+	@apply text-secondary;
+
+	@apply font-semibold;
+
+	@apply transition-colors;
+	@apply duration-200;
+	@apply ease-in-out;
+
+	@apply hover:bg-secondary;
+	@apply hover:text-primary;
+	// @apply hover:before:opacity-100;
+
+	@apply focus:outline-none;
+	// @apply focus:after:
+
+	@apply active:bg-secondary-700;
+	@apply active:border-secondary-700;
+	@apply active:text-primary;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
+
+		width: 100%;
+		height: 100%;
+
+		@apply opacity-0;
+
+		@apply bg-primary;
+		@apply rounded-sm;
+		@apply border-3;
+		@apply border-secondary;
+
+		z-index: -1;
+	}
+}
+
+.gray-button {
+	@apply relative;
+	@apply px-4;
+	@apply py-3;
+
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-gray-c50;
+
+	@apply bg-primary;
+	@apply text-secondary;
+
+	@apply font-semibold;
+
+	@apply transition-colors;
+	@apply duration-200;
+	@apply ease-in-out;
+
+	@apply hover:bg-gray-c50;
+	@apply hover:text-primary;
+	// @apply hover:before:opacity-100;
+
+	@apply focus:outline-none;
+	// @apply focus:after:
+
+	@apply active:bg-secondary-700;
+	@apply active:border-secondary-700;
+	@apply active:text-primary;
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 8px;
+
+		width: 100%;
+		height: 100%;
+
+		@apply opacity-0;
+
+		@apply bg-primary;
+		@apply rounded-sm;
+		@apply border-3;
+		@apply border-secondary;
+
+		z-index: -1;
+	}
+}

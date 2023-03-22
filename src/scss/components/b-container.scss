@@ -1,0 +1,81 @@
+$gap: 2rem !default;
+
+$mobile: 768px !default;
+$tablet: 769px !default;
+$desktop: 1024px !default;
+$widescreen: 1216px !default;
+$fullhd: 1408px !default;
+
+$container-offset: (2 * $gap) !default;
+$container-max-width: $fullhd !default;
+
+.b_container {
+	flex-grow: 1;
+	margin: 0 auto;
+	position: relative;
+	width: auto;
+
+	// &.is-fluid {
+	// 	max-width: none !important;
+	// 	padding-left: $gap;
+	// 	padding-right: $gap;
+	// 	width: 100%;
+	// }
+
+	@media screen and (max-width: calc($mobile - 1px)) {
+		padding-left: 2rem;
+		padding-right: 2rem;
+	}
+
+	@media screen and (min-width: $desktop) {
+		max-width: calc($desktop - $container-offset);
+	}
+
+	@media screen and (max-width: calc($widescreen - 1px)) {
+		&.is-widescreen:not(.is-max-desktop) {
+			max-width: calc(min($widescreen, $container-max-width) - $container-offset);
+		}
+	}
+
+	@media screen and (max-width: calc($fullhd - 1px)) {
+		&.is-fullhd:not(.is-max-desktop):not(.is-max-widescreen) {
+			max-width: calc(min($fullhd, $container-max-width) - $container-offset);
+		}
+	}
+
+	@media screen and (min-width: $widescreen) {
+		&:not(.is-max-desktop) {
+			max-width: calc(min($widescreen, $container-max-width) - $container-offset);
+		}
+	}
+
+	@media screen and (min-width: $fullhd) {
+		&:not(.is-max-desktop):not(.is-max-widescreen) {
+			max-width: calc(min($fullhd, $container-max-width) - $container-offset);
+		}
+	}
+
+	// @include desktop {
+	// 	max-width: $desktop - $container-offset;
+	// }
+	// @include until-widescreen {
+	// 	&.is-widescreen:not(.is-max-desktop) {
+	// 		max-width: min($widescreen, $container-max-width) - $container-offset;
+	// 	}
+	// }
+	// @include until-fullhd {
+	// 	&.is-fullhd:not(.is-max-desktop):not(.is-max-widescreen) {
+	// 		max-width: min($fullhd, $container-max-width) - $container-offset;
+	// 	}
+	// }
+	// @include widescreen {
+	// 	&:not(.is-max-desktop) {
+	// 		max-width: min($widescreen, $container-max-width) - $container-offset;
+	// 	}
+	// }
+	// @include fullhd {
+	// 	&:not(.is-max-desktop):not(.is-max-widescreen) {
+	// 		max-width: min($fullhd, $container-max-width) - $container-offset;
+	// 	}
+	// }
+}
