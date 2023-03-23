@@ -1,6 +1,6 @@
-.box {
-	border-radius: 3px;
-}
+// .box {
+// 	border-radius: 3px;
+// }
 
 .right-box {
 	border-radius: 3px;
@@ -66,4 +66,13 @@
 		transform: translate(10px, -20px);
 		border: solid 3px black;
 	}
+}
+
+// *~~*~~*~~ ----- ~~*~~*~~* //
+.box2 {
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-secondary;
+	@apply px-8;
+	@apply py-8;
 }
