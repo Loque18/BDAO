@@ -61,13 +61,13 @@ export class Celeste implements ICeleste {
 		linked: undefined,
 	};
 
-	init(_config: Web3Config): void {
-		this._initWeb3(_config).then(() => {
-			this._ready = true;
-		});
-	}
+	// init(_config: Web3Config): void {
+	// 	this._initWeb3(_config).then(() => {
+	// 		this._ready = true;
+	// 	});
+	// }
 
-	private async _initWeb3(config: Web3Config): Promise<void> {
+	public async init(config: Web3Config): Promise<void> {
 		const { rpcs: rpcsObj } = config;
 
 		const rpcs: Rpc[] = Object.values(rpcsObj);
@@ -98,6 +98,9 @@ export class Celeste implements ICeleste {
 
 		// 3. listen for provider events
 		this._listenForProviderEvents();
+
+		// 4. set ready flag
+		this._ready = true;
 	}
 
 	/**
@@ -130,7 +133,7 @@ export class Celeste implements ICeleste {
 		const s = [injectedSession, linkedSession].find((s) => s.accounts.length > 0);
 
 		if (s) {
-			this.storeWalletData(s.providerType, this._providerInstances[s.providerType]);
+			await this.storeWalletData(s.providerType, this._providerInstances[s.providerType]);
 		}
 	}
 

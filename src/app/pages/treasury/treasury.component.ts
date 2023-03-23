@@ -29,6 +29,7 @@ function genItems(): Itreasury[] {
 	styleUrls: ['./treasury.component.scss'],
 })
 export class TreasuryComponent implements OnInit {
+	items2: Itreasury[] = genItems();
 	protected _assetTypes: DropdownItem[] = assetTypes;
 	protected _selectedAssetType: DropdownItem = this._assetTypes[0];
 

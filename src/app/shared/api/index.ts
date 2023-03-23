@@ -8,6 +8,14 @@ const api = {
 	treasury: {
 		assets: `${baseUrl}/allAssets`,
 	},
+
+	staking: {
+		stats: `${baseUrl}/staking/getUserStakingStats`,
+	},
+
+	proposals: {
+		all: `${baseUrl}/proposals/getAllProposals`,
+	},
 };
 
 export { api };

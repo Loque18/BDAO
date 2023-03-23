@@ -7,6 +7,10 @@
     border-radius: 3px;
 }
 
+.small-boxs{
+    border-radius: 3px;
+}
+
 .text1{
     background-color: black;
     pointer-events: none;
@@ -47,8 +51,6 @@ a{
 }
 
 .right-box{
-    width: 40%;
-    height: fit-content;
     position: relative;
 }
 
@@ -66,4 +68,16 @@ a{
 
 .small-icons{
     width: 40px;
+}
+
+.space{
+    justify-content: space-between;
+}
+
+.bg-gray-500{
+    background-color: #AEAEAE;
+}
+
+.border-gray-500{
+    border-color: #AEAEAE;
 }
