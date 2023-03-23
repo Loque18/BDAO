@@ -1,31 +1,31 @@
-<div class="mt-12">
-	<p class="font-bold text-2xl ml-20 mt-3 hidden lg:block">{{ title }}</p>
-	<div class="lg:grid lg:grid-rows-1 lg:grid-flow-col lg:ml-20 lg:mt-3 hidden gap-20">
+<section class="container mt-12">
+	<h1 class="font-bold text-2xl mt-3 hidden lg:block">{{ title }}</h1>
+	<div class="lg:grid lg:grid-rows-1 lg:grid-flow-col lg:mt-3 hidden gap-20">
 		<div class="box border-3 border-black">
 			<button class="text1 text-lg bg-black px-5 py-2">
 				<img src="/assets/PENDING.svg" />
 			</button>
-			<div class="flex space mt-3 ml-9">
+			<div class="flex space mt-3 lg:ml-4 xl:ml-0">
 				<span>
-					<p class="text-2xl ml-1 font-semibold">{{ text1 }}</p>
-					<p class="text-2xl ml-1 font-semibold">{{ text2 }}</p>
+					<p class="text-2xl font-semibold">{{ text1 }}</p>
+					<p class="text-2xl font-semibold">{{ text2 }}</p>
 				</span>
 				<img
-					class="clock py-4 px-4 mr-12"
+					class="clock py-4 px-4 xl:mr-0 lg:mr-5"
 					width="90px"
 					src="/assets/tabler-icon-clock-hour-9.svg"
 				/>
 			</div>
-			<div class="flex">
-				<button class="border-3 border-black py-1 px-2 rounded font-semibold ml-9 mb-4">
+			<div class="flex 2xl:ml-12 ml-4">
+				<button class="border-3 border-black py-1 px-2 rounded font-semibold mb-4">
 					{{ smallText }}
 				</button>
-				<button class="px-1 py-1 bg-semi-black rounded font-semibold ml-9 mb-4">
+				<button class="px-1 py-1 bg-semi-black rounded font-semibold ml-4 mb-4">
 					<img width="40px" src="/assets/tabler-icon-cube-send.svg" />
 				</button>
 			</div>
 		</div>
-		<div class="box right-box border-3 border-black xl:w-9/12 mr-10">
+		<div class="box right-box border-3 border-black 2xl:w-8/12 lg:mr-12">
 			<div class="ml-5 mt-5">
 				<div class="flex">
 					<button class="bg-semi-black rounded px-2 py-2">
@@ -33,7 +33,7 @@
 					</button>
 					<span class="font-semibold ml-5">
 						<p class="">Created</p>
-						<p class="">03 Mar 2023 4:44 PM</p>
+						<p class="lg:mr-2 xl:mr-0">03 Mar 2023 4:44 PM</p>
 					</span>
 				</div>
 				<div class="flex mt-6 mb-4">
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 	<p class="font-bold text-2xl ml-20 lg:hidden">Voting</p>
-	<div class="lg:grid lg:grid-cols-3 gap-12 lg:mt-9 xl:w-7/12 lg:w-10/12 w-8/12 lg:ml-20 m-auto">
+	<div class="lg:grid lg:grid-cols-3 gap-12 lg:mt-9 xl:w-7/12 lg:w-10/12 w-8/12 lg:ml-0 m-auto">
 		<div
 			class="small-boxs border-3 border-gray-500 px-5 mt-7 lg:mt-0"
 			*ngFor="let item of items; let first = first; let last = last"
@@ -64,17 +64,17 @@
 				<p class="font-semibold text-2xl ml-4 mt-1">{{ item.votesCount }}</p>
 				<p class="font-medium text-xl ml-4 pb-3">Votes</p>
 			</div>
-			<div class="flex space mt-5">
+			<div class="flex between mt-5">
 				<p class="text-xs font-medium">Addresses</p>
 				<p class="text-xs font-medium">Voting Weight</p>
 			</div>
-			<div class="flex space mt-1">
+			<div class="flex between mt-1">
 				<a class="text-xs">{{ item.addresses }}</a>
 				<p class="text-xs font-semibold">{{ item.voteWeight }}</p>
 			</div>
 			<div class="flex flex-col items-center mt-24 mb-6">
 				<button
-					class="btn text-2xl font-medium py-2 rounded hover:bg-black hover:text-white"
+					class="border-3 border-black w-full text-2xl font-medium py-2 rounded hover:bg-black hover:text-white"
 				>
 					{{ item.status }}
 				</button>
@@ -141,7 +141,7 @@
 	</div>
 	<div class="">
 		<div
-			class="footer border-3 border-gray-500 rounded lg:pb-32 mb-7 mt-12 lg:w-11/12 w-8/12 lg:ml-20 m-auto"
+			class="footer border-3 border-gray-500 rounded lg:pb-32 mb-7 mt-12 lg:w-11/12 w-8/12 lg:ml-0 m-auto"
 		>
 			<p class="text-2xl font-semibold ml-7 mt-7">Description</p>
 			<p class="font-medium text-lg ml-7 mt-6">
@@ -163,4 +163,4 @@
 			<p class="font-medium text-lg ml-7">officia deserunt mollit anim id est laborum.</p>
 		</div>
 	</div>
-</div>
+</section>

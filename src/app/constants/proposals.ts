@@ -28,6 +28,13 @@ const items : Iproposals[] = [
         text2 : ' SXP, TRX and ETH',
         smallText : '#003'
     },
+    {
+        status : '/assets/ACCEPTED.svg',
+        image : '/assets/tabler-icon-circle-check.svg',
+        text1 : 'VIP-101 Risk Parameters Adjustments for',
+        text2 : ' SXP, TRX and ETH',
+        smallText : '#003'
+    },
 ]
 
 export {Iproposals , items}

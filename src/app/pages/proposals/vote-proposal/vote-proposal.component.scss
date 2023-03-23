@@ -27,11 +27,6 @@ a{
     cursor: pointer;
 }
 
-.btn{
-    border: 3px solid black;
-    width: 90%;
-}
-
 .last{
     background:linear-gradient(0deg, #3954E5, #3954E5);
     width: 20%;
@@ -71,6 +66,10 @@ a{
 }
 
 .space{
+    justify-content: space-around;
+}
+
+.between{
     justify-content: space-between;
 }
 

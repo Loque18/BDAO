@@ -13,7 +13,7 @@ import { CreateProposalComponent } from './create-proposal/create-proposal.compo
   declarations: [
     ProposalsMainComponent,
     CreateProposalComponent,
-    VoteProposalComponent
+    //VoteProposalComponent
   ],
   imports: [
     CommonModule,

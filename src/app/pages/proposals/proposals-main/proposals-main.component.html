@@ -1,82 +1,86 @@
-<div class="container mt-12 mb-9">
-	<p class="text-2xl font-semibold mb-7 ml-16 translate lg:ml-0 2xl:ml-20">{{ title }}</p>
-	<div class="lg:grid lg:grid-rows-3 grid grid-rows-5 lg:grid-flow-col gap-10 2xl:ml-20">
-		<div
-			class="box lg:w-full w-9/12 border-3 rounded border-gray-500 mx-auto lg:mt-0 mt-5"
-			*ngFor="let item of items; let i = index"
-			[ngClass]="i === id ? 'slide-right' : 'none'"
-		>
-			<div class="lg:border-3 border-gray-500 bg-white animation">
-				<button class="text1 text-lg bg-black px-5 py-2">
-					<img [src]="item.status" />
-				</button>
-				<div class="flex gap-20 mt-3 md:ml-9 ml-5">
-					<span class="lg:hidden">
-						<p class="text-lg font-semibold">{{ mobileText1 }}</p>
-						<p class="text-lg font-semibold">{{ mobileText2 }}</p>
-						<p class="text-lg font-semibold">{{ mobileText3 }}</p>
-					</span>
-					<span class="hidden lg:block">
-						<p class="text-2xl ml-1 font-semibold">{{ item.text1 }}</p>
-						<p class="text-2xl ml-1 font-semibold">{{ item.text2 }}</p>
-					</span>
-					<img
-						class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-						width="90px"
-						[src]="item.image"
-					/>
-				</div>
-				<div class="flex gap-36">
-					<div class="md:mt-0 mt-7 lg:mb-3">
-						<button
-							class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 md:mb-3 md:mt-3 ml-5"
-						>
-							{{ item.smallText }}
-						</button>
-					</div>
-					<div>
+<section class="container mt-12 mb-9">
+	<h1 class="text-2xl font-semibold md:ml-0 ml-14 translate">{{ title }}</h1>
+	<div class="grid parent lg:grid-cols-3 grid-rows lg:grid-flow-col lg:gap-x-12">
+		<div class="section scrollable lg:col-span-2">
+			<div
+				class="box lg:w-full w-9/12 border-3 rounded border-gray-500 mx-auto lg:mt-8 mt-16"
+				*ngFor="let item of items; let i = index"
+				[ngClass]="i === id ? 'slide-right' : 'none'"
+			>
+				<div class="lg:border-3 border-gray-500 bg-white animation">
+					<button class="text1 text-lg bg-black px-5 py-2">
+						<img [src]="item.status" />
+					</button>
+					<div class="flex gap-20 mt-3 md:ml-9 ml-5">
+						<span class="lg:hidden">
+							<p class="text-lg font-semibold">{{ mobileText1 }}</p>
+							<p class="text-lg font-semibold">{{ mobileText2 }}</p>
+							<p class="text-lg font-semibold">{{ mobileText3 }}</p>
+						</span>
+						<span class="hidden lg:block">
+							<p class="text-2xl ml-1 font-semibold">{{ item.text1 }}</p>
+							<p class="text-2xl ml-1 font-semibold">{{ item.text2 }}</p>
+						</span>
 						<img
-							class="clock py-3 px-3 visible md:hidden mb-2 md:mr-4"
-							width="70px"
+							class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+							width="90px"
 							[src]="item.image"
 						/>
 					</div>
+					<div class="flex gap-36">
+						<div class="md:mt-0 mt-7 lg:mb-3">
+							<button
+								class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 md:mb-3 md:mt-3 ml-5"
+							>
+								{{ item.smallText }}
+							</button>
+						</div>
+						<div>
+							<img
+								class="clock py-3 px-3 visible md:hidden mb-2 md:mr-4"
+								width="70px"
+								[src]="item.image"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="flex gap-5 m-auto lg:hidden mt-5">
+				<div>
+					<button (click)="slideLeft(id)" class="slide ml-3 px-2 py-1 bg-neon">
+						<img class="w-5 h-5" src="/assets/arrow_back_ios.svg" />
+					</button>
+				</div>
+				<div>
+					<button (click)="slideRight(id)" class="slide ml-3 px-2 py-1 bg-neon">
+						<img class="w-5 h-5" src="/assets/arrow_forward_ios.svg" />
+					</button>
+				</div>
+			</div>
+			<div class="section row-start-1 lg:mt-8">
+			<div
+				class="right-box border-3 border-black m-auto lg:pb-14 lg:m-0 lg:w-full 2xl:w-9/12 w-9/12"
+			>
+				<div class="flex flex-col items-center">
+					<button class="bg-black text-white text-xl mt-6 px-10 py-3 rounded ml-2 mr-2">
+						Create Proposal
+					</button>
+				</div>
+				<p class="font-bold text-2xl mt-6 ml-14">0</p>
+				<p class="font-medium text-lg ml-14 pb-7 lg:pb-0">Voting Weight</p>
+			</div>
+			<div
+				class="right-box border-3 border-black lg:w-full lg:pb-44 2xl:w-9/12 w-9/12 pb-7 lg:m-0 m-auto mt-6 lg:mt-8"
+			>
+				<p class="text-center mt-6 text-xl font-medium">To vote you should</p>
+				<div>
+					<button class="small-box border-3 mt-6 ml-3 py-1 px-3 border-gray-400">1</button>
+				</div>
+				<div>
+					<button class="small-box border-3 mt-7 ml-3 py-1 px-3 border-gray-400">2</button>
 				</div>
 			</div>
 		</div>
-		<div class="flex gap-5 m-auto lg:hidden">
-			<div>
-				<button (click)="slideLeft(id)" class="slide ml-3 px-2 py-1 bg-neon">
-					<img class="w-5 h-5" src="/assets/arrow_back_ios.svg" />
-				</button>
-			</div>
-			<div>
-				<button (click)="slideRight(id)" class="slide ml-3 px-2 py-1 bg-neon">
-					<img class="w-5 h-5" src="/assets/arrow_forward_ios.svg" />
-				</button>
-			</div>
-		</div>
-		<div
-			class="right-box border-3 border-black lg:w-full 2xl:w-9/12 w-9/12 mt-5 lg:m-0 m-auto row-start-1"
-		>
-			<div class="flex flex-col items-center">
-				<button class="bg-black text-white text-2xl mt-6 px-10 py-3 rounded ml-2 mr-2">
-					Create Proposal
-				</button>
-			</div>
-			<p class="font-bold text-2xl mt-6 ml-14">0</p>
-			<p class="font-medium text-lg ml-14 pb-7 lg:pb-0">Voting Weight</p>
-		</div>
-		<div
-			class="right-box border-3 border-black lg:row-span-2 lg:w-full 2xl:w-9/12 w-9/12 h-fit lg:h-full pb-7 lg:pb-0 lg:m-0 m-auto row-start-2"
-		>
-			<p class="text-center mt-6 text-xl font-medium">To vote you should</p>
-			<div>
-				<button class="small-box border-3 mt-6 ml-3 py-1 px-3 border-gray-400">1</button>
-			</div>
-			<div>
-				<button class="small-box border-3 mt-7 ml-3 py-1 px-3 border-gray-400">2</button>
-			</div>
-		</div>
 	</div>
-</div>
+</section>

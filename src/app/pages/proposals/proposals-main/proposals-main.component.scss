@@ -50,13 +50,13 @@
 
 @media only screen and (max-width: 1024px) {
 	.translate {
-		transform: translateY(37rem);
+		transform: translateY(30.7rem);
 	}
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 768px) {
 	.translate {
-		transform: translateY(35.2rem);
+		transform: translateY(30.7rem);
 		margin-left: 6rem;
 	}
 }
@@ -67,3 +67,16 @@
 		border: solid 3px black;
 	}
 }
+
+.scrollable{
+	height: 754px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	padding-right: 10px;   
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
