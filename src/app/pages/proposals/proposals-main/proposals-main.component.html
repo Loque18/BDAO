@@ -6,66 +6,47 @@
 
 			<div class="grid grid-rows-5 lg:grid-rows-3 lg:grid-flow-col gap-10">
 				<div
-					class="box lg:w-full w-9/12 border-3 rounded border-gray-500 mx-auto lg:mt-0 mt-5"
-					*ngFor="let item of items; let i = index"
+					class="box3 !border-gray-c50 relative animation"
+					*ngFor="let p of proposals; let i = index"
 					[ngClass]="i === id ? 'slide-right' : 'none'"
 				>
-					<!--<p class="text-lg font-semibold">
-						{{ p.description }}
-					</p>
+					<div
+						class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
+						[ngClass]="p.status === 0 ? 'text-green-500' : 'text-yellow-500'"
+					>
+						{{ p.status === 0 ? 'ACCEPTED' : 'PENDING' }}
+					</div>
 
-				 <div class="flex gap-20 mt-3 md:ml-9 ml-5">
-						<span class="">
-							<p class="">{{ mobileText1 }}</p>
-							<p class="text-lg font-semibold">{{ mobileText2 }}</p>
-							<p class="text-lg font-semibold">{{ mobileText3 }}</p>
-						</span>
-						
+					<div class="flex gap-20 justify-between h-full">
+						<div class="flex flex-col h-full">
+							<p class="text-xl font-semibold">
+								{{ p.description }}
+							</p>
+
+							<div class="flex-grow"></div>
+
+							<div class="flex gap-x-4">
+								<div
+									class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
+								>
+									#{{ p.number | number : '3.0' }}
+								</div>
+							</div>
+						</div>
 						<div [ngSwitch]="p.status">
 							<img
-								*ngSwitchCase="'active'"
+								*ngSwitchCase="0"
 								class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
 								width="90px"
-								src="/assets/clock.svg"
+								src="/assets/icons/proposals/accepted-icon.svg"
 							/>
-						</div>
-					
-					</div> -->
-					<div class="lg:border-3 border-gray-500 bg-white animation">
-						<button class="text1 text-lg bg-black px-5 py-2">
-							<img [src]="item.status" />
-						</button>
-						<div class="flex gap-20 mt-3 md:ml-9 ml-5">
-							<span class="lg:hidden">
-								<p class="text-lg font-semibold">{{ mobileText1 }}</p>
-								<p class="text-lg font-semibold">{{ mobileText2 }}</p>
-								<p class="text-lg font-semibold">{{ mobileText3 }}</p>
-							</span>
-							<span class="hidden lg:block">
-								<p class="text-2xl ml-1 font-semibold">{{ item.text1 }}</p>
-								<p class="text-2xl ml-1 font-semibold">{{ item.text2 }}</p>
-							</span>
+
 							<img
+								*ngSwitchCase="1"
 								class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
 								width="90px"
-								[src]="item.image"
+								src="/assets/icons/proposals/pending-icon.svg"
 							/>
-						</div>
-						<div class="flex gap-36">
-							<div class="md:mt-0 mt-7 lg:mb-3">
-								<button
-									class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 md:mb-3 md:mt-3 ml-5"
-								>
-									{{ item.smallText }}
-								</button>
-							</div>
-							<div>
-								<img
-									class="clock py-3 px-3 visible md:hidden mb-2 md:mr-4"
-									width="70px"
-									[src]="item.image"
-								/>
-							</div>
 						</div>
 					</div>
 				</div>

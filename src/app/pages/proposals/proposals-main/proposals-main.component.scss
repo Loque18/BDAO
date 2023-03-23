@@ -63,8 +63,12 @@
 
 @media only screen and (min-width: 1024px) {
 	.animation:hover {
-		transform: translate(10px, -20px);
-		border: solid 3px black;
+		&::before {
+			transform: translate(-10px, 10px);
+			@apply transition-transform;
+			@apply duration-100;
+			@apply ease-in-out;
+		}
 	}
 }
 
@@ -75,4 +79,35 @@
 	@apply border-secondary;
 	@apply px-8;
 	@apply py-8;
+}
+
+.box3 {
+	position: relative;
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-gray-c50;
+	@apply bg-primary;
+
+	@apply pt-10;
+	@apply pb-4;
+	@apply px-8;
+
+	transition: all 100ms ease-in-out;
+
+	&:hover {
+		@apply border-secondary #{'!important'};
+	}
+
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		@apply border-3;
+		@apply border-secondary;
+		@apply rounded-sm;
+	}
 }
