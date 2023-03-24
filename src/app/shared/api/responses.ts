@@ -30,7 +30,7 @@ type AllProposalsResponse = ApiResponse & {
 	data?: Proposal[];
 };
 
-type ProposalReponse = ApiResponse & {
+type ProposalResponse = ApiResponse & {
 	data?: {
 		number: number;
 		againstVotes: number;
@@ -46,4 +46,4 @@ type ProposalReponse = ApiResponse & {
 	};
 };
 
-export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalReponse };
+export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse };

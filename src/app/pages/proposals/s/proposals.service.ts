@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 
-import { AllProposalsResponse } from 'src/app/shared/api/responses';
+import { AllProposalsResponse, ProposalResponse } from 'src/app/shared/api/responses';
 
 import { api } from 'src/app/shared/api';
+import { Proposal } from 'src/app/shared/models/proposal/proposal';
 
 @Injectable({
 	providedIn: 'root',
@@ -14,6 +15,11 @@ export class ProposalsService {
 	constructor(private http: HttpClient) {}
 
 	// *~~*~~*~~ http requests ~~*~~*~~* //
+
+	/**
+	 * Get all proposals
+	 * @returns
+	 */
 	getProposals(): Observable<AllProposalsResponse> {
 		const url = api.proposals.all;
 
@@ -26,6 +32,33 @@ export class ProposalsService {
 			)
 		);
 	}
+
+	getProposal(number: number): Observable<ProposalResponse> {
+		const url = api.proposals.byId(number);
+
+		return this.http
+			.get<ProposalResponse>(url)
+			.pipe(catchError(this.handleError<ProposalResponse>(`get proposal id =${number}`)));
+	}
+
+	/**
+	 * return undefined if proposal not found
+	 */
+	// getProposalNo404<Data>(number: number): Observable<ProposalResponse> {
+	// 	const url = api.proposals.byId(number);
+
+	// 	return this.http.get<ProposalResponse>(url).pipe(
+	// 		map((proposal) => {
+	// 			if (proposal.success) {
+	// 				return proposal;
+	// 			} else {
+	// 				return undefined;
+	// 			}
+	// 		}),
+
+	// 		catchError(this.handleError<ProposalResponse>(`getProposal id=${number}`))
+	// 	);
+	// }
 
 	/**
 	 * Handle Http operation that failed.
