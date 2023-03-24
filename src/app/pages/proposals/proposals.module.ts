@@ -6,14 +6,12 @@ import { LayoutModule } from 'src/app/layout/layout.module';
 import { ProposalsRoutingModule } from './proposals-routing.module';
 import { ProposalsMainComponent } from './proposals-main/proposals-main.component';
 import { VoteProposalComponent } from './vote-proposal/vote-proposal.component';
-import { CreateProposalComponent } from './create-proposal/create-proposal.component';
 
 
 @NgModule({
   declarations: [
     ProposalsMainComponent,
-    CreateProposalComponent,
-    //VoteProposalComponent
+    VoteProposalComponent
   ],
   imports: [
     CommonModule,
