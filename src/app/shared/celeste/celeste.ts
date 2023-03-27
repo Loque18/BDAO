@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
+
 import Web3 from 'web3';
+import { Contract } from 'web3-eth-contract';
+import { AbiItem } from 'web3-utils';
 
 import { Rpc, Web3Config, ProviderType } from './celeste-types';
 
@@ -18,6 +20,8 @@ import { InjectedProviderStrategy } from './provider-context/strategies/injected
 import { LinkedProviderStrategy } from './provider-context/strategies/linked';
 import { ICeleste } from '../models/iceleste';
 
+import { SmartContract } from './celeste-types';
+
 // instantiate strategies
 const StrategiesMap: {
 	[key: string]: IProviderStrategy;
@@ -29,6 +33,7 @@ const StrategiesMap: {
 export class Celeste implements ICeleste {
 	// *~~*~~*~~ External variables ~~*~~*~~* //
 
+	private _config!: Web3Config; // config object
 	private _ready: boolean = false; // is celeste ready to be used
 	private _web3Wrapper: Web3Wrapper = new Web3Wrapper(); // web3 instanecs
 	private _walletData: WalletData = new WalletData(); // wallet data
@@ -39,6 +44,10 @@ export class Celeste implements ICeleste {
 
 	get walletData(): WalletData {
 		return this._walletData;
+	}
+
+	get web3Wrapper(): Web3Wrapper {
+		return this._web3Wrapper;
 	}
 
 	// private _web3WrapperSub: BehaviorSubject<Web3Wrapper> = new BehaviorSubject<Web3Wrapper>(
@@ -68,7 +77,8 @@ export class Celeste implements ICeleste {
 	// }
 
 	public async init(config: Web3Config): Promise<void> {
-		const { rpcs: rpcsObj } = config;
+		this._config = config;
+		const { rpcs: rpcsObj, smartContracts, isMultichain } = config;
 
 		const rpcs: Rpc[] = Object.values(rpcsObj);
 
@@ -76,6 +86,41 @@ export class Celeste implements ICeleste {
 		const injectedStrategy = StrategiesMap[providers.INJECTED];
 		const linkedStrategy = StrategiesMap[providers.LINKED];
 
+		// 2. create web3 readonly instances, for each rpc and init its smart contracts
+
+		if (!isMultichain && rpcs.length > 1) {
+			throw new Error('Multichain is not enabled but more than one rpc is provided');
+		}
+
+		rpcs.forEach((rpc: Rpc) => {
+			const web3 = new Web3(rpc.url);
+
+			this._web3Wrapper.addWeb3ROInstance(rpc.name, web3); // add web3 instance
+
+			// get the smart contracts for the current rpc (multichain)
+			let sc: SmartContract[] = [];
+			if (!isMultichain) {
+				sc = smartContracts;
+			} else {
+				sc = smartContracts.filter((sc: SmartContract) =>
+					Object.keys(sc.address).includes(rpc.chainId.toString())
+				);
+			}
+
+			sc.forEach((sc: SmartContract) => {
+				const address = isMultichain ? sc.address[rpc.chainId] : (sc.address as string);
+
+				const _scInstance = new web3.eth.Contract(sc.abi as AbiItem, address);
+
+				const scKey = `${sc.key}_READ.${rpc.chainId}`;
+
+				this._web3Wrapper.addContract(scKey, _scInstance);
+			});
+		});
+
+		this._web3Wrapper.setWeb3ROInitialized(true);
+
+		// 3. intantiante providers
 		// get injected provider
 		try {
 			await injectedStrategy.init(rpcs);
@@ -93,13 +138,13 @@ export class Celeste implements ICeleste {
 			if (environment.development) console.warn('Linked provider not found');
 		}
 
-		// 2. try recovering existing session
-		await this.getPreviousSession();
-
-		// 3. listen for provider events
+		// 4. listen for provider events
 		this._listenForProviderEvents();
 
-		// 4. set ready flag
+		// 5. try recovering any existing session
+		await this.getPreviousSession();
+
+		// 6. set ready flag
 		this._ready = true;
 	}
 
@@ -156,8 +201,6 @@ export class Celeste implements ICeleste {
 
 	public async requestDisconnection(): Promise<void> {
 		if (!this._walletData.isLoggedIn) return; // if user is not logged in, do nothing
-
-		console.log('logging out');
 
 		this._providerContext.setStrategy(StrategiesMap[this._walletData.provider as ProviderType]);
 
@@ -279,6 +322,35 @@ export class Celeste implements ICeleste {
 		this._walletData = walletData;
 
 		this._web3Wrapper.setWeb3Instance(_web3);
+		this._web3Wrapper.setInitialized(true);
+
+		let sc: SmartContract[] = [];
+
+		if (!this._config.isMultichain) {
+			sc = this._config.smartContracts;
+		} else {
+			// check address for chainId is defined
+			sc = this._config.smartContracts.filter((sc: SmartContract) =>
+				Object.keys(sc.address).includes(chainId.toString())
+			);
+		}
+
+		sc.forEach((sc: SmartContract) => {
+			const address = this._config.isMultichain
+				? sc.address[chainId]
+				: (sc.address as string);
+
+			const contract: Contract = new _web3.eth.Contract(sc.abi as AbiItem, address);
+
+			this._web3Wrapper.addContract(sc.key, contract);
+		});
+
+		// if(this._config.isMultichain) {
+		// sc = this._config.smartContracts.filter((sc: SmartContract) => sc.address[chainId] === );
+
+		// this.initSmartContracts(_web3, this._config.smartContracts.filter((sc: SmartContract) => sc.cha)
+
+		localStorage.setItem('celeste_session', '_');
 		// this._web3Subject.next(this._web3Wrapper);
 	}
 
@@ -286,6 +358,37 @@ export class Celeste implements ICeleste {
 		this._walletData.reset();
 
 		this._web3Wrapper.removeWeb3Instance();
+		this._web3Wrapper.setInitialized(false);
 		// this._web3WrapperSub.next(this._web3Wrapper);
+
+		const contracts = this._web3Wrapper.contracts;
+
+		Object.keys(contracts).forEach((key: string) => {
+			if (key.includes('_READ')) return;
+			this._web3Wrapper.removeContract(key);
+		});
+
+		localStorage.removeItem('celeste_session');
+	}
+
+	private initSmartContracts(web3: Web3, smartContracts: SmartContract[], chainId: number): void {
+		smartContracts.forEach((sc: SmartContract) => {
+			const _address = this._config?.isMultichain
+				? sc.address[chainId]
+				: (sc.address as string);
+
+			const contract = new web3.eth.Contract(sc.abi as AbiItem, _address);
+
+			this.web3Wrapper.addContract(sc.key, contract);
+		});
+	}
+
+	public removeWriteSmartContracts(): void {
+		const contracts = this._web3Wrapper.contracts;
+
+		Object.keys(contracts).forEach((key: string) => {
+			if (key.includes('_READ')) return;
+			this._web3Wrapper.removeContract(key);
+		});
 	}
 }

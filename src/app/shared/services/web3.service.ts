@@ -8,6 +8,7 @@ import { ICeleste } from '../models/iceleste';
 import { config } from 'src/celeste.config';
 import { environment } from 'src/environments/environment';
 import { WalletData } from '../celeste/wallet-data';
+import { Web3Wrapper } from '../celeste/we3-wrapper';
 
 /**
  * in order to keep the main bundle size small, we are using lazy loading for the celeste library
@@ -35,6 +36,11 @@ export class Web3Service {
 	public get walletData(): WalletData {
 		if (this._celesteInstance) return this._celesteInstance.walletData;
 		else return new WalletData();
+	}
+
+	public get web3Wrapper(): Web3Wrapper {
+		if (this._celesteInstance) return this._celesteInstance.web3Wrapper;
+		else return new Web3Wrapper();
 	}
 
 	private _loading = true;

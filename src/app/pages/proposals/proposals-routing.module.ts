@@ -14,7 +14,7 @@ const routes: Routes = [
 		component: CreateProposalComponent,
 	},
 	{
-		path: 'vote',
+		path: 'vote/:id',
 		component: VoteProposalComponent,
 	},
 ];
