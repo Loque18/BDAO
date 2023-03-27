@@ -18,3 +18,32 @@
         </form>
     <button class="text-white text-xl bg-black rounded px-7 py-3 mt-11 mb-5">Create proposal</button>
 </div>
+
+
+
+<section class="flex">
+<div>
+    <label for="new-user">User name:</label>
+    <input class="border-2" id="new-user" #userName>
+
+    <button class="border-3 border-black bg-black text-white" (click)="add(userName.value); userName.value=''">
+        Add user
+    </button>
+</div>
+<div>
+    <label for="new-user">User ID:</label>
+    <input class="border-2" type="number" (keyup)="changeID($event)" id="new-user" #userID>
+
+    <button class="border-3 border-black bg-black text-white">
+        Add user by ID
+    </button>
+</div>
+<button class="border-3 border-black bg-black text-white ml-12" (click)="save()">save</button>
+</section>
+
+<div *ngIf="user">
+    <h2>{{ user.id }}</h2>
+    <p>{{ user.title }}</p>
+    <p>{{ user.completed }}</p>
+</div>
+
