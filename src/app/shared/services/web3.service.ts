@@ -9,6 +9,7 @@ import { config } from 'src/celeste.config';
 import { environment } from 'src/environments/environment';
 import { WalletData } from '../celeste/wallet-data';
 import { Web3Wrapper } from '../celeste/we3-wrapper';
+import { EthEvents } from '../celeste/constants';
 
 /**
  * in order to keep the main bundle size small, we are using lazy loading for the celeste library
@@ -118,5 +119,13 @@ export class Web3Service {
 		if (!this.canExecute()) return;
 
 		this._celesteInstance.requestDisconnection();
+	}
+
+	// *~~*~~*~~ Blockchain events ~~*~~*~~* //
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	on(eventkey: EthEvents, callback: (data: any) => void): void {
+		if (!this.canExecute()) return;
+
+		this._celesteInstance.on(eventkey, callback);
 	}
 }

@@ -5,7 +5,7 @@ import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
 import { MetaMaskInpageProvider } from '@metamask/providers';
 
-import { Rpc, Web3Config, ProviderType } from './celeste-types';
+import { Rpc, Web3Config, ProviderType, EthEventHandlers } from './celeste-types';
 
 import { WalletData } from './wallet-data';
 import { Web3Wrapper } from './we3-wrapper';
@@ -38,7 +38,7 @@ export class Celeste implements ICeleste {
 	private _ready: boolean = false; // is celeste ready to be used
 	private _web3Wrapper: Web3Wrapper = new Web3Wrapper(); // web3 instanecs
 	private _walletData: WalletData = new WalletData(); // wallet data
-	private _events: any = {}; // events
+	private _eventHandlers: EthEventHandlers = {};
 
 	get ready(): boolean {
 		return this._ready;
@@ -246,12 +246,16 @@ export class Celeste implements ICeleste {
 				const acc: string[] = accounts as string[];
 
 				this.accountsChanged(acc);
+
+				this._eventHandlers.accountsChanged?.(acc);
 			});
 
 			injectedProvider.on('chainChanged', (chainId) => {
 				const chainId_decimal = parseInt(chainId as string, 16);
 
 				this.chainChanged(chainId_decimal);
+
+				this._eventHandlers.chainChanged?.(chainId_decimal);
 			});
 
 			// injectedProvider.on('disconnect', () => {
@@ -269,11 +273,13 @@ export class Celeste implements ICeleste {
 
 			wcProvider.on('accountsChanged', (acc: string[]) => {
 				this.accountsChanged(acc);
+				this._eventHandlers.accountsChanged?.(acc);
 			});
 
 			wcProvider.on('chainChanged', (chainId: string) => {
 				const chainIdNum: number = parseInt(chainId);
 				this.chainChanged(chainIdNum);
+				this._eventHandlers.chainChanged?.(chainIdNum);
 			});
 
 			wcProvider.on('disconnect', (stream: any) => {
@@ -288,6 +294,8 @@ export class Celeste implements ICeleste {
 
 					this.accountsChanged([]);
 				}
+
+				this._eventHandlers.disconnect?.(stream);
 			});
 		}
 	}
@@ -310,7 +318,7 @@ export class Celeste implements ICeleste {
 	}
 
 	on(eventkey: EthEvents, callback: (data: any) => void): void {
-		this._events[eventkey] = callback;
+		this._eventHandlers[eventkey] = callback;
 	}
 
 	// *~~*~~*~~ Utility Methods ~~*~~*~~* //
