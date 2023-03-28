@@ -11,6 +11,9 @@ import { HttpHeaders } from '@angular/common/http';
 export class UserDataService {
 private Iurl = 'https://jsonplaceholder.typicode.com/todos'
 
+httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=UTF-8' })
+};
   constructor(private http : HttpClient) { }
 
   getData() : Observable<userData[]>{
@@ -33,11 +36,13 @@ private Iurl = 'https://jsonplaceholder.typicode.com/todos'
     return this.http.put(this.Iurl , user , this.httpOptions)
   }
   
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
   addUser(user : userData) : Observable<userData>{
+    console.log('addUser called with user:', user);
     return this.http.post<userData>(this.Iurl , user , this.httpOptions)
+  }
+
+  deleteUser(id:number) : Observable<userData> {
+    const url = `${this.Iurl}/${id}`
+    return this.http.delete<userData>(url , this.httpOptions)
   }
 }

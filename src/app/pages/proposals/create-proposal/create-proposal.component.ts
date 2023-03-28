@@ -16,9 +16,9 @@ export class CreateProposalComponent {
   users : userData[] | undefined
   user: userData | undefined
   userID : number = 0
+  savedUsers : userData[] = []
 
   constructor(private userService : UserDataService) { }
-
 
 
   changeID(ID : any) : void {
@@ -28,13 +28,21 @@ export class CreateProposalComponent {
     })
   }
 
+  postUser(id : any){
+    if (this.user) {
+    this.savedUsers.push(this.user);
+    }
+  }
+ 
   add(title : string) : void{
     title = title.trim()
     if (!title) {return;}
     this.userService.addUser({title} as userData)
-    .subscribe((user: userData) => {
+    .subscribe((user) => {
       this.users?.push(user)
+      console.log('User added:', user);
     })
+    console.log(this.users)
   }
 
   save() : void{
@@ -44,9 +52,16 @@ export class CreateProposalComponent {
     }
   }
 
-  /*ngOnInit(){
-    this.userService.getID(this.userID).subscribe(user =>{
-      this.user = user
-    })
-  }*/
-}
+  delete(user : userData): void{
+    this.users = this.users?.filter(h => h !== user)
+    this.userService.deleteUser(user.id).subscribe()
+  }
+
+  ngOnInit(){
+    this.userService.getData().subscribe(users =>
+      this.users = users)
+      console.log(this.users)
+    }
+    
+  }
+

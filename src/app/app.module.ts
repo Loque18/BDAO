@@ -12,7 +12,7 @@ import { CreateProposalComponent } from './pages/proposals/create-proposal/creat
   declarations: [
     AppComponent,
     TestComponent,
-    CreateProposalComponent
+    CreateProposalComponent,
   ],
   imports: [
     BrowserModule,

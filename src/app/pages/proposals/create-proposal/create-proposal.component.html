@@ -21,29 +21,49 @@
 
 
 
-<section class="flex">
+<section class="flex gap-10">
 <div>
     <label for="new-user">User name:</label>
     <input class="border-2" id="new-user" #userName>
 
     <button class="border-3 border-black bg-black text-white" (click)="add(userName.value); userName.value=''">
-        Add user
+        Add new user
     </button>
 </div>
 <div>
     <label for="new-user">User ID:</label>
     <input class="border-2" type="number" (keyup)="changeID($event)" id="new-user" #userID>
 
-    <button class="border-3 border-black bg-black text-white">
-        Add user by ID
+    <button 
+    (click)="postUser(userID.value); userID.value=''"
+    class="border-3 border-black bg-black text-white">
+        Save user
     </button>
 </div>
 <button class="border-3 border-black bg-black text-white ml-12" (click)="save()">save</button>
 </section>
 
-<div *ngIf="user">
-    <h2>{{ user.id }}</h2>
-    <p>{{ user.title }}</p>
-    <p>{{ user.completed }}</p>
+<div *ngIf="user" class="mb-2">
+    <p><span class="mr-3">{{ user.id }}</span>{{ user.title }}</p>
 </div>
+
+<div>
+    <ul>
+      <li *ngFor="let user of savedUsers" class="mb-2">
+        <p><span class="mr-3">{{ user.id }}</span>{{ user.title }}</p>
+      </li>
+    </ul>
+</div>
+
+
+<ul class="users">
+    <li *ngFor="let user of users" class="flex gap-10">
+      <a class="mb-2">
+        <span class="badge">{{user.id}}</span> {{user.title}}
+      </a>
+      <button type="button" class="delete mb-2" title="delete user"
+        (click)="delete(user)">x</button>
+    </li>
+  </ul>
+
 
