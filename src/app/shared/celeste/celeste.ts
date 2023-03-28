@@ -3,14 +3,15 @@
 import Web3 from 'web3';
 import { Contract } from 'web3-eth-contract';
 import { AbiItem } from 'web3-utils';
+import { MetaMaskInpageProvider } from '@metamask/providers';
 
 import { Rpc, Web3Config, ProviderType } from './celeste-types';
 
 import { WalletData } from './wallet-data';
 import { Web3Wrapper } from './we3-wrapper';
 
-import { providers } from './constants';
-import { MetaMaskInpageProvider } from '@metamask/providers';
+import { providers, EthEvents } from './constants';
+
 // import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { environment } from 'src/environments/environment';
 import { ProviderContext } from './provider-context';
@@ -37,6 +38,7 @@ export class Celeste implements ICeleste {
 	private _ready: boolean = false; // is celeste ready to be used
 	private _web3Wrapper: Web3Wrapper = new Web3Wrapper(); // web3 instanecs
 	private _walletData: WalletData = new WalletData(); // wallet data
+	private _events: any = {}; // events
 
 	get ready(): boolean {
 		return this._ready;
@@ -307,6 +309,10 @@ export class Celeste implements ICeleste {
 		this._walletData.setChainId(chainId);
 	}
 
+	on(eventkey: EthEvents, callback: (data: any) => void): void {
+		this._events[eventkey] = callback;
+	}
+
 	// *~~*~~*~~ Utility Methods ~~*~~*~~* //
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -324,6 +330,7 @@ export class Celeste implements ICeleste {
 		this._web3Wrapper.setWeb3Instance(_web3);
 		this._web3Wrapper.setInitialized(true);
 
+		// intantiate write smart contracts
 		let sc: SmartContract[] = [];
 
 		if (!this._config.isMultichain) {
@@ -361,6 +368,7 @@ export class Celeste implements ICeleste {
 		this._web3Wrapper.setInitialized(false);
 		// this._web3WrapperSub.next(this._web3Wrapper);
 
+		// remove all write smart contracts
 		const contracts = this._web3Wrapper.contracts;
 
 		Object.keys(contracts).forEach((key: string) => {
@@ -369,26 +377,5 @@ export class Celeste implements ICeleste {
 		});
 
 		localStorage.removeItem('celeste_session');
-	}
-
-	private initSmartContracts(web3: Web3, smartContracts: SmartContract[], chainId: number): void {
-		smartContracts.forEach((sc: SmartContract) => {
-			const _address = this._config?.isMultichain
-				? sc.address[chainId]
-				: (sc.address as string);
-
-			const contract = new web3.eth.Contract(sc.abi as AbiItem, _address);
-
-			this.web3Wrapper.addContract(sc.key, contract);
-		});
-	}
-
-	public removeWriteSmartContracts(): void {
-		const contracts = this._web3Wrapper.contracts;
-
-		Object.keys(contracts).forEach((key: string) => {
-			if (key.includes('_READ')) return;
-			this._web3Wrapper.removeContract(key);
-		});
 	}
 }

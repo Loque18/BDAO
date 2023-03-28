@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { from, skipUntil } from 'rxjs';
-import { Web3Service } from 'src/app/shared/services/web3.service';
-
 import { Contract } from 'web3-eth-contract';
-
 import { Transaction } from 'web3-core';
+
+import { Web3Service } from 'src/app/shared/services/web3.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 import { config } from 'src/celeste.config';
 
@@ -16,7 +16,7 @@ const { addressBook } = config;
 	styleUrls: ['./test.component.scss'],
 })
 export class TestComponent {
-	constructor(protected web3Svc: Web3Service) {}
+	constructor(protected web3Svc: Web3Service, protected userSvc: UserService) {}
 
 	metamaskConnect(): void {
 		this.web3Svc.requestConnection('injected');
