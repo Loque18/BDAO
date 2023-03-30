@@ -54,18 +54,18 @@ const config: Web3Config = {
 		{
 			key: 'STAKING',
 			abi: stakingAbi,
-			address: '0xe1ca6100E35Ad492DCa8654cc27057E88b994769',
+			address: '0xf0c7395d72a33ae10a07b03b8b11fc5cfab2dbae',
 		},
 		{
 			key: 'BRICKS',
 			abi: erc20Abi,
-			address: '0x1AAeE4aB99ae547B3C74A21f378D467f6b90e0ea',
+			address: '0x08eaedd643b1b821e539c8d90cb099ea54aae042',
 		},
 	],
 
 	addressBook: {
-		bricks: '0x1AAeE4aB99ae547B3C74A21f378D467f6b90e0ea',
-		staking: '0xe1ca6100E35Ad492DCa8654cc27057E88b994769',
+		bricks: '0x08eaedd643b1b821e539c8d90cb099ea54aae042',
+		staking: '0xf0c7395d72a33ae10a07b03b8b11fc5cfab2dbae',
 	},
 };
 

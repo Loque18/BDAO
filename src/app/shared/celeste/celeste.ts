@@ -22,6 +22,7 @@ import { LinkedProviderStrategy } from './provider-context/strategies/linked';
 import { ICeleste } from '../models/iceleste';
 
 import { SmartContract } from './celeste-types';
+import { EventEmitter } from '@angular/core';
 
 // instantiate strategies
 const StrategiesMap: {
@@ -51,6 +52,10 @@ export class Celeste implements ICeleste {
 	get web3Wrapper(): Web3Wrapper {
 		return this._web3Wrapper;
 	}
+
+	// data streams
+	public connectEvent = new EventEmitter<null>();
+	public disconnectEvent = new EventEmitter<null>();
 
 	// private _web3WrapperSub: BehaviorSubject<Web3Wrapper> = new BehaviorSubject<Web3Wrapper>(
 	// 	this._web3Wrapper
@@ -211,25 +216,26 @@ export class Celeste implements ICeleste {
 		this.removeWalletData();
 	}
 
-	/*
-	public signMessage(message: string): Observable<unknown> {
-		if (!this._walletData.isLoggedIn)
-			return throwError(() => new Error('User is not logged in'));
+	public sign(message: string): Promise<unknown> {
+		if (!this._walletData.isLoggedIn) throw new Error('User is not logged in');
+
 		const type = this._walletData.provider as ProviderType;
 
 		const provider = this._providerInstances[type];
 
-		if (!provider) return throwError(() => new Error('Provider not found'));
+		return provider.request({
+			method: 'personal_sign',
+			params: [message, this._walletData.address],
+		});
 
-		const obs = from(
-			provider.request({
-				method: 'personal_sign',
-				params: [message, this._walletData.address],
-			})
-		);
-		return obs;
+		// const obs = from(
+		// 	provider.request({
+		// 		method: 'personal_sign',
+		// 		params: [message, this._walletData.address],
+		// 	})
+		// );
+		// return obs;
 	}
-	*/
 
 	// *~~*~~*~~ Web3 Events ~~*~~*~~* //
 
@@ -360,12 +366,15 @@ export class Celeste implements ICeleste {
 			this._web3Wrapper.addContract(sc.key, contract);
 		});
 
+		localStorage.setItem('celeste_session', '_');
+
+		this.connectEvent.emit();
+
 		// if(this._config.isMultichain) {
 		// sc = this._config.smartContracts.filter((sc: SmartContract) => sc.address[chainId] === );
 
 		// this.initSmartContracts(_web3, this._config.smartContracts.filter((sc: SmartContract) => sc.cha)
 
-		localStorage.setItem('celeste_session', '_');
 		// this._web3Subject.next(this._web3Wrapper);
 	}
 
@@ -385,5 +394,7 @@ export class Celeste implements ICeleste {
 		});
 
 		localStorage.removeItem('celeste_session');
+
+		this.disconnectEvent.emit();
 	}
 }

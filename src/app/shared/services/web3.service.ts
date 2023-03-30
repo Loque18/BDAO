@@ -29,6 +29,8 @@ export class Web3Service {
 
 	// *~~*~~*~~ service events ~~*~~*~~* //
 	public readyEvent = new EventEmitter<null>();
+	public connectEvent = new EventEmitter<null>();
+	public disconnectEvent = new EventEmitter<null>();
 
 	// *~~*~~*~~ Service internal data ~~*~~*~~* //
 
@@ -95,6 +97,14 @@ export class Web3Service {
 			this._celesteInstance = new m.Celeste();
 			this._celesteLoaded = true;
 
+			this._celesteInstance.connectEvent.subscribe(() => {
+				this.connectEvent.emit();
+			});
+
+			this._celesteInstance.disconnectEvent.subscribe(() => {
+				this.disconnectEvent.emit();
+			});
+
 			from(this._celesteInstance.init(config)).subscribe(() => {
 				this._loading = false;
 				this.readyEvent.emit();
@@ -119,6 +129,12 @@ export class Web3Service {
 		if (!this.canExecute()) return;
 
 		this._celesteInstance.requestDisconnection();
+	}
+
+	sign(msg: string): Promise<unknown> | void {
+		if (!this.canExecute()) return;
+
+		return this._celesteInstance.sign(msg);
 	}
 
 	// *~~*~~*~~ Blockchain events ~~*~~*~~* //

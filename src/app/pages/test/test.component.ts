@@ -69,4 +69,10 @@ export class TestComponent {
 		console.log(staking.methods);
 		// from(staking.methods.stake.send)
 	}
+
+	sign() {
+		this.web3Svc.sign('hello')?.then((res) => {
+			console.log(res);
+		});
+	}
 }

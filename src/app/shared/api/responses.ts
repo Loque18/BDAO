@@ -18,6 +18,8 @@ type TreasuryResponse = ApiResponse & {
 
 type StakingResponse = ApiResponse & {
 	data?: {
+		apr: number;
+		price: number;
 		rewardsHistory: Reward[];
 		totalProfit: number;
 		spots: number;
