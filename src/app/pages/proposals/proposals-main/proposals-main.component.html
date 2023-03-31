@@ -4,6 +4,7 @@
 		<div class="container">
 			<h1 class="text-2xl font-semibold mb-7 translate">Proposals</h1>
 
+			<!-- grid container -->
 			<div class="grid grid-rows-5 lg:grid-rows-3 lg:grid-flow-col gap-10">
 				<div
 					class="box3 !border-gray-c50 relative animation"
@@ -89,7 +90,35 @@
 							2
 						</button>
 					</div>
+					<div class="flex gap-36">
+						<div class="md:mt-0 mt-7 lg:mb-3">
+							<!-- <button
+								class="border-3 border-gray-500 rounded font-semibold py-1 px-2 md:ml-9 md:mb-3 md:mt-3 ml-5"
+							>
+								{{ item.smallText }}
+							</button> -->
+						</div>
+						<div>
+							<!-- <img
+								class="clock py-3 px-3 visible md:hidden mb-2 md:mr-4"
+								width="70px"
+								[src]="item.image"
+							/> -->
+						</div>
+					</div>
 				</div>
+			</div>
+		</div>
+		<div class="flex gap-5 m-auto lg:hidden mt-5">
+			<div>
+				<button (click)="slideLeft(id)" class="slide ml-3 px-2 py-1 bg-neon">
+					<img class="w-5 h-5" src="/assets/arrow_back_ios.svg" />
+				</button>
+			</div>
+			<div>
+				<button (click)="slideRight(id)" class="slide ml-3 px-2 py-1 bg-neon">
+					<img class="w-5 h-5" src="/assets/arrow_forward_ios.svg" />
+				</button>
 			</div>
 		</div>
 	</section>

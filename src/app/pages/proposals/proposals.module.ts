@@ -12,8 +12,8 @@ import { CreateProposalComponent } from './create-proposal/create-proposal.compo
 @NgModule({
   declarations: [
     ProposalsMainComponent,
-    CreateProposalComponent,
-    VoteProposalComponent
+    VoteProposalComponent,
+    CreateProposalComponent
   ],
   imports: [
     CommonModule,
