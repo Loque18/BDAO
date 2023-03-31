@@ -116,13 +116,11 @@ export class StakingComponent implements OnInit {
 		else method = this.stakingSvc.unstake;
 
 		// stake
-		method(amountBN).subscribe({
+		this.stakingSvc.stake(amountBN).subscribe({
 			next: (tx: any) => {
-				// todo
+				// 		// todo
 				this.user.updateBalance();
-
 				this.form.reset();
-
 				setTimeout(() => {
 					this.fetchData();
 				}, 5000);
@@ -136,12 +134,10 @@ export class StakingComponent implements OnInit {
 	}
 
 	stake() {
-		// validate
 		if (this.form.invalid) return;
 
 		// get amount
 		const amountDec = this.form.value.amount;
-
 		const amountBN = BigInt(amountDec * 10 ** 18).toString();
 
 		// stake
@@ -149,29 +145,20 @@ export class StakingComponent implements OnInit {
 			next: (tx: any) => {
 				// todo
 				this.user.updateBalance();
-
 				this.form.reset();
-
 				setTimeout(() => {
 					this.fetchData();
 				}, 5000);
 			},
-			error: () => {
-				// todo
-
-				this.form.reset();
-			},
+			error: () => {},
 		});
+		// 	error: () => {
 	}
 
 	get needsApproval() {
 		if (!this.form.value.amount) return false;
 
 		return BigInt(Math.ceil(this.form.value.amount)) > BigInt(this.user.data.stakingAllowance);
-	}
-
-	unstake() {
-		console.log(this.form.value);
 	}
 
 	connect() {

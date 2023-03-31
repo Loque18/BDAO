@@ -71,7 +71,7 @@ export class TestComponent {
 	}
 
 	sign() {
-		this.web3Svc.sign('hello')?.then((res) => {
+		this.web3Svc.sign('hello test')?.then((res) => {
 			console.log(res);
 		});
 	}
