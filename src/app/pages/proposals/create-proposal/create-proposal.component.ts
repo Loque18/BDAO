@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { userData } from 'src/app/constants/users';
-import { UserDataService } from './user-data.service';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 

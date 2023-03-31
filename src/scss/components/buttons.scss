@@ -13,6 +13,9 @@
 	@apply border-3;
 	@apply border-secondary;
 
+	@apply cursor-pointer;
+	@apply text-center;
+
 	@apply bg-secondary;
 	@apply text-primary;
 
@@ -66,6 +69,9 @@
 	@apply border-3;
 	@apply border-secondary;
 
+	@apply cursor-pointer;
+	@apply text-center;
+
 	@apply bg-primary;
 	@apply text-secondary;
 
@@ -114,6 +120,9 @@
 	@apply rounded-sm;
 	@apply border-3;
 	@apply border-gray-c50;
+
+	@apply cursor-pointer;
+	@apply text-center;
 
 	@apply bg-primary;
 	@apply text-secondary;
