@@ -16,6 +16,8 @@ const api = {
 	proposals: {
 		all: `${baseUrl}/proposals/getAllProposals`,
 		byId: (id: number) => `${baseUrl}/proposals/getProposalInfo?proposalNumber=${id}`,
+		add: (title: string, description: string, signature: string) =>
+			`${baseUrl}/proposals/newProposal?title=${title}&description=${description}&signature=${signature}`,
 	},
 };
 

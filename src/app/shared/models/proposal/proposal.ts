@@ -16,7 +16,7 @@ type DetailedProposal = {
 	votes: [];
 	title: string;
 	abstainVotingWeight: number;
-	status: string;
+	status: number;
 };
 
 export { Proposal, DetailedProposal };

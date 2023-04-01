@@ -1,5 +1,5 @@
 import { Asset } from '../models/asset';
-import { Proposal } from '../models/proposal/proposal';
+import { DetailedProposal, Proposal } from '../models/proposal/proposal';
 
 import { Reward } from '../models/staking/reward';
 
@@ -32,20 +32,31 @@ type AllProposalsResponse = ApiResponse & {
 	data?: Proposal[];
 };
 
-type ProposalResponse = ApiResponse & {
-	data?: {
-		number: number;
-		againstVotes: number;
-		againstVotingWeight: number;
-		absentVotes: number;
-		withVotes: number;
-		description: string;
-		creationgTime: number;
-		votes: [];
-		title: string;
-		abstainVotingWeight: number;
-		status: string;
-	};
+type SuccessProposalResponse = {
+	success: true;
+	data: DetailedProposal;
+	// {
+	// 	number: number;
+	// 	againstVotes: number;
+	// 	againstVotingWeight: number;
+	// 	absentVotes: number;
+	// 	withVotes: number;
+	// 	description: string;
+	// 	creationgTime: number;
+	// 	votes: [];
+	// 	title: string;
+	// 	abstainVotingWeight: number;
+	// 	status: string;
+	// };
+	statusCode: number;
 };
+
+type ErrorProposalResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
+};
+
+type ProposalResponse = SuccessProposalResponse | ErrorProposalResponse;
 
 export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse };

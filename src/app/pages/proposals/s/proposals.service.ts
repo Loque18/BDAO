@@ -50,6 +50,16 @@ export class ProposalsService {
 		return this.http.get<ProposalResponse>(url).pipe(catchError(this.handleError));
 	}
 
+	postProposal(
+		title: string,
+		description: string,
+		signature: string
+	): Observable<ProposalResponse> {
+		const url = api.proposals.add(title, description, signature);
+
+		return this.http.post<ProposalResponse>(url, {});
+	}
+
 	/**
 	 * Transform the error for user consumption.
 	 *

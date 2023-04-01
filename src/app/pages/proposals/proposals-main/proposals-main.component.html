@@ -8,10 +8,12 @@
 			<div class="grid grid-rows-12 lg:grid-flow-col gap-10">
 				<div class="col-span-8">
 					<!-- proposal boxes -->
-					<div
-						class="box3 !border-gray-c50 relative animation mb-8"
+
+					<a
+						class="box3 !border-gray-c50 relative animatsdion mb-8 block"
 						*ngFor="let p of proposals; let i = index"
 						[ngClass]="i === id ? 'slide-right' : 'none'"
+						[routerLink]="['/proposals/vote', p.number]"
 					>
 						<div
 							class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
@@ -54,7 +56,7 @@
 								/>
 							</div>
 						</div>
-					</div>
+					</a>
 				</div>
 
 				<!-- arrows 

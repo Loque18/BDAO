@@ -4,16 +4,15 @@
 		<div class="grid grid-cols-1 lg:grid-cols-12">
 			<!-- col -->
 			<div class="lg:col-span-10">
-				<form>
+				<form [formGroup]="proposalForm" (ngSubmit)="submit()">
 					<div class="field">
 						<h1 class="font-semibold text-2xl">Create proposal</h1>
 						<div class="box border-3 border-secondary rounded-sm mt-6">
 							<textarea
 								class="w-90 border-3 border-gray-c50 p-3 font-medium text-xl rounded-sm w-full"
-								name=""
-								id=""
 								rows="2"
 								placeholder="Title..."
+								formControlName="title"
 							></textarea>
 
 							<br /><br />
@@ -27,16 +26,13 @@
 					</div>
 
 					<div class="field">
-						<label for="" class="font-semibold text-xl mb-4 inline-block">
-							Description
-						</label>
+						<label class="font-semibold text-xl mb-4 inline-block"> Description </label>
 
 						<textarea
-							class="w-90 border-3 border-gray-c50 p-3 font-medium text-xl rounded-sm w-full"
-							name=""
-							id=""
+							class="border-3 border-gray-c50 p-3 font-medium text-xl rounded-sm w-full"
 							rows="5"
 							placeholder="Type something..."
+							formControlName="description"
 						></textarea>
 					</div>
 

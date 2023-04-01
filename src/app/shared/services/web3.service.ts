@@ -131,9 +131,7 @@ export class Web3Service {
 		this._celesteInstance.requestDisconnection();
 	}
 
-	sign(msg: string): Promise<unknown> | void {
-		if (!this.canExecute()) return;
-
+	sign(msg: string): Promise<unknown> {
 		return this._celesteInstance.sign(msg);
 	}
 

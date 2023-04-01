@@ -4,6 +4,8 @@ import { Ivote, items } from 'src/app/constants/vote-proposal';
 import { ProposalResponse } from 'src/app/shared/api/responses';
 import { ProposalsService } from '../s/proposals.service';
 
+import { DetailedProposal } from 'src/app/shared/models/proposal/proposal';
+
 @Component({
 	selector: 'app-vote-proposal',
 	templateUrl: './vote-proposal.component.html',
@@ -16,10 +18,23 @@ export class VoteProposalComponent implements OnInit {
 	protected _error: boolean = false;
 	protected _errorMessage: string = '';
 
+	protected proposal: DetailedProposal = {
+		number: 0,
+		againstVotes: 0,
+		againstVotingWeight: 0,
+		absentVotes: 0,
+		withVotes: 0,
+		description: '',
+		votes: [],
+		creationgTime: 0,
+		title: 'asd',
+		abstainVotingWeight: 0,
+		status: 0,
+	};
+
 	title = 'Overview';
-	text1 = 'VIP-101 Risk Parameters Adjustments for';
-	text2 = ' SXP, TRX and ETH';
-	smallText = '#001';
+
+	number = '0';
 	text1Mobile = 'VIP-101 Risk Parameters';
 	text2Mobile = 'Adjustments for SXP, TRX';
 	text3Mobile = 'and ETH';
@@ -33,8 +48,11 @@ export class VoteProposalComponent implements OnInit {
 
 		this.proposalsSvc.getProposalNo404(proposalId).subscribe({
 			next: (res: ProposalResponse) => {
-				if (!res.success && res.statusCode === 615) {
-					this._handleError('Proposal not found');
+				if (res.success) {
+					this.proposal = res.data;
+					console.log(this.proposal);
+				} else {
+					this._handleError(res.message);
 				}
 
 				this._loading = false;
