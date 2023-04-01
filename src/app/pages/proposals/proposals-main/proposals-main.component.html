@@ -1,81 +1,71 @@
 <layout-main>
 	<section class="root">
 		<!-- container -->
-		<div class="container">
+		<div class="container h-full overflow-hidden">
 			<h1 class="text-2xl font-semibold mb-7 translate">Proposals</h1>
 
 			<!-- grid container -->
-			<div class="grid grid-rows-12 lg:grid-flow-col gap-10">
-				<div class="col-span-8">
+			<div class="block lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10 h-full">
+				<!-- boxes container -->
+				<div class="col-span-8 overflow-auto">
 					<!-- proposal boxes -->
 
-					<a
-						class="box3 !border-gray-c50 relative animatsdion mb-8 block"
-						*ngFor="let p of proposals; let i = index"
-						[ngClass]="i === id ? 'slide-right' : 'none'"
-						[routerLink]="['/proposals/vote', p.number]"
-					>
-						<div
-							class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
-							[ngClass]="p.status === 0 ? 'text-yellow-500' : 'text-green-500'"
+					<div class="relative" *ngFor="let p of proposals; let i = index">
+						<div class="box-shadow hidden lg:block"></div>
+
+						<a
+							class="box3 !border-gray-c50 relative animation mb-8 block"
+							[ngClass]="i === id ? 'slide-right' : 'none'"
+							[routerLink]="['/proposals/vote', p.number]"
 						>
-							{{ p.status === 0 ? 'PENDING' : 'ACCEPTED' }}
-						</div>
+							<div
+								class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
+								[ngClass]="p.status === 0 ? 'text-yellow-500' : 'text-green-500'"
+							>
+								{{ p.status === 0 ? 'PENDING' : 'ACCEPTED' }}
+							</div>
 
-						<div class="flex gap-20 justify-between h-full">
-							<div class="flex flex-col h-full">
-								<p class="text-xl font-semibold">
-									{{ p.description }}
-								</p>
+							<div class="flex gap-20 justify-between h-full">
+								<div class="flex flex-col h-full">
+									<p class="text-xl font-semibold">
+										{{ p.description }}
+									</p>
 
-								<br />
+									<br />
 
-								<div class="flex-grow"></div>
+									<div class="flex-grow"></div>
 
-								<div class="flex gap-x-4">
-									<div
-										class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
-									>
-										#{{ p.number | number : '3.0' }}
+									<div class="flex gap-x-4">
+										<div
+											class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
+										>
+											#{{ p.number | number : '3.0' }}
+										</div>
 									</div>
 								</div>
-							</div>
-							<div [ngSwitch]="p.status">
-								<img
-									*ngSwitchCase="0"
-									class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-									width="90px"
-									src="/assets/icons/proposals/pending-icon.svg"
-								/>
+								<div [ngSwitch]="p.status">
+									<img
+										*ngSwitchCase="0"
+										class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+										width="90px"
+										src="/assets/icons/proposals/pending-icon.svg"
+									/>
 
-								<img
-									*ngSwitchCase="1"
-									class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-									width="90px"
-									src="/assets/icons/proposals/accepted-icon.svg"
-								/>
+									<img
+										*ngSwitchCase="1"
+										class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+										width="90px"
+										src="/assets/icons/proposals/accepted-icon.svg"
+									/>
+								</div>
 							</div>
-						</div>
-					</a>
+						</a>
+					</div>
 				</div>
-
-				<!-- arrows 
-				<div class="flex gap-5 m-auto lg:hidden">
-					<div>
-						<button (click)="slideLeft(id)" class="slide ml-3 px-2 py-1 bg-neon">
-							<img class="w-5 h-5" src="/assets/arrow_back_ios.svg" />
-						</button>
-					</div>
-					<div>
-						<button (click)="slideRight(id)" class="slide ml-3 px-2 py-1 bg-neon">
-							<img class="w-5 h-5" src="/assets/arrow_forward_ios.svg" />
-						</button>
-					</div>
-				</div>-->
 
 				<!-- right container -->
 
-				<div class="col-span-4">
+				<div class="col-span-1 lg:col-span-4">
 					<div class="box2 flex flex-col mb-8">
 						<a
 							class="primary-button text-2xl rounded-sm w-full"

@@ -51,12 +51,10 @@
 
 @media only screen and (min-width: 1024px) {
 	.animation:hover {
-		&::before {
-			transform: translate(-10px, 10px);
-			@apply transition-transform;
-			@apply duration-100;
-			@apply ease-in-out;
-		}
+		transform: translate(15px, -15px);
+		@apply transition-all;
+		@apply duration-500;
+		@apply ease-in-out;
 	}
 }
 
@@ -85,30 +83,32 @@
 	&:hover {
 		@apply border-secondary #{'!important'};
 	}
-
-	&::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
-		@apply border-3;
-		@apply border-secondary;
-		@apply rounded-sm;
-	}
 }
 
-.scrollable{
+.box-shadow {
+	position: absolute;
+	top: 0;
+
+	width: 100%;
+	height: 100%;
+
+	@apply border-3;
+	@apply border-secondary;
+	@apply rounded-sm;
+}
+
+.scrollable {
 	height: 754px;
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding-right: 10px;   
+	padding-right: 10px;
 }
 
 ::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
+	width: 0;
+	background: transparent;
 }
 
+.root {
+	height: calc(100vh - 102px);
+}
