@@ -155,7 +155,10 @@
 								</div>
 								<!-- Vote button -->
 								<div class="mt-16">
-									<button class="secondary-button w-full text-2xl">
+									<button
+										class="secondary-button w-full text-2xl"
+										(click)="vote(item.type)"
+									>
 										{{ item.title }}
 									</button>
 								</div>
@@ -236,7 +239,7 @@
 						</div>
 					</div> -->
 					<div class="box min-h-[300px]">
-						<p class="text-2xl font-semibold">Description</p>
+						<p class="text-2xl font-semibold mb-3">Description</p>
 						<p class="font-medium text-lg">
 							{{ proposal.description }}
 						</p>

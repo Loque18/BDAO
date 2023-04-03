@@ -60,6 +60,18 @@ export class ProposalsService {
 		return this.http.post<ProposalResponse>(url, {});
 	}
 
+	vote(
+		number: number,
+		vote: number, // 0 = yes, 1 = no, 2 = abstain
+		signature: string
+	): Observable<any> {
+		const url = api.proposals.vote(number, vote, signature);
+
+		return this.http.post<any>(url, {});
+	}
+
+	// *~~*~~*~~ handle errors ~~*~~*~~* //
+
 	/**
 	 * Transform the error for user consumption.
 	 *

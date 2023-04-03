@@ -11,4 +11,9 @@ export class HeaderComponent {
 	constructor(protected web3Svc: Web3Service) {}
 
 	protected walletLoading: boolean = false;
+	protected opened: boolean = false;
+
+	toggle() {
+		this.opened = !this.opened;
+	}
 }

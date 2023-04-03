@@ -18,6 +18,8 @@ const api = {
 		byId: (id: number) => `${baseUrl}/proposals/getProposalInfo?proposalNumber=${id}`,
 		add: (title: string, description: string, signature: string) =>
 			`${baseUrl}/proposals/newProposal?title=${title}&description=${description}&signature=${signature}`,
+		vote: (number: number, vote: number, signature: string) =>
+			`${baseUrl}/proposals/voteOnProposal?number=${number}&vote=${vote}&signature=${signature}`,
 	},
 };
 

@@ -5,6 +5,9 @@ import { ProposalResponse } from 'src/app/shared/api/responses';
 import { ProposalsService } from '../s/proposals.service';
 
 import { DetailedProposal } from 'src/app/shared/models/proposal/proposal';
+import { Web3Service } from 'src/app/shared/services/web3.service';
+import { from } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-vote-proposal',
@@ -12,7 +15,12 @@ import { DetailedProposal } from 'src/app/shared/models/proposal/proposal';
 	styleUrls: ['./vote-proposal.component.scss'],
 })
 export class VoteProposalComponent implements OnInit {
-	constructor(private proposalsSvc: ProposalsService, private router: ActivatedRoute) {}
+	constructor(
+		private proposalsSvc: ProposalsService,
+		private router: ActivatedRoute,
+		private w3Svc: Web3Service,
+		private toastr: ToastrService
+	) {}
 
 	protected _loading: boolean = false;
 	protected _error: boolean = false;
@@ -77,6 +85,8 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.withVotes,
 			weight: this.proposal.withVotingWeight,
 			color: 'bg-green-1',
+			percent: (10).toString(),
+			type: 0,
 		});
 
 		// against
@@ -85,6 +95,8 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.againstVotes,
 			weight: this.proposal.againstVotingWeight,
 			color: 'bg-red-1',
+			percent: (10).toString(),
+			type: 1,
 		});
 
 		// absent
@@ -93,6 +105,8 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.abstainVotes,
 			weight: this.proposal.abstainVotingWeight,
 			color: 'bg-blue-1',
+			percent: (10).toString(),
+			type: 2,
 		});
 
 		return res;
@@ -101,5 +115,27 @@ export class VoteProposalComponent implements OnInit {
 	private _handleError(msg: string): void {
 		this._error = true;
 		this._errorMessage = msg;
+	}
+
+	vote(type: number): void {
+		from(this.w3Svc.sign(`N${type}`)).subscribe({
+			next: (res: unknown) => {
+				const signature = res as string;
+
+				this.proposalsSvc.vote(this.proposal.number, type, signature).subscribe({
+					next: (res) => {
+						console.log(res);
+
+						this.toastr.info('Your vote has been submitted');
+					},
+					error: (err) => {
+						this.toastr.error(err.message);
+					},
+				});
+			},
+			error: (err) => {
+				this.toastr.error(err.message);
+			},
+		});
 	}
 }
