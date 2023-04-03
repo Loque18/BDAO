@@ -3,13 +3,17 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './components/header/header.component';
 import { MainComponent } from './main/main.component';
 
+import { ConnectBtnComponent } from '../components/internal/connect-btn/connect-btn.component';
+
 @NgModule({
 	declarations: [
 		HeaderComponent,
-		MainComponent
+		MainComponent,
+		
 	],
 	imports: [
-		CommonModule
+		CommonModule,
+		ConnectBtnComponent
 	],
 	exports: [
 		MainComponent

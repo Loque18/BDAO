@@ -2,12 +2,18 @@
 	<section class="root">
 		<!-- container -->
 		<div class="container h-full overflow-hidden">
-			<h1 class="text-2xl font-semibold mb-7 translate">Proposals</h1>
-
 			<!-- grid container -->
-			<div class="block lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10 h-full">
+
+			<h1 class="text-2xl font-semibold mb-7 hidden lg:block">Proposals</h1>
+
+			<div
+				class="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10 h-full grid-container"
+			>
 				<!-- boxes container -->
-				<div class="col-span-8 overflow-auto">
+
+				<div class="lg:col-span-8 overflow-auto">
+					<h1 class="text-2xl font-semibold mb-7 lg:hidden block">Proposals</h1>
+
 					<!-- proposal boxes -->
 
 					<div class="relative" *ngFor="let p of proposals; let i = index">
@@ -65,7 +71,7 @@
 
 				<!-- right container -->
 
-				<div class="col-span-1 lg:col-span-4">
+				<div class="lg:col-span-4">
 					<div class="box2 flex flex-col mb-8">
 						<a
 							class="primary-button text-2xl rounded-sm w-full"
