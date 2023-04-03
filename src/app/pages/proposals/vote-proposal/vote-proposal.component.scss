@@ -69,22 +69,31 @@ a {
 	z-index: -1;
 }
 
-.small-icons {
-	width: 40px;
-}
-
-.space {
-	justify-content: space-around;
-}
-
-.between {
-	justify-content: space-between;
-}
-
 .bg-gray-500 {
 	background-color: #aeaeae;
 }
 
 .border-gray-500 {
 	border-color: #aeaeae;
+}
+
+// *~~*~~*~~ loque's styles ~~*~~*~~* //
+
+.cbox {
+	z-index: 2;
+}
+
+.bottomLine {
+	&::after {
+		content: '';
+		position: absolute;
+		display: block;
+
+		width: 2px;
+		height: 32px;
+		top: 100%;
+		background-color: black;
+
+		z-index: 0;
+	}
 }

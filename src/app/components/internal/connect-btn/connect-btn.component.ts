@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
 import { Web3Service } from 'src/app/shared/services/web3.service';
 
@@ -10,10 +10,18 @@ import { Web3Service } from 'src/app/shared/services/web3.service';
 	standalone: true,
 	imports: [CommonModule, AddressPipe],
 })
-export class ConnectBtnComponent {
+export class ConnectBtnComponent implements OnInit {
 	@Input() public classNames: string = '';
 
+	protected loading: boolean = true;
+
 	constructor(protected w3Svc: Web3Service) {}
+
+	ngOnInit(): void {
+		this.w3Svc.readyEvent.subscribe((ready) => {
+			this.loading = false;
+		});
+	}
 
 	get walletAddress(): string | null {
 		return this.w3Svc.walletData.address;

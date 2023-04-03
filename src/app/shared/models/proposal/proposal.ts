@@ -8,14 +8,15 @@ type Proposal = {
 type DetailedProposal = {
 	number: number;
 	againstVotes: number;
-	againstVotingWeight: number;
-	absentVotes: number;
+	abstainVotes: number;
 	withVotes: number;
+	againstVotingWeight: number;
+	abstainVotingWeight: number;
+	withVotingWeight: number;
 	description: string;
 	creationgTime: number;
 	votes: [];
 	title: string;
-	abstainVotingWeight: number;
 	status: number;
 };
 

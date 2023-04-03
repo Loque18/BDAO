@@ -21,14 +21,15 @@ export class VoteProposalComponent implements OnInit {
 	protected proposal: DetailedProposal = {
 		number: 0,
 		againstVotes: 0,
-		againstVotingWeight: 0,
-		absentVotes: 0,
+		abstainVotes: 0,
 		withVotes: 0,
+		againstVotingWeight: 0,
+		abstainVotingWeight: 0,
+		withVotingWeight: 0,
 		description: '',
 		votes: [],
 		creationgTime: 0,
-		title: 'asd',
-		abstainVotingWeight: 0,
+		title: '',
 		status: 0,
 	};
 
@@ -65,6 +66,36 @@ export class VoteProposalComponent implements OnInit {
 				this._loading = false;
 			},
 		});
+	}
+
+	protected get votesArr() {
+		const res = [];
+
+		// with
+		res.push({
+			title: 'WITH',
+			count: this.proposal.withVotes,
+			weight: this.proposal.withVotingWeight,
+			color: 'bg-green-1',
+		});
+
+		// against
+		res.push({
+			title: 'AGAINST',
+			count: this.proposal.againstVotes,
+			weight: this.proposal.againstVotingWeight,
+			color: 'bg-red-1',
+		});
+
+		// absent
+		res.push({
+			title: 'ABSTAIN',
+			count: this.proposal.abstainVotes,
+			weight: this.proposal.abstainVotingWeight,
+			color: 'bg-blue-1',
+		});
+
+		return res;
 	}
 
 	private _handleError(msg: string): void {
