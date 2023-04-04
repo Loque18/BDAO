@@ -27,140 +27,153 @@
 				</ng-container>
 
 				<ng-template #content>
-					<p class="font-bold text-2xl">Overview</p>
+					<div class="flex flex-col-reverse lg:block">
+						<h1 class="font-bold text-2xl">Overview</h1>
 
-					<!-- first row -->
-					<div class="block lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10">
-						<div class="col-span-8">
-							<div class="box !border-gray-c50 relative animatsdion mb-8 block">
+						<br />
+
+						<!-- first row -->
+						<div class="lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10">
+							<div class="col-span-8">
 								<div
-									class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
-									[ngClass]="
-										proposal.status === 0 ? 'text-yellow-500' : 'text-green-500'
-									"
+									class="box !border-gray-c50 relative animatsdion mb-8 block h-full"
 								>
-									{{ proposal.status === 0 ? 'PENDING' : 'ACCEPTED' }}
-								</div>
+									<div
+										class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
+										[ngClass]="
+											proposal.status === 0
+												? 'text-yellow-500'
+												: 'text-green-500'
+										"
+									>
+										{{ proposal.status === 0 ? 'PENDING' : 'ACCEPTED' }}
+									</div>
 
-								<div class="flex gap-20 justify-between h-full">
-									<div class="flex flex-col h-full">
-										<p class="text-xl font-semibold">
-											{{ proposal.title }}
-										</p>
+									<div class="flex gap-20 justify-between h-full">
+										<div class="flex flex-col h-full">
+											<p class="text-xl font-semibold">
+												{{ proposal.title }}
+											</p>
 
-										<br />
+											<br />
 
-										<div class="flex-grow"></div>
+											<div class="flex-grow"></div>
 
-										<div class="flex gap-x-4">
-											<div
-												class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
-											>
-												#{{ proposal.number | number : '3.0' }}
+											<div class="flex gap-x-4">
+												<div
+													class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
+												>
+													#{{ proposal.number | number : '3.0' }}
+												</div>
 											</div>
 										</div>
-									</div>
-									<div [ngSwitch]="proposal.status">
-										<img
-											*ngSwitchCase="0"
-											class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-											width="90px"
-											src="/assets/icons/proposals/pending-icon.svg"
-										/>
+										<div [ngSwitch]="proposal.status">
+											<img
+												*ngSwitchCase="0"
+												class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+												width="90px"
+												src="/assets/icons/proposals/pending-icon.svg"
+											/>
 
-										<img
-											*ngSwitchCase="1"
-											class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-											width="90px"
-											src="/assets/icons/proposals/accepted-icon.svg"
-										/>
+											<img
+												*ngSwitchCase="1"
+												class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+												width="90px"
+												src="/assets/icons/proposals/accepted-icon.svg"
+											/>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-span-4">
+								<div class="box">
+									<div class="flex gap-x-8">
+										<div
+											class="bg-secondary rounded px-2 py-2 text-green-1 w-16 h-16 grid place-items-center relative bottomLine cbox"
+										>
+											<i class="far fa-check-circle text-4xl"></i>
+										</div>
+										<div>
+											<h1 class="text-xl font-semibold">Created</h1>
+											<h2 class="text-lg font-semibold">
+												{{
+													proposal.creationgTime
+														| date : 'dd MMM y h:mm a'
+												}}
+											</h2>
+										</div>
+									</div>
+									<br />
+									<div class="flex gap-x-8">
+										<div
+											class="border-3 border-gray-c50 bg-primary rounded px-2 py-2 w-16 h-16 grid place-items-center cbox"
+										>
+											<img
+												src="/assets/icons/proposals/pending-gray.svg"
+												alt=""
+											/>
+											<!-- <i class="far fa-check-circle text-4xl"></i> -->
+										</div>
+										<div class="font-semibold">
+											<h1 class="text-xl font-semibold">Executed</h1>
+											<h2 class="text-lg font-semibold">pending...</h2>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="col-span-4">
-							<div class="box">
-								<div class="flex gap-x-8">
-									<div
-										class="bg-secondary rounded px-2 py-2 text-green-1 w-16 h-16 grid place-items-center relative bottomLine cbox"
-									>
-										<i class="far fa-check-circle text-4xl"></i>
-									</div>
-									<div>
-										<h1 class="text-xl font-semibold">Created</h1>
-										<h2 class="text-lg font-semibold">
-											{{ proposal.creationgTime | date : 'dd MMM y h:mm a' }}
-										</h2>
-									</div>
-								</div>
-								<br />
-								<div class="flex gap-x-8">
-									<div
-										class="border-3 border-gray-c50 bg-primary rounded px-2 py-2 w-16 h-16 grid place-items-center cbox"
-									>
-										<img
-											src="/assets/icons/proposals/pending-gray.svg"
-											alt=""
-										/>
-										<!-- <i class="far fa-check-circle text-4xl"></i> -->
-									</div>
-									<div class="font-semibold">
-										<h1 class="text-xl font-semibold">Executed</h1>
-										<h2 class="text-lg font-semibold">pending...</h2>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+						<br />
 
-					<br />
-
-					<!-- second row -->
-					<div class="block lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10">
-						<div class="lg:col-span-8 lg:flex justify-between">
+						<!-- second row -->
+						<div class="lg:grid lg:grid-cols-12 lg:grid-flow-col gap-10">
 							<div
-								class="border-3 border-gray-c50 px-4 py-6 rounded-sm lg:w-[280px]"
-								*ngFor="let item of votesArr"
+								class="xl:col-span-8 lg:col-span-12 lg:flex lg:flex-row justify-between flex flex-col gap-y-8"
 							>
-								<!-- progress bar -->
-								<div class="bg-black h-3.5 mb-4 p-[2px]">
-									<div
-										class="h-full"
-										[ngClass]="item.color + ' ' + 'w-[' + '40' + '%]'"
-									></div>
-								</div>
-
-								<!-- total votes -->
-								<div class="border-3 border-black rounded px-4 py-3 mb-6">
-									<h1 class="font-semibold text-2xl">
-										{{ item.count }}
-									</h1>
-									<p class="font-medium text-xl">Votes</p>
-								</div>
-
-								<!-- address and weight -->
-								<div class="flex justify-between text-xs font-medium mb-2">
-									<div>Addresses</div>
-									<div>Voting Weight</div>
-								</div>
-								<div class="flex justify-between text-xs font-medium mb-4">
-									<div class="text-[dodgerblue] cursor-pointer">
-										<u>
-											address
-											<!-- {{ item.addresses }} -->
-										</u>
+								<div
+									class="border-3 border-gray-c50 px-4 py-6 rounded-sm lg:w-[280px] xl:w-[250px] 2xl:w-[280px]"
+									*ngFor="let item of votesArr"
+								>
+									<!-- progress bar -->
+									<div class="bg-black h-3.5 mb-4 p-[2px]">
+										<div
+											class="h-full"
+											[ngClass]="item.color + ' ' + 'w-[' + '40' + '%]'"
+										></div>
 									</div>
-									<div>{{ item.weight }}</div>
-								</div>
-								<!-- Vote button -->
-								<div class="mt-16">
-									<button
-										class="secondary-button w-full text-2xl"
-										(click)="vote(item.type)"
-									>
-										{{ item.title }}
-									</button>
+
+									<!-- total votes -->
+									<div class="border-3 border-black rounded px-4 py-3 mb-6">
+										<h1 class="font-semibold text-2xl">
+											{{ item.count }}
+										</h1>
+										<p class="font-medium text-xl">Votes</p>
+									</div>
+
+									<!-- address and weight -->
+									<div class="flex justify-between text-xs font-medium mb-2">
+										<div>Addresses</div>
+										<div>Voting Weight</div>
+									</div>
+									<div class="flex justify-between text-xs font-medium mb-4">
+										<div class="text-[dodgerblue] cursor-pointer">
+											<u>
+												address
+												<!-- {{ item.addresses }} -->
+											</u>
+										</div>
+										<div>{{ item.weight }}</div>
+									</div>
+									<!-- Vote button -->
+									<div class="mt-16">
+										<button
+											class="secondary-button w-full text-2xl"
+											(click)="vote(item.type)"
+										>
+											{{ item.title }}
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>

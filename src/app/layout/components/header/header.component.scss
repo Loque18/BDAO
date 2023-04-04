@@ -4,3 +4,19 @@
 
 	// z-index: 10;
 }
+
+.navbar-link {
+	@apply flex;
+	@apply py-2;
+	@apply px-1;
+	@apply text-gray-900;
+	@apply rounded-sm;
+	@apply h-full;
+	@apply w-full;
+	@apply items-center;
+
+	&.active {
+		@apply text-white;
+		@apply bg-blue-700;
+	}
+}
