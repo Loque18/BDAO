@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ivote, items } from 'src/app/constants/vote-proposal';
-import { ProposalResponse } from 'src/app/shared/api/responses';
+import { ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
 import { ProposalsService } from '../s/proposals.service';
 
 import { DetailedProposal } from 'src/app/shared/models/proposal/proposal';
@@ -123,13 +123,20 @@ export class VoteProposalComponent implements OnInit {
 				const signature = res as string;
 
 				this.proposalsSvc.vote(this.proposal.number, type, signature).subscribe({
-					next: (res) => {
-						console.log(res);
+					next: (res: VoteResponse) => {
+						if (res.success) {
+							this.toastr.info(res.message);
 
-						this.toastr.info('Your vote has been submitted');
+							// add vote to total votes
+							if (type === 0) this.proposal.withVotes++;
+							else if (type === 1) this.proposal.againstVotes++;
+							else if (type === 2) this.proposal.abstainVotes++;
+						} else {
+							this.toastr.error(res.message);
+						}
 					},
-					error: (err) => {
-						this.toastr.error(err.message);
+					error: () => {
+						this.toastr.error('something went wrong, please try again');
 					},
 				});
 			},

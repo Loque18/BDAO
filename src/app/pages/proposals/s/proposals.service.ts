@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 
-import { AllProposalsResponse, ProposalResponse } from 'src/app/shared/api/responses';
+import { AllProposalsResponse, ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
 
 import { api } from 'src/app/shared/api';
 import { Proposal } from 'src/app/shared/models/proposal/proposal';
@@ -64,10 +64,10 @@ export class ProposalsService {
 		number: number,
 		vote: number, // 0 = yes, 1 = no, 2 = abstain
 		signature: string
-	): Observable<any> {
+	): Observable<VoteResponse> {
 		const url = api.proposals.vote(number, vote, signature);
 
-		return this.http.post<any>(url, {});
+		return this.http.post<VoteResponse>(url, {});
 	}
 
 	// *~~*~~*~~ handle errors ~~*~~*~~* //

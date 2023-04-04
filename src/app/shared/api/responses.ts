@@ -32,22 +32,11 @@ type AllProposalsResponse = ApiResponse & {
 	data?: Proposal[];
 };
 
+// PROPOSALS DETAIL
+
 type SuccessProposalResponse = {
 	success: true;
 	data: DetailedProposal;
-	// {
-	// 	number: number;
-	// 	againstVotes: number;
-	// 	againstVotingWeight: number;
-	// 	absentVotes: number;
-	// 	withVotes: number;
-	// 	description: string;
-	// 	creationgTime: number;
-	// 	votes: [];
-	// 	title: string;
-	// 	abstainVotingWeight: number;
-	// 	status: string;
-	// };
 	statusCode: number;
 };
 
@@ -59,4 +48,19 @@ type ErrorProposalResponse = {
 
 type ProposalResponse = SuccessProposalResponse | ErrorProposalResponse;
 
-export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse };
+// VOTE PROPOSAL
+type SuccessVoteResponse = {
+	success: true;
+	message: string;
+	statusCode: number;
+};
+
+type FailedVoteResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
+};
+
+type VoteResponse = SuccessVoteResponse | FailedVoteResponse;
+
+export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse, VoteResponse };
