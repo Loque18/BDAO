@@ -1,27 +1,23 @@
-.border-3{
-    border-width: 3px;
+.small-box {
+	width: fit-content;
 }
 
-.all{
-    width: 80%;
+.box {
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-secondary;
+	@apply px-8;
+	@apply py-8;
 }
 
-.w-100{
-    width: 100%;   
+.w-90 {
+	width: 95%;
 }
 
-.w-90{
-    width: 95%;
+.bg-gray-500 {
+	background-color: #aeaeae;
 }
 
-.small-box{
-    width: fit-content;
-}
-
-.bg-gray-500{
-    background-color: #AEAEAE;
-}
-
-.border-gray-500{
-    border-color: #AEAEAE;
+.border-gray-500 {
+	border-color: #aeaeae;
 }

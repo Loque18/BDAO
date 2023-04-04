@@ -1,4 +1,10 @@
+%base {
+	@apply block;
+}
+
 .primary-button {
+	// @extend %base;
+
 	@apply relative;
 	@apply px-4;
 	@apply py-3;
@@ -6,6 +12,9 @@
 	@apply rounded-sm;
 	@apply border-3;
 	@apply border-secondary;
+
+	@apply cursor-pointer;
+	@apply text-center;
 
 	@apply bg-secondary;
 	@apply text-primary;
@@ -27,28 +36,30 @@
 	@apply active:border-secondary-700;
 	@apply active:text-primary;
 
-	&::before {
-		content: '';
-		position: absolute;
-		top: 8px;
-		left: 8px;
+	// &::before {
+	// 	content: '';
+	// 	position: absolute;
+	// 	top: 8px;
+	// 	left: 8px;
 
-		width: 100%;
-		height: 100%;
+	// 	width: 100%;
+	// 	height: 100%;
 
-		@apply opacity-0;
+	// 	@apply opacity-0;
 
-		@apply bg-primary;
-		@apply rounded-sm;
-		@apply border-3;
-		@apply border-secondary;
+	// 	@apply bg-primary;
+	// 	@apply rounded-sm;
+	// 	@apply border-3;
+	// 	@apply border-secondary;
 
-		z-index: -1;
-	}
+	// 	z-index: -1;
+	// }
 }
 
 .secondary-button {
 	// @extend .rounded-sm; .px-4; .py-3 .border-3 .border-primary .text-primary .font-semibold .bg-secondary .hover:bg-primary .hover:text-secondary .text-xl .transition-colors .duration-200 .ease-in-out .focus:outline-none .focus:bg-gray-100 .active:bg-primary;
+
+	// @extend %base;
 
 	@apply relative;
 	@apply px-4;
@@ -57,6 +68,9 @@
 	@apply rounded-sm;
 	@apply border-3;
 	@apply border-secondary;
+
+	@apply cursor-pointer;
+	@apply text-center;
 
 	@apply bg-primary;
 	@apply text-secondary;
@@ -78,24 +92,24 @@
 	@apply active:border-secondary-700;
 	@apply active:text-primary;
 
-	&::before {
-		content: '';
-		position: absolute;
-		top: 8px;
-		left: 8px;
+	// &::before {
+	// 	content: '';
+	// 	position: absolute;
+	// 	top: 8px;
+	// 	left: 8px;
 
-		width: 100%;
-		height: 100%;
+	// 	width: 100%;
+	// 	height: 100%;
 
-		@apply opacity-0;
+	// 	@apply opacity-0;
 
-		@apply bg-primary;
-		@apply rounded-sm;
-		@apply border-3;
-		@apply border-secondary;
+	// 	@apply bg-primary;
+	// 	@apply rounded-sm;
+	// 	@apply border-3;
+	// 	@apply border-secondary;
 
-		z-index: -1;
-	}
+	// 	z-index: -1;
+	// }
 }
 
 .gray-button {
@@ -106,6 +120,9 @@
 	@apply rounded-sm;
 	@apply border-3;
 	@apply border-gray-c50;
+
+	@apply cursor-pointer;
+	@apply text-center;
 
 	@apply bg-primary;
 	@apply text-secondary;

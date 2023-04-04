@@ -35,7 +35,7 @@
 						<div
 							class="rounded-sm overflow-hidden border-3 border-gray-c50 px-6 py-5 h-full"
 						>
-							<form [formGroup]="form" (ngSubmit)="stake()">
+							<form [formGroup]="form">
 								<div
 									class="flex justify-between items-center border-3 border-secondary rounded-sm px-4 py-3"
 								>
@@ -48,7 +48,7 @@
 										type="text"
 										class="text-xl text-right text-secondary font-semibold"
 									>
-										$5000
+										${{ user.data.balance | bigNumber : 18 }}
 									</div>
 								</div>
 
@@ -79,27 +79,56 @@
 
 								<div class="flex justify-between">
 									<div class="text-secondary text-xl font-semibold">APY</div>
-									<div class="text-secondary text-xl font-semibold">0.00%</div>
+									<div class="text-secondary text-xl font-semibold">
+										{{ data.apr }}%
+									</div>
 								</div>
 
 								<br />
 
 								<div class="field">
-									<div class="grid grid-cols-2 gap-6">
-										<div class="col-span-1">
+									<ng-container
+										*ngIf="web3Svc.walletData.isLoggedIn; else connectBtn"
+									>
+										<ng-container *ngIf="needsApproval; else stakeButtons">
 											<button
 												class="primary-button text-xl w-full"
-												type="submit"
+												type="button"
+												(click)="approve()"
 											>
-												Stake
+												Approve
 											</button>
-										</div>
-										<div class="col-span-1">
-											<button class="secondary-button text-xl w-full">
-												UnStake
-											</button>
-										</div>
-									</div>
+										</ng-container>
+
+										<ng-template #stakeButtons>
+											<div class="grid grid-cols-2 gap-6">
+												<div class="col-span-1">
+													<button
+														class="primary-button text-xl w-full"
+														type="button"
+														(click)="submit('stake')"
+													>
+														Stake
+													</button>
+												</div>
+												<div class="col-span-1">
+													<button
+														class="secondary-button text-xl w-full"
+														type="button"
+														(click)="submit('unstake')"
+													>
+														UnStake
+													</button>
+												</div>
+											</div>
+										</ng-template>
+									</ng-container>
+
+									<ng-template #connectBtn>
+										<button class="primary-button text-xl w-full" type="button">
+											Connect Wallet
+										</button>
+									</ng-template>
 								</div>
 							</form>
 						</div>
@@ -120,7 +149,7 @@
 										<img src="/assets/icons/eth_d.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												{{ stakingSvc.data.totalStaked }}
+												{{ data.totalStaked }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
 												Amount Staked
@@ -135,7 +164,7 @@
 										<img src="/assets/icons/eth_l.svg" alt="" width="48" />
 										<div>
 											<div class="text-green-1 text-2xl font-semibold">
-												{{ stakingSvc.data.activeStaked }}
+												{{ data.activeStaked }}
 											</div>
 											<div class="text-primary text-xl font-semibold">
 												Active Staked
@@ -150,7 +179,7 @@
 										<img src="/assets/icons/spots.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												{{ stakingSvc.data.spots }}
+												{{ data.spots }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
 												Spots
@@ -165,7 +194,7 @@
 										<img src="/assets/icons/spots.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												${{ stakingSvc.data.totalProfit }}
+												${{ data.totalProfit }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
 												Total Profit
@@ -216,11 +245,20 @@
 									<td class="text-secondary text-right">
 										<a
 											[href]="r.blockchainUrl"
-											class="primary-button btn !p-1 min-w-[32px]"
-											target="_blank"
 											rel="noopener noreferrer"
+											target="_blank"
 										>
-											<img src="/assets/icons/cube.svg" alt="" width="32px" />
+											<button
+												class="primary-button btn !p-1 min-w-[32px]"
+												target="_blank"
+												rel="noopener noreferrer"
+											>
+												<img
+													src="/assets/icons/cube.svg"
+													alt=""
+													width="32px"
+												/>
+											</button>
 										</a>
 									</td>
 								</tr>

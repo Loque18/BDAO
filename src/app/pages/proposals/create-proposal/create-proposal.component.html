@@ -1,20 +1,44 @@
-<div class="all ml-12 pl-12 mt-7">
-    <p class="font-semibold text-2xl">Create proposal</p>
-    <div class="box border-3 border-black rounded mt-6">
-        <form>
-            <input class="w-90 border-3 border-gray-500 mt-9 ml-7 pl-5 pb-10 pt-3 font-medium text-xl rounded"
-            type="text"
-            placeholder="Title...">
-        </form>
-        <div class="small-box border-3 border-black rounded font-semibold px-2 py-2 mt-9 ml-7 mb-7">
-            #001
-        </div>
-    </div>
-    <p class="font-semibold text-xl mt-8">Description</p>
-        <form>
-            <input class="w-100 border-3 border-gray-500 mt-4 pl-3 pb-24 pt-3 font-medium text-xl rounded"
-            type="text"
-            placeholder="Type something...">
-        </form>
-    <button class="text-white text-xl bg-black rounded px-7 py-3 mt-11 mb-5">Create proposal</button>
-</div>
+<layout-main>
+	<div class="container py-4">
+		<!-- grid container to avoid using all space -->
+		<div class="grid grid-cols-1 lg:grid-cols-12">
+			<!-- col -->
+			<div class="lg:col-span-10">
+				<form [formGroup]="proposalForm" (ngSubmit)="submit()">
+					<div class="field">
+						<h1 class="font-semibold text-2xl">Create proposal</h1>
+						<div class="box border-3 border-secondary rounded-sm mt-6">
+							<textarea
+								class="w-90 border-3 border-gray-c50 p-3 font-medium text-xl rounded-sm w-full"
+								rows="2"
+								placeholder="Title..."
+								formControlName="title"
+							></textarea>
+
+							<br /><br />
+
+							<div
+								class="border-3 border-secondary rounded-sm font-semibold py-3 px-2 w-fit"
+							>
+								#001
+							</div>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="font-semibold text-xl mb-4 inline-block"> Description </label>
+
+						<textarea
+							class="border-3 border-gray-c50 p-3 font-medium text-xl rounded-sm w-full"
+							rows="5"
+							placeholder="Type something..."
+							formControlName="description"
+						></textarea>
+					</div>
+
+					<button class="primary-button" type="submit">Create proposal</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</layout-main>

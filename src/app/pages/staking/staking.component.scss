@@ -86,8 +86,10 @@ td {
 	}
 }
 
+$col: #1d1b1b;
 .btn {
 	&:hover {
-		background-color: rgba(#1d1b1b, 0.9);
+		background-color: rgba($col, 0.9) !important;
+		border-color: rgba($col, 0.9) !important;
 	}
 }

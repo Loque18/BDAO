@@ -5,4 +5,19 @@ type Proposal = {
 	status: number;
 };
 
-export { Proposal };
+type DetailedProposal = {
+	number: number;
+	againstVotes: number;
+	abstainVotes: number;
+	withVotes: number;
+	againstVotingWeight: number;
+	abstainVotingWeight: number;
+	withVotingWeight: number;
+	description: string;
+	creationgTime: number;
+	votes: [];
+	title: string;
+	status: number;
+};
+
+export { Proposal, DetailedProposal };

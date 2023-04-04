@@ -20,6 +20,7 @@
 			class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
 			aria-controls="navbar-default"
 			aria-expanded="false"
+			(click)="toggle()"
 		>
 			<span class="sr-only">Open main menu</span>
 			<svg
@@ -38,43 +39,25 @@
 		</button>
 
 		<!-- NAVIGATION -->
-		<div class="hiddena w-full md:block md:w-auto" id="navbar-default">
+		<div class="w-full md:block md:w-auto" id="navbar-default" [ngClass]="{ hidden: !opened }">
 			<ul
 				class="flex flex-col p-4 mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium"
 			>
-				<!-- <li>
-					<a
-						href="#"
-						class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-						aria-current="page"
-						>Home</a
-					>
+				<li>
+					<a routerLink="/treasury" class="navbar-link" aria-current="page"> Treasury </a>
 				</li>
 				<li>
-					<a
-						href="#"
-						class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-						>About</a
-					>
-				</li> -->
+					<a routerLink="/staking" class="navbar-link" aria-current="page"> Staking </a>
+				</li>
 
 				<li>
-					<button
-						class="secondary-button !rounded-none"
-						(click)="connectWallet()"
-						*ngIf="!web3Svc.walletData.isLoggedIn; else address"
-					>
-						<div class="flex items-center gap-x-8">
-							<div class="font-medium">Connect</div>
-							<div><img src="/assets/icons/arrow-right.png" alt="" width="24" /></div>
-						</div>
-					</button>
+					<a routerLink="/proposals" class="navbar-link" aria-current="page">
+						Proposals
+					</a>
+				</li>
 
-					<ng-template #address>
-						<div>
-							{{ web3Svc.walletData.address }}
-						</div>
-					</ng-template>
+				<li>
+					<app-connect-btn [classNames]="'w-full'"></app-connect-btn>
 				</li>
 			</ul>
 		</div>

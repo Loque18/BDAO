@@ -51,6 +51,12 @@ module.exports = {
 				green: {
 					1: '#76DE5C',
 				},
+				red: {
+					1: '#E53939',
+				},
+				blue: {
+					1: '#3954E5',
+				},
 			},
 			borderWidth: {
 				3: '3px',

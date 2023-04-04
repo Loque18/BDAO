@@ -20,12 +20,6 @@ const routes: Routes = [
 	},
 
 	{
-		path: 'proposals',
-		loadChildren: () =>
-			import('src/app/pages/proposals/proposals.module').then((m) => m.ProposalsModule),
-	},
-
-	{
 		path: 'test',
 		component: TestComponent,
 	},

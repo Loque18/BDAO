@@ -1,14 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BehaviorSubject, from, Observable, throwError } from 'rxjs';
-import Web3 from 'web3';
 
-import { Rpc, Web3Config, ProviderType } from './celeste-types';
+import Web3 from 'web3';
+import { Contract } from 'web3-eth-contract';
+import { AbiItem } from 'web3-utils';
+import { MetaMaskInpageProvider } from '@metamask/providers';
+
+import { Rpc, Web3Config, ProviderType, EthEventHandlers } from './celeste-types';
 
 import { WalletData } from './wallet-data';
 import { Web3Wrapper } from './we3-wrapper';
 
-import { providers } from './constants';
-import { MetaMaskInpageProvider } from '@metamask/providers';
+import { providers, EthEvents } from './constants';
+
 // import type EthereumProvider from '@walletconnect/ethereum-provider/dist/types/EthereumProvider';
 import { environment } from 'src/environments/environment';
 import { ProviderContext } from './provider-context';
@@ -17,6 +20,9 @@ import { type IProviderStrategy } from './provider-context/strategies/IProviderS
 import { InjectedProviderStrategy } from './provider-context/strategies/injected';
 import { LinkedProviderStrategy } from './provider-context/strategies/linked';
 import { ICeleste } from '../models/iceleste';
+
+import { SmartContract } from './celeste-types';
+import { EventEmitter } from '@angular/core';
 
 // instantiate strategies
 const StrategiesMap: {
@@ -29,9 +35,11 @@ const StrategiesMap: {
 export class Celeste implements ICeleste {
 	// *~~*~~*~~ External variables ~~*~~*~~* //
 
+	private _config!: Web3Config; // config object
 	private _ready: boolean = false; // is celeste ready to be used
 	private _web3Wrapper: Web3Wrapper = new Web3Wrapper(); // web3 instanecs
 	private _walletData: WalletData = new WalletData(); // wallet data
+	private _eventHandlers: EthEventHandlers = {};
 
 	get ready(): boolean {
 		return this._ready;
@@ -40,6 +48,14 @@ export class Celeste implements ICeleste {
 	get walletData(): WalletData {
 		return this._walletData;
 	}
+
+	get web3Wrapper(): Web3Wrapper {
+		return this._web3Wrapper;
+	}
+
+	// data streams
+	public connectEvent = new EventEmitter<null>();
+	public disconnectEvent = new EventEmitter<null>();
 
 	// private _web3WrapperSub: BehaviorSubject<Web3Wrapper> = new BehaviorSubject<Web3Wrapper>(
 	// 	this._web3Wrapper
@@ -68,7 +84,8 @@ export class Celeste implements ICeleste {
 	// }
 
 	public async init(config: Web3Config): Promise<void> {
-		const { rpcs: rpcsObj } = config;
+		this._config = config;
+		const { rpcs: rpcsObj, smartContracts, isMultichain } = config;
 
 		const rpcs: Rpc[] = Object.values(rpcsObj);
 
@@ -76,6 +93,41 @@ export class Celeste implements ICeleste {
 		const injectedStrategy = StrategiesMap[providers.INJECTED];
 		const linkedStrategy = StrategiesMap[providers.LINKED];
 
+		// 2. create web3 readonly instances, for each rpc and init its smart contracts
+
+		if (!isMultichain && rpcs.length > 1) {
+			throw new Error('Multichain is not enabled but more than one rpc is provided');
+		}
+
+		rpcs.forEach((rpc: Rpc) => {
+			const web3 = new Web3(rpc.url);
+
+			this._web3Wrapper.addWeb3ROInstance(rpc.name, web3); // add web3 instance
+
+			// get the smart contracts for the current rpc (multichain)
+			let sc: SmartContract[] = [];
+			if (!isMultichain) {
+				sc = smartContracts;
+			} else {
+				sc = smartContracts.filter((sc: SmartContract) =>
+					Object.keys(sc.address).includes(rpc.chainId.toString())
+				);
+			}
+
+			sc.forEach((sc: SmartContract) => {
+				const address = isMultichain ? sc.address[rpc.chainId] : (sc.address as string);
+
+				const _scInstance = new web3.eth.Contract(sc.abi as AbiItem, address);
+
+				const scKey = `${sc.key}_READ.${rpc.chainId}`;
+
+				this._web3Wrapper.addContract(scKey, _scInstance);
+			});
+		});
+
+		this._web3Wrapper.setWeb3ROInitialized(true);
+
+		// 3. intantiante providers
 		// get injected provider
 		try {
 			await injectedStrategy.init(rpcs);
@@ -93,13 +145,13 @@ export class Celeste implements ICeleste {
 			if (environment.development) console.warn('Linked provider not found');
 		}
 
-		// 2. try recovering existing session
-		await this.getPreviousSession();
-
-		// 3. listen for provider events
+		// 4. listen for provider events
 		this._listenForProviderEvents();
 
-		// 4. set ready flag
+		// 5. try recovering any existing session
+		await this.getPreviousSession();
+
+		// 6. set ready flag
 		this._ready = true;
 	}
 
@@ -157,8 +209,6 @@ export class Celeste implements ICeleste {
 	public async requestDisconnection(): Promise<void> {
 		if (!this._walletData.isLoggedIn) return; // if user is not logged in, do nothing
 
-		console.log('logging out');
-
 		this._providerContext.setStrategy(StrategiesMap[this._walletData.provider as ProviderType]);
 
 		await this._providerContext.requestDisconnection();
@@ -166,25 +216,26 @@ export class Celeste implements ICeleste {
 		this.removeWalletData();
 	}
 
-	/*
-	public signMessage(message: string): Observable<unknown> {
-		if (!this._walletData.isLoggedIn)
-			return throwError(() => new Error('User is not logged in'));
+	public sign(message: string): Promise<unknown> {
+		if (!this._walletData.isLoggedIn) throw new Error('User is not logged in');
+
 		const type = this._walletData.provider as ProviderType;
 
 		const provider = this._providerInstances[type];
 
-		if (!provider) return throwError(() => new Error('Provider not found'));
+		return provider.request({
+			method: 'personal_sign',
+			params: [message, this._walletData.address],
+		});
 
-		const obs = from(
-			provider.request({
-				method: 'personal_sign',
-				params: [message, this._walletData.address],
-			})
-		);
-		return obs;
+		// const obs = from(
+		// 	provider.request({
+		// 		method: 'personal_sign',
+		// 		params: [message, this._walletData.address],
+		// 	})
+		// );
+		// return obs;
 	}
-	*/
 
 	// *~~*~~*~~ Web3 Events ~~*~~*~~* //
 
@@ -201,12 +252,16 @@ export class Celeste implements ICeleste {
 				const acc: string[] = accounts as string[];
 
 				this.accountsChanged(acc);
+
+				this._eventHandlers.accountsChanged?.(acc);
 			});
 
 			injectedProvider.on('chainChanged', (chainId) => {
 				const chainId_decimal = parseInt(chainId as string, 16);
 
 				this.chainChanged(chainId_decimal);
+
+				this._eventHandlers.chainChanged?.(chainId_decimal);
 			});
 
 			// injectedProvider.on('disconnect', () => {
@@ -224,11 +279,13 @@ export class Celeste implements ICeleste {
 
 			wcProvider.on('accountsChanged', (acc: string[]) => {
 				this.accountsChanged(acc);
+				this._eventHandlers.accountsChanged?.(acc);
 			});
 
 			wcProvider.on('chainChanged', (chainId: string) => {
 				const chainIdNum: number = parseInt(chainId);
 				this.chainChanged(chainIdNum);
+				this._eventHandlers.chainChanged?.(chainIdNum);
 			});
 
 			wcProvider.on('disconnect', (stream: any) => {
@@ -243,6 +300,8 @@ export class Celeste implements ICeleste {
 
 					this.accountsChanged([]);
 				}
+
+				this._eventHandlers.disconnect?.(stream);
 			});
 		}
 	}
@@ -264,6 +323,10 @@ export class Celeste implements ICeleste {
 		this._walletData.setChainId(chainId);
 	}
 
+	on(eventkey: EthEvents, callback: (data: any) => void): void {
+		this._eventHandlers[eventkey] = callback;
+	}
+
 	// *~~*~~*~~ Utility Methods ~~*~~*~~* //
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -279,6 +342,39 @@ export class Celeste implements ICeleste {
 		this._walletData = walletData;
 
 		this._web3Wrapper.setWeb3Instance(_web3);
+		this._web3Wrapper.setInitialized(true);
+
+		// intantiate write smart contracts
+		let sc: SmartContract[] = [];
+
+		if (!this._config.isMultichain) {
+			sc = this._config.smartContracts;
+		} else {
+			// check address for chainId is defined
+			sc = this._config.smartContracts.filter((sc: SmartContract) =>
+				Object.keys(sc.address).includes(chainId.toString())
+			);
+		}
+
+		sc.forEach((sc: SmartContract) => {
+			const address = this._config.isMultichain
+				? sc.address[chainId]
+				: (sc.address as string);
+
+			const contract: Contract = new _web3.eth.Contract(sc.abi as AbiItem, address);
+
+			this._web3Wrapper.addContract(sc.key, contract);
+		});
+
+		localStorage.setItem('celeste_session', '_');
+
+		this.connectEvent.emit();
+
+		// if(this._config.isMultichain) {
+		// sc = this._config.smartContracts.filter((sc: SmartContract) => sc.address[chainId] === );
+
+		// this.initSmartContracts(_web3, this._config.smartContracts.filter((sc: SmartContract) => sc.cha)
+
 		// this._web3Subject.next(this._web3Wrapper);
 	}
 
@@ -286,6 +382,19 @@ export class Celeste implements ICeleste {
 		this._walletData.reset();
 
 		this._web3Wrapper.removeWeb3Instance();
+		this._web3Wrapper.setInitialized(false);
 		// this._web3WrapperSub.next(this._web3Wrapper);
+
+		// remove all write smart contracts
+		const contracts = this._web3Wrapper.contracts;
+
+		Object.keys(contracts).forEach((key: string) => {
+			if (key.includes('_READ')) return;
+			this._web3Wrapper.removeContract(key);
+		});
+
+		localStorage.removeItem('celeste_session');
+
+		this.disconnectEvent.emit();
 	}
 }

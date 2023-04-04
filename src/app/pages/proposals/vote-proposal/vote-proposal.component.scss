@@ -1,83 +1,99 @@
-.clock{
-    background-color: #1D1B1B;
-    border-radius: 6px;
+.clock {
+	background-color: #1d1b1b;
+	border-radius: 6px;
 }
 
-.box{
-    border-radius: 3px;
+.box {
+	position: relative;
+	@apply rounded-sm;
+	@apply border-3;
+	@apply border-gray-c50;
+	@apply bg-primary;
+
+	@apply pt-10;
+	@apply pb-4;
+	@apply px-8;
 }
 
-.small-boxs{
-    border-radius: 3px;
+.small-boxs {
+	border-radius: 3px;
 }
 
-.text1{
-    background-color: black;
-    pointer-events: none;
-    border-radius: 3px;
+.text1 {
+	background-color: black;
+	pointer-events: none;
+	border-radius: 3px;
 }
 
-.bg-semi-black{
-    background-color: #1D1B1B;
+.bg-semi-black {
+	background-color: #1d1b1b;
 }
 
-a{
-    color: #3954E5;
-    text-decoration: underline;
-    cursor: pointer;
+a {
+	color: #3954e5;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-.btn{
-    border: 3px solid black;
-    width: 90%;
+.last {
+	background: linear-gradient(0deg, #3954e5, #3954e5);
+	width: 20%;
 }
 
-.last{
-    background:linear-gradient(0deg, #3954E5, #3954E5);
-    width: 20%;
+.first {
+	background: linear-gradient(0deg, #8eff71, #8eff71);
+	width: 50%;
 }
 
-.first{
-    background:linear-gradient(0deg, #8EFF71, #8EFF71);
-    width: 50%;
+.bg-red-600 {
+	width: 40%;
 }
 
-.bg-red-600{
-    width: 40%;
+.border-3 {
+	border-width: 3px;
 }
 
-.border-3{
-    border-width: 3px;
+.right-box {
+	position: relative;
 }
 
-.right-box{
-    position: relative;
+.right-box::after {
+	content: '';
+	position: absolute;
+	top: 60px;
+	right: 0;
+	left: 45px;
+	width: 3px;
+	height: 40px;
+	background-color: black;
+	z-index: -1;
 }
 
-.right-box::after{
-    Content: "";
-    position: absolute;
-    top: 60px;
-    right: 0;
-    left: 45px;
-    width: 3px;
-    height: 40px;
-    background-color: black;
-    z-index: -1;
+.bg-gray-500 {
+	background-color: #aeaeae;
 }
 
-.small-icons{
-    width: 40px;
+.border-gray-500 {
+	border-color: #aeaeae;
 }
 
-.space{
-    justify-content: space-between;
+// *~~*~~*~~ loque's styles ~~*~~*~~* //
+
+.cbox {
+	z-index: 2;
 }
 
-.bg-gray-500{
-    background-color: #AEAEAE;
-}
+.bottomLine {
+	&::after {
+		content: '';
+		position: absolute;
+		display: block;
 
-.border-gray-500{
-    border-color: #AEAEAE;
+		width: 2px;
+		height: 32px;
+		top: 100%;
+		background-color: black;
+
+		z-index: 0;
+	}
 }

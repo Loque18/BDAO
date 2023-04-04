@@ -11,12 +11,9 @@ export class HeaderComponent {
 	constructor(protected web3Svc: Web3Service) {}
 
 	protected walletLoading: boolean = false;
+	protected opened: boolean = false;
 
-	connectWallet() {
-		this.walletLoading = true;
-
-		from(this.web3Svc.requestConnection('injected')).subscribe(() => {
-			this.walletLoading = false;
-		});
+	toggle() {
+		this.opened = !this.opened;
 	}
 }

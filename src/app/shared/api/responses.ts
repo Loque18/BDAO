@@ -1,5 +1,5 @@
 import { Asset } from '../models/asset';
-import { Proposal } from '../models/proposal/proposal';
+import { DetailedProposal, Proposal } from '../models/proposal/proposal';
 
 import { Reward } from '../models/staking/reward';
 
@@ -18,6 +18,8 @@ type TreasuryResponse = ApiResponse & {
 
 type StakingResponse = ApiResponse & {
 	data?: {
+		apr: number;
+		price: number;
 		rewardsHistory: Reward[];
 		totalProfit: number;
 		spots: number;
@@ -30,20 +32,35 @@ type AllProposalsResponse = ApiResponse & {
 	data?: Proposal[];
 };
 
-type ProposalReponse = ApiResponse & {
-	data?: {
-		number: number;
-		againstVotes: number;
-		againstVotingWeight: number;
-		absentVotes: number;
-		withVotes: number;
-		description: string;
-		creationgTime: number;
-		votes: [];
-		title: string;
-		abstainVotingWeight: number;
-		status: string;
-	};
+// PROPOSALS DETAIL
+
+type SuccessProposalResponse = {
+	success: true;
+	data: DetailedProposal;
+	statusCode: number;
 };
 
-export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalReponse };
+type ErrorProposalResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
+};
+
+type ProposalResponse = SuccessProposalResponse | ErrorProposalResponse;
+
+// VOTE PROPOSAL
+type SuccessVoteResponse = {
+	success: true;
+	message: string;
+	statusCode: number;
+};
+
+type FailedVoteResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
+};
+
+type VoteResponse = SuccessVoteResponse | FailedVoteResponse;
+
+export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse, VoteResponse };

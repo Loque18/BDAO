@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutModule } from 'src/app/layout/layout.module';
 
@@ -8,18 +9,22 @@ import { ProposalsMainComponent } from './proposals-main/proposals-main.componen
 import { VoteProposalComponent } from './vote-proposal/vote-proposal.component';
 import { CreateProposalComponent } from './create-proposal/create-proposal.component';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
     ProposalsMainComponent,
-    CreateProposalComponent,
-    VoteProposalComponent
+    VoteProposalComponent,
+    CreateProposalComponent
   ],
   imports: [
     CommonModule,
     ProposalsRoutingModule,
+    ReactiveFormsModule,
 
-    LayoutModule
+    LayoutModule,
+    ToastrModule.forRoot(),
   ]
 })
 export class ProposalsModule { }
