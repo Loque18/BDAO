@@ -44,7 +44,7 @@ export class StakingComponent implements OnInit {
 
 	data: any = {
 		apr: 0,
-		totalStaked: 0,
+		inactiveStaked: 0,
 		activeStaked: 0,
 		price: 1,
 		spots: 0,

@@ -48,7 +48,7 @@
 										type="text"
 										class="text-xl text-right text-secondary font-semibold"
 									>
-										${{ user.data.balance | bigNumber : 18 }}
+										{{ user.data.balance | bigNumber : 18 }}
 									</div>
 								</div>
 
@@ -90,39 +90,52 @@
 									<ng-container
 										*ngIf="web3Svc.walletData.isLoggedIn; else connectBtn"
 									>
-										<ng-container *ngIf="needsApproval; else stakeButtons">
-											<button
-												class="primary-button text-xl w-full"
-												type="button"
-												(click)="approve()"
-											>
-												Approve
-											</button>
-										</ng-container>
+										<ng-container
+											*ngIf="
+												web3Svc.walletData.chainId === 97;
+												else changeNetwork
+											"
+										>
+											<ng-container *ngIf="needsApproval; else stakeButtons">
+												<button
+													class="primary-button text-xl w-full"
+													type="button"
+													(click)="approve()"
+												>
+													Approve
+												</button>
+											</ng-container>
 
-										<ng-template #stakeButtons>
-											<div class="grid grid-cols-2 gap-6">
-												<div class="col-span-1">
-													<button
-														class="primary-button text-xl w-full"
-														type="button"
-														(click)="submit('stake')"
-													>
-														Stake
-													</button>
+											<ng-template #stakeButtons>
+												<div class="grid grid-cols-2 gap-6">
+													<div class="col-span-1">
+														<button
+															class="primary-button text-xl w-full"
+															type="button"
+															(click)="submit('stake')"
+														>
+															Cement
+														</button>
+													</div>
+													<div class="col-span-1">
+														<button
+															class="secondary-button text-xl w-full"
+															type="button"
+															(click)="submit('unstake')"
+														>
+															Demolish
+														</button>
+													</div>
 												</div>
-												<div class="col-span-1">
-													<button
-														class="secondary-button text-xl w-full"
-														type="button"
-														(click)="submit('unstake')"
-													>
-														UnStake
-													</button>
-												</div>
-											</div>
-										</ng-template>
+											</ng-template>
+										</ng-container>
 									</ng-container>
+
+									<ng-template #changeNetwork>
+										<button class="primary-button text-xl w-full" type="button">
+											Change to Eth Network
+										</button>
+									</ng-template>
 
 									<ng-template #connectBtn>
 										<button class="primary-button text-xl w-full" type="button">
@@ -149,10 +162,10 @@
 										<img src="/assets/icons/eth_d.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												{{ data.totalStaked }}
+												{{ data.inactiveStaked }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
-												Amount Staked
+												Fresh Bricks
 											</div>
 										</div>
 									</div>
@@ -167,7 +180,7 @@
 												{{ data.activeStaked }}
 											</div>
 											<div class="text-primary text-xl font-semibold">
-												Active Staked
+												Set Bricks
 											</div>
 										</div>
 									</div>
