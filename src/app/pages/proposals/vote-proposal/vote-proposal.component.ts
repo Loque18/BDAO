@@ -4,7 +4,7 @@ import { Ivote, items } from 'src/app/constants/vote-proposal';
 import { ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
 import { ProposalsService } from '../s/proposals.service';
 
-import { DetailedProposal } from 'src/app/shared/models/proposal/proposal';
+import { DetailedProposal, Vote } from 'src/app/shared/models/proposal/proposal';
 import { Web3Service } from 'src/app/shared/services/web3.service';
 import { from } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -59,7 +59,6 @@ export class VoteProposalComponent implements OnInit {
 			next: (res: ProposalResponse) => {
 				if (res.success) {
 					this.proposal = res.data;
-					console.log(this.proposal);
 				} else {
 					this._handleError(res.message);
 				}
@@ -79,34 +78,45 @@ export class VoteProposalComponent implements OnInit {
 	protected get votesArr() {
 		const res = [];
 
+		const totalWeight =
+			this.proposal.withVotingWeight +
+			this.proposal.againstVotingWeight +
+			this.proposal.abstainVotingWeight;
+
 		// with
 		res.push({
+			id: this.proposal.number,
 			title: 'WITH',
 			count: this.proposal.withVotes,
 			weight: this.proposal.withVotingWeight,
 			color: 'bg-green-1',
-			percent: (10).toString(),
+			percent: (this.proposal.withVotingWeight / totalWeight) * 100,
 			type: 0,
+			votes: this.proposal.votes.filter((v: Vote) => v.vote === 0),
 		});
 
 		// against
 		res.push({
+			id: this.proposal.number,
 			title: 'AGAINST',
 			count: this.proposal.againstVotes,
 			weight: this.proposal.againstVotingWeight,
 			color: 'bg-red-1',
-			percent: (10).toString(),
+			percent: (this.proposal.againstVotingWeight / totalWeight) * 100,
 			type: 1,
+			votes: this.proposal.votes.filter((v: Vote) => v.vote === 1),
 		});
 
 		// absent
 		res.push({
+			id: this.proposal.number,
 			title: 'ABSTAIN',
 			count: this.proposal.abstainVotes,
 			weight: this.proposal.abstainVotingWeight,
 			color: 'bg-blue-1',
-			percent: (10).toString(),
+			percent: (this.proposal.abstainVotingWeight / totalWeight) * 100,
 			type: 2,
+			votes: this.proposal.votes.filter((v: Vote) => v.vote === 2),
 		});
 
 		return res;
@@ -117,8 +127,14 @@ export class VoteProposalComponent implements OnInit {
 		this._errorMessage = msg;
 	}
 
-	vote(type: number): void {
-		from(this.w3Svc.sign(`N${type}`)).subscribe({
+	vote(type: number, proposalNumber: number): void {
+		let _type: string = '';
+
+		if (type === 0) _type = 'With';
+		else if (type === 1) _type = 'Against';
+		else if (type === 2) _type = 'Abstain';
+
+		from(this.w3Svc.sign(`${_type} ${proposalNumber}`)).subscribe({
 			next: (res: unknown) => {
 				const signature = res as string;
 
