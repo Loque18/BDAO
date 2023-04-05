@@ -207,7 +207,7 @@
 										<img src="/assets/icons/spots.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												${{ data.totalProfit }}
+												${{ data.totalProfit | number : '1.2-2' }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
 												Total Profit
@@ -231,7 +231,7 @@
 					>
 						<table class="table">
 							<tbody>
-								<tr *ngFor="let r of stakingSvc.data.rewardsHistory">
+								<tr *ngFor="let r of data.rewardsHistory">
 									<td class="text-secondary">
 										<h1 class="text-xl md:text-2xl font-semibold">
 											{{ r.amount }}
@@ -246,14 +246,14 @@
 										<h1 class="text-base md:text-xl font-medium">date</h1>
 									</td>
 
-									<td class="text-secondary hidden md:block">
+									<!-- <td class="text-secondary hidden md:block">
 										<h1 class="text-2xl font-semibold">
 											{{ r.totalDividends }}
 										</h1>
 										<h1 class="text-base md:text-xl font-medium">
 											Total dividends
 										</h1>
-									</td>
+									</td> -->
 
 									<td class="text-secondary text-right">
 										<a

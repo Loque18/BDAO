@@ -22,8 +22,9 @@ export class StakingService {
 		activeStaked: 0,
 		spots: 0,
 		totalProfit: 0,
-		totalStaked: 0,
+		inactiveStaked: 0,
 		rewardsHistory: [],
+		apr: 0,
 	};
 
 	loading: boolean = false;
@@ -110,6 +111,7 @@ export class StakingService {
 			catchError(
 				this.handleError<StakingResponse>('getAssets', {
 					success: false,
+					message: 'Error while fetching user stats',
 					statusCode: 500,
 				})
 			)

@@ -4,8 +4,9 @@ type StakingStats = {
 	activeStaked: number;
 	spots: number;
 	totalProfit: number;
-	totalStaked: number;
+	inactiveStaked: number;
 	rewardsHistory: Reward[];
+	apr: number;
 };
 
 export { StakingStats };

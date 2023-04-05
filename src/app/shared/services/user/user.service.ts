@@ -48,8 +48,6 @@ export class UserService {
 				.call();
 
 			from(Promise.all([balance_promise, allowance_promise])).subscribe((res) => {
-				console.log(res);
-
 				this._loading = false;
 
 				this._data.balance = res[0];

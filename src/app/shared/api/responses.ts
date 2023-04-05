@@ -2,6 +2,7 @@ import { Asset } from '../models/asset';
 import { DetailedProposal, Proposal } from '../models/proposal/proposal';
 
 import { Reward } from '../models/staking/reward';
+import { StakingStats } from '../models/staking/stats';
 
 type ApiResponse = {
 	success: boolean;
@@ -16,17 +17,21 @@ type TreasuryResponse = ApiResponse & {
 	};
 };
 
-type StakingResponse = ApiResponse & {
-	data?: {
-		apr: number;
-		price: number;
-		rewardsHistory: Reward[];
-		totalProfit: number;
-		spots: number;
-		activeStaked: number;
-		totalStaked: number;
-	};
+// Proposals
+
+type FailedStakingResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
 };
+
+type SuccessStakingResponse = {
+	success: true;
+	statusCode: number;
+	data: StakingStats;
+};
+
+type StakingResponse = SuccessStakingResponse | FailedStakingResponse;
 
 type AllProposalsResponse = ApiResponse & {
 	data?: Proposal[];
