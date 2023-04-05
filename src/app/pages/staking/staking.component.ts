@@ -9,6 +9,7 @@ import { EthEvents } from 'src/app/shared/celeste/constants';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { StakingResponse } from 'src/app/shared/api/responses';
+import { StakingStats } from 'src/app/shared/models/staking/stats';
 
 type Tx = {
 	amount: number;
@@ -42,13 +43,13 @@ function genTxs() {
 export class StakingComponent implements OnInit {
 	txs = genTxs();
 
-	data: any = {
+	data: StakingStats = {
 		apr: 0,
 		inactiveStaked: 0,
 		activeStaked: 0,
-		price: 1,
 		spots: 0,
 		totalProfit: 0,
+		rewardsHistory: [],
 	};
 
 	constructor(
@@ -169,14 +170,11 @@ export class StakingComponent implements OnInit {
 	fetchData() {
 		this.stakingSvc.getUserStats(this.web3Svc.walletData.address as string).subscribe({
 			next: (res: StakingResponse) => {
-				this.data = {
-					...this.data,
-					apr: res.data?.apr,
-					totalStaked: res.data?.totalStaked,
-					activeStaked: res.data?.activeStaked,
-					price: res.data?.price,
-					spots: res.data?.spots,
-				};
+				if (res.success) {
+					this.data = res.data;
+
+					console.log(this.data);
+				}
 			},
 
 			error: (err) => {
