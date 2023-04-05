@@ -138,8 +138,8 @@
 									<!-- progress bar -->
 									<div class="bg-black h-3.5 mb-4 p-[2px]">
 										<div
-											class="h-full"
-											[ngClass]="item.color + ' ' + 'w-[' + '40' + '%]'"
+											class="h-full {{ item.color }} "
+											[style]="{ width: item.percent + '%' }"
 										></div>
 									</div>
 
@@ -156,20 +156,24 @@
 										<div>Addresses</div>
 										<div>Voting Weight</div>
 									</div>
-									<div class="flex justify-between text-xs font-medium mb-4">
-										<div class="text-[dodgerblue] cursor-pointer">
-											<u>
-												address
+									<div class="data-container h-[100px] overflow-auto">
+										<div
+											class="flex justify-between text-xs font-medium mb-4"
+											*ngFor="let vote of item.votes"
+										>
+											<div class="text-[dodgerblue] cursor-pointer">
+												{{ vote.address | address }}
+
 												<!-- {{ item.addresses }} -->
-											</u>
+											</div>
+											<div>{{ vote.weight }}</div>
 										</div>
-										<div>{{ item.weight }}</div>
 									</div>
 									<!-- Vote button -->
-									<div class="mt-16">
+									<div>
 										<button
 											class="secondary-button w-full text-2xl"
-											(click)="vote(item.type)"
+											(click)="vote(item.type, item.id)"
 										>
 											{{ item.title }}
 										</button>

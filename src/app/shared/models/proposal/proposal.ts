@@ -5,6 +5,13 @@ type Proposal = {
 	status: number;
 };
 
+type Vote = {
+	address: string;
+	signature: string;
+	weight: number;
+	vote: number;
+};
+
 type DetailedProposal = {
 	number: number;
 	againstVotes: number;
@@ -15,9 +22,9 @@ type DetailedProposal = {
 	withVotingWeight: number;
 	description: string;
 	creationgTime: number;
-	votes: [];
+	votes: Vote[];
 	title: string;
 	status: number;
 };
 
-export { Proposal, DetailedProposal };
+export { Proposal, DetailedProposal, Vote };

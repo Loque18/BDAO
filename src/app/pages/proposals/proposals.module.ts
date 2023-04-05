@@ -10,6 +10,7 @@ import { VoteProposalComponent } from './vote-proposal/vote-proposal.component';
 import { CreateProposalComponent } from './create-proposal/create-proposal.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ToastrModule } from 'ngx-toastr';
 
     LayoutModule,
     ToastrModule.forRoot(),
+    AddressPipe
   ]
 })
 export class ProposalsModule { }
