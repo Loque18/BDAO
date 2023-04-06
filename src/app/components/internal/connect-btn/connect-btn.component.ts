@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
 import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
 import { Web3Service } from 'src/app/shared/services/web3.service';
+
+import { APP_MODALS } from 'src/app/shared/static/app.modals';
 
 @Component({
 	selector: 'app-connect-btn',
@@ -15,10 +18,10 @@ export class ConnectBtnComponent implements OnInit {
 
 	protected loading: boolean = true;
 
-	constructor(protected w3Svc: Web3Service) {}
+	constructor(protected w3Svc: Web3Service, private modalSvc: ModalCoreService) {}
 
 	ngOnInit(): void {
-		this.w3Svc.readyEvent.subscribe((ready) => {
+		this.w3Svc.readyEvent.subscribe(() => {
 			this.loading = false;
 		});
 	}
@@ -32,6 +35,7 @@ export class ConnectBtnComponent implements OnInit {
 	}
 
 	connect() {
-		this.w3Svc.requestConnection('injected');
+		this.modalSvc.openModal(APP_MODALS.WALLETS);
+		// this.w3Svc.requestConnection('injected');
 	}
 }

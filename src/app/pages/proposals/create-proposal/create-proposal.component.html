@@ -36,7 +36,21 @@
 						></textarea>
 					</div>
 
-					<button class="primary-button" type="submit">Create proposal</button>
+					<ng-container *ngIf="walletConnected; else connect">
+						<button
+							class="primary-button"
+							type="submit"
+							[ngClass]="{ loading: loading }"
+						>
+							Create proposal
+						</button>
+					</ng-container>
+
+					<ng-template #connect>
+						<button class="primary-button" type="button" (click)="connectW()">
+							Connect Wallet
+						</button>
+					</ng-template>
 				</form>
 			</div>
 		</div>
