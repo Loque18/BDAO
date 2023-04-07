@@ -169,12 +169,23 @@
 									</div>
 									<!-- Vote button -->
 									<div>
-										<button
-											class="secondary-button w-full text-2xl"
-											(click)="vote(item.type, item.id)"
-										>
-											{{ item.title }}
-										</button>
+										<ng-container *ngIf="walletConnected; else connect">
+											<button
+												class="secondary-button w-full text-2xl"
+												(click)="vote(item.type, item.id)"
+											>
+												{{ item.title }}
+											</button>
+										</ng-container>
+
+										<ng-template #connect>
+											<button
+												class="secondary-button w-full text-2xl"
+												(click)="connectW()"
+											>
+												Connect wallet
+											</button>
+										</ng-template>
 									</div>
 								</div>
 							</div>

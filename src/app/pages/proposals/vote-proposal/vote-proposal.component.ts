@@ -8,6 +8,8 @@ import { DetailedProposal, Vote } from 'src/app/shared/models/proposal/proposal'
 import { Web3Service } from 'src/app/shared/services/web3.service';
 import { from } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { APP_MODALS } from 'src/app/shared/static/app.modals';
+import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
 
 @Component({
 	selector: 'app-vote-proposal',
@@ -19,7 +21,8 @@ export class VoteProposalComponent implements OnInit {
 		private proposalsSvc: ProposalsService,
 		private router: ActivatedRoute,
 		private w3Svc: Web3Service,
-		private toastr: ToastrService
+		private toastr: ToastrService,
+		private modalSvc: ModalCoreService
 	) {}
 
 	protected _loading: boolean = false;
@@ -83,6 +86,9 @@ export class VoteProposalComponent implements OnInit {
 			this.proposal.againstVotingWeight +
 			this.proposal.abstainVotingWeight;
 
+		
+		
+
 		// with
 		res.push({
 			id: this.proposal.number,
@@ -90,7 +96,7 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.withVotes,
 			weight: this.proposal.withVotingWeight,
 			color: 'bg-green-1',
-			percent: (this.proposal.withVotingWeight / totalWeight) * 100,
+			percent: totalWeight === 0 ? 0 : (this.proposal.withVotingWeight / totalWeight) * 100,
 			type: 0,
 			votes: this.proposal.votes.filter((v: Vote) => v.vote === 0),
 		});
@@ -102,7 +108,7 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.againstVotes,
 			weight: this.proposal.againstVotingWeight,
 			color: 'bg-red-1',
-			percent: (this.proposal.againstVotingWeight / totalWeight) * 100,
+			percent: totalWeight === 0 ? 0 : (this.proposal.againstVotingWeight / totalWeight) * 100,
 			type: 1,
 			votes: this.proposal.votes.filter((v: Vote) => v.vote === 1),
 		});
@@ -114,7 +120,7 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.abstainVotes,
 			weight: this.proposal.abstainVotingWeight,
 			color: 'bg-blue-1',
-			percent: (this.proposal.abstainVotingWeight / totalWeight) * 100,
+			percent: totalWeight === 0 ? 0 : (this.proposal.abstainVotingWeight / totalWeight) * 100,
 			type: 2,
 			votes: this.proposal.votes.filter((v: Vote) => v.vote === 2),
 		});
@@ -160,5 +166,13 @@ export class VoteProposalComponent implements OnInit {
 				this.toastr.error(err.message);
 			},
 		});
+	}
+
+	get walletConnected(): boolean {
+		return this.w3Svc.walletData.isLoggedIn;
+	}
+
+	connectW(): void {
+		this.modalSvc.openModal(APP_MODALS.WALLETS);
 	}
 }
