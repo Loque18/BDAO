@@ -79,8 +79,6 @@ export class ProposalsService {
 	 * @param result - optional value to return as the observable result
 	 */
 	private handleError(error: HttpErrorResponse) {
-		console.log('original__', error);
-
 		let errorMessage = 'An unknown error occurred!';
 
 		if (error.error instanceof Error || error.error instanceof ProgressEvent) {

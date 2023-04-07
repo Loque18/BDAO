@@ -77,8 +77,6 @@ export class StakingService {
 	}
 
 	public stake(amount: string): Observable<unknown> {
-		console.log(this);
-
 		const staking_SC: Contract = this.w3Svc.web3Wrapper.contracts['STAKING'];
 
 		const tx = staking_SC.methods.stake(amount);

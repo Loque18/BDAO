@@ -207,8 +207,6 @@ export class StakingComponent implements OnInit {
 			next: (res: StakingResponse) => {
 				if (res.success) {
 					this.data = res.data;
-
-					console.log(res.data);
 				}
 			},
 

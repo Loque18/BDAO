@@ -75,13 +75,9 @@ export class VoteProposalComponent implements OnInit {
 				if (res.success) {
 					this.proposal = res.data;
 
-					console.log(this._loading);
-
 					const v: VoteData[] = this.calc();
 
 					this.votesArr = v;
-
-					console.log(this.votesArr);
 				} else {
 					this._handleError(res.message);
 				}
@@ -90,10 +86,6 @@ export class VoteProposalComponent implements OnInit {
 				this._handleError(err.message);
 
 				this._loading = false;
-			},
-			complete: () => {
-				console.log('fuck this shit 1000 timess');
-				console.log(this._loading);
 			},
 		});
 	}
