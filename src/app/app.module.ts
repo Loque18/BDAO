@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
+
 import { ModalModule } from './shared/modal/modal.module';
 
 
@@ -27,6 +28,7 @@ import { WalletsComponent } from './components/modals/wallets/wallets.component'
     AppRoutingModule,
     HttpClientModule,
     ToastrModule.forRoot(),
+
 
     ModalModule,
 

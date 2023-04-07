@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { from } from 'rxjs';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProposalsService } from '../s/proposals.service';
@@ -7,6 +7,7 @@ import { Web3Service } from 'src/app/shared/services/web3.service';
 import { ToastrService } from 'ngx-toastr';
 import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
 import { APP_MODALS } from 'src/app/shared/static/app.modals';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-create-proposal',
@@ -18,7 +19,8 @@ export class CreateProposalComponent {
 		private proposalsSvc: ProposalsService,
 		private w3Svc: Web3Service,
 		public toastService: ToastrService,
-		public modalSvc: ModalCoreService
+		public modalSvc: ModalCoreService,
+		private router: Router
 	) {}
 
 	loading: boolean = false;
@@ -51,8 +53,11 @@ export class CreateProposalComponent {
 
 			this.proposalsSvc.postProposal(title, description, s).subscribe({
 				next: (res) => {
+					this.loading = false;
+
 					if (res.success) {
 						this.toastService.success('Proposal created successfully');
+						this.router.navigateByUrl('/proposals');
 					} else {
 						switch (res.statusCode) {
 							case 614:
@@ -66,8 +71,6 @@ export class CreateProposalComponent {
 								break;
 						}
 					}
-
-					this.loading = false;
 				},
 				error: () => {
 					this.toastService.error('there was a network error, please try again later');

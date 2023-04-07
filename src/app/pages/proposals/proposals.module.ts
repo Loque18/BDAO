@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import {NgxPopperModule} from 'ngx-popper';
+
 import { LayoutModule } from 'src/app/layout/layout.module';
 
 import { ProposalsRoutingModule } from './proposals-routing.module';
@@ -23,6 +25,8 @@ import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
     CommonModule,
     ProposalsRoutingModule,
     ReactiveFormsModule,
+
+    NgxPopperModule.forRoot(),
 
     LayoutModule,
     ToastrModule.forRoot(),

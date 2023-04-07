@@ -35,6 +35,8 @@ export class ConnectBtnComponent implements OnInit {
 	}
 
 	connect() {
+		if (this.w3Svc.walletData.isLoggedIn) return;
+
 		this.modalSvc.openModal(APP_MODALS.WALLETS);
 		// this.w3Svc.requestConnection('injected');
 	}

@@ -56,7 +56,7 @@ export class StakingComponent implements OnInit {
 		private titleService: Title,
 		protected web3Svc: Web3Service,
 		protected stakingSvc: StakingService,
-		// protected toastSvc: ToastrService,
+		protected toastSvc: ToastrService,
 		protected user: UserService
 	) {
 		this.titleService.setTitle('BDAO • Staking');
@@ -64,12 +64,10 @@ export class StakingComponent implements OnInit {
 
 	ngOnInit(): void {
 		if (this.web3Svc.walletData.isLoggedIn) {
-			console.log('si');
-
 			this.fetchData();
+			this.user.updateAllowance();
+			this.user.updateBalance();
 		} else {
-			console.log('no');
-
 			this.web3Svc.connectEvent.subscribe(() => {
 				this.fetchData();
 			});
@@ -101,31 +99,40 @@ export class StakingComponent implements OnInit {
 		});
 	}
 
+	approveLoading: boolean = false;
 	approve() {
+		this.approveLoading = true;
+
 		this.stakingSvc.approve().subscribe({
 			next: (res) => {
 				// todo
 				this.user.updateAllowance();
+
+				this.approveLoading = false;
 			},
 			error: (err) => {
 				// todo
+				this.approveLoading = false;
+
+				if (err.code === 4001) {
+					this.toastSvc.error('Transaction rejected');
+				}
 			},
 		});
 	}
 
-	submit(operation: string) {
+	unstakeLoading: boolean = false;
+	unstake() {
 		if (this.form.invalid) return;
+
+		this.unstakeLoading = true;
 
 		// get amount
 		const amountDec = this.form.value.amount;
 		const amountBN = BigInt(amountDec * 10 ** 18).toString();
 
-		let method;
-		if (operation == 'stake') method = this.stakingSvc.stake;
-		else method = this.stakingSvc.unstake;
-
 		// stake
-		this.stakingSvc.stake(amountBN).subscribe({
+		this.stakingSvc.unstake(amountBN).subscribe({
 			next: (tx: any) => {
 				// 		// todo
 				this.user.updateBalance();
@@ -133,17 +140,28 @@ export class StakingComponent implements OnInit {
 				setTimeout(() => {
 					this.fetchData();
 				}, 5000);
+
+				this.unstakeLoading = false;
 			},
-			error: () => {
+			error: (err) => {
 				// todo
 
+				if (err.code === 4001) {
+					this.toastSvc.error('Transaction rejected');
+				}
+
 				this.form.reset();
+
+				this.unstakeLoading = false;
 			},
 		});
 	}
 
+	stakeLoading: boolean = false;
 	stake() {
 		if (this.form.invalid) return;
+
+		this.stakeLoading = true;
 
 		// get amount
 		const amountDec = this.form.value.amount;
@@ -158,8 +176,17 @@ export class StakingComponent implements OnInit {
 				setTimeout(() => {
 					this.fetchData();
 				}, 5000);
+
+				this.stakeLoading = false;
 			},
-			error: () => {},
+			error: (err) => {
+				if (err.code === 4001) {
+					this.toastSvc.error('Transaction rejected');
+				}
+
+				this.form.reset();
+				this.stakeLoading = false;
+			},
 		});
 		// 	error: () => {
 	}
@@ -180,6 +207,8 @@ export class StakingComponent implements OnInit {
 			next: (res: StakingResponse) => {
 				if (res.success) {
 					this.data = res.data;
+
+					console.log(res.data);
 				}
 			},
 

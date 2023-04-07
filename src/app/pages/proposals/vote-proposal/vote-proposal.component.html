@@ -159,11 +159,52 @@
 											class="flex justify-between text-xs font-medium mb-4"
 											*ngFor="let vote of item.votes"
 										>
-											<div class="text-[dodgerblue] cursor-pointer">
-												{{ vote.address | address }}
-
-												<!-- {{ item.addresses }} -->
+											<div
+												[popper]="popper1Content"
+												[popperShowOnStart]="false"
+												[popperTrigger]="'click'"
+												[popperHideOnClickOutside]="true"
+												[popperHideOnScroll]="false"
+												[popperPlacement]="'top'"
+												[popperApplyClass]="'bg-secondary'"
+											>
+												<u class="text-[dodgerblue] cursor-pointer">{{
+													vote.address | address
+												}}</u>
 											</div>
+											<popper-content #popper1Content>
+												<div
+													class="border-3 border-primary p-3 rounded-sm mb-3"
+												>
+													<h1 class="text-sm font-semibold text-primary">
+														Number of proposals
+													</h1>
+													<h1 class="text-sm font-semivold text-primary">
+														#{{ item.id }}
+													</h1>
+												</div>
+												<div
+													class="border-3 border-primary p-3 rounded-sm flex justify-between"
+												>
+													<div>
+														<h1
+															class="text-sm font-semibold text-primary"
+														>
+															User signature
+														</h1>
+														<h1
+															class="text-sm font-semivold text-primary"
+														>
+															{{ vote.signature | address }}
+														</h1>
+													</div>
+
+													<a class="text-sm text-primary">
+														<i class="far fa-clone"></i>
+													</a>
+												</div>
+											</popper-content>
+
 											<div>{{ vote.weight }}</div>
 										</div>
 									</div>
