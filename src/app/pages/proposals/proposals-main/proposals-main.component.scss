@@ -97,13 +97,6 @@
 	@apply rounded-sm;
 }
 
-.scrollable {
-	height: 754px;
-	overflow-x: hidden;
-	overflow-y: auto;
-	padding-right: 10px;
-}
-
 ::-webkit-scrollbar {
 	width: 0;
 	background: transparent;

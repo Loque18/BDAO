@@ -55,8 +55,6 @@
 												{{ proposal.title }}
 											</p>
 
-											<br />
-
 											<div class="flex-grow"></div>
 
 											<div class="flex gap-x-4">
@@ -98,7 +96,7 @@
 											<h1 class="text-xl font-semibold">Created</h1>
 											<h2 class="text-lg font-semibold">
 												{{
-													proposal.creationgTime
+													proposal.creationgTime * 1000
 														| date : 'dd MMM y h:mm a'
 												}}
 											</h2>
@@ -171,12 +169,23 @@
 									</div>
 									<!-- Vote button -->
 									<div>
-										<button
-											class="secondary-button w-full text-2xl"
-											(click)="vote(item.type, item.id)"
-										>
-											{{ item.title }}
-										</button>
+										<ng-container *ngIf="walletConnected; else connect">
+											<button
+												class="secondary-button w-full text-2xl"
+												(click)="vote(item.type, item.id)"
+											>
+												{{ item.title }}
+											</button>
+										</ng-container>
+
+										<ng-template #connect>
+											<button
+												class="secondary-button w-full text-2xl"
+												(click)="connectW()"
+											>
+												Connect wallet
+											</button>
+										</ng-template>
 									</div>
 								</div>
 							</div>

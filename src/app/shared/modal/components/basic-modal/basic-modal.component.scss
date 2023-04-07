@@ -1,0 +1,53 @@
+@use 'src/scss/vars' as vars;
+
+@keyframes modalFadeIn {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes modalFadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.modal {
+	position: fixed;
+	display: none;
+
+	top: 0;
+
+	animation: modalFadeOut 0.25s;
+
+	z-index: vars.$z-index-modal;
+
+	overflow: hidden auto !important;
+
+	height: 100%;
+	width: 100%;
+
+	&.is-active {
+		display: block;
+
+		animation: modalFadeIn 0.25s;
+	}
+
+	.modal-content {
+		margin: 0 !important;
+		overflow: unset;
+		min-height: 100%;
+		max-height: unset;
+		padding: 20px 50px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: unset;
+	}
+}

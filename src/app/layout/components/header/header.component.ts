@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { from } from 'rxjs';
+import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
 import { Web3Service } from 'src/app/shared/services/web3.service';
 
 @Component({
