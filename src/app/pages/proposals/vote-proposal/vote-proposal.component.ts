@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Ivote, items } from 'src/app/constants/vote-proposal';
 import { ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
@@ -10,6 +10,17 @@ import { from } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { APP_MODALS } from 'src/app/shared/static/app.modals';
 import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
+
+type VoteData = {
+	id: number;
+	title: string;
+	count: number;
+	weight: number;
+	color: string;
+	percent: number;
+	type: number;
+	votes: Vote[];
+};
 
 @Component({
 	selector: 'app-vote-proposal',
@@ -33,10 +44,10 @@ export class VoteProposalComponent implements OnInit {
 		number: 0,
 		againstVotes: 0,
 		abstainVotes: 0,
-		withVotes: 0,
+		withVotes: 1,
 		againstVotingWeight: 0,
 		abstainVotingWeight: 0,
-		withVotingWeight: 0,
+		withVotingWeight: 1,
 		description: '',
 		votes: [],
 		creationgTime: 0,
@@ -44,50 +55,56 @@ export class VoteProposalComponent implements OnInit {
 		status: 0,
 	};
 
-	title = 'Overview';
+	protected votesArr: VoteData[] = [];
 
-	number = '0';
-	text1Mobile = 'VIP-101 Risk Parameters';
-	text2Mobile = 'Adjustments for SXP, TRX';
-	text3Mobile = 'and ETH';
-
-	items: Ivote[] = items;
+	// items: Ivote[] = items;
 
 	ngOnInit(): void {
+		this.fetch();
+	}
+
+	fetch() {
 		this._loading = true;
 
 		const proposalId = this.router.snapshot.params['id'];
 
 		this.proposalsSvc.getProposalNo404(proposalId).subscribe({
 			next: (res: ProposalResponse) => {
+				this._loading = false;
+
 				if (res.success) {
 					this.proposal = res.data;
+
+					console.log(this._loading);
+
+					const v: VoteData[] = this.calc();
+
+					this.votesArr = v;
+
+					console.log(this.votesArr);
 				} else {
 					this._handleError(res.message);
 				}
-
-				this._loading = false;
 			},
 			error: (err) => {
-				console.log(err.message);
-
 				this._handleError(err.message);
 
 				this._loading = false;
 			},
+			complete: () => {
+				console.log('fuck this shit 1000 timess');
+				console.log(this._loading);
+			},
 		});
 	}
 
-	protected get votesArr() {
+	protected calc(): VoteData[] {
 		const res = [];
 
 		const totalWeight =
 			this.proposal.withVotingWeight +
 			this.proposal.againstVotingWeight +
 			this.proposal.abstainVotingWeight;
-
-		
-		
 
 		// with
 		res.push({
@@ -108,7 +125,8 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.againstVotes,
 			weight: this.proposal.againstVotingWeight,
 			color: 'bg-red-1',
-			percent: totalWeight === 0 ? 0 : (this.proposal.againstVotingWeight / totalWeight) * 100,
+			percent:
+				totalWeight === 0 ? 0 : (this.proposal.againstVotingWeight / totalWeight) * 100,
 			type: 1,
 			votes: this.proposal.votes.filter((v: Vote) => v.vote === 1),
 		});
@@ -120,7 +138,8 @@ export class VoteProposalComponent implements OnInit {
 			count: this.proposal.abstainVotes,
 			weight: this.proposal.abstainVotingWeight,
 			color: 'bg-blue-1',
-			percent: totalWeight === 0 ? 0 : (this.proposal.abstainVotingWeight / totalWeight) * 100,
+			percent:
+				totalWeight === 0 ? 0 : (this.proposal.abstainVotingWeight / totalWeight) * 100,
 			type: 2,
 			votes: this.proposal.votes.filter((v: Vote) => v.vote === 2),
 		});
@@ -149,10 +168,12 @@ export class VoteProposalComponent implements OnInit {
 						if (res.success) {
 							this.toastr.info(res.message);
 
-							// add vote to total votes
-							if (type === 0) this.proposal.withVotes++;
-							else if (type === 1) this.proposal.againstVotes++;
-							else if (type === 2) this.proposal.abstainVotes++;
+							// // add vote to total votes
+							// if (type === 0) this.proposal.withVotes++;
+							// else if (type === 1) this.proposal.againstVotes++;
+							// else if (type === 2) this.proposal.abstainVotes++;1
+
+							// this.fetch();
 						} else {
 							this.toastr.error(res.message);
 						}
