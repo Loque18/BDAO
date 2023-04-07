@@ -63,9 +63,17 @@ export class StakingComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		this.web3Svc.connectEvent.subscribe(() => {
+		if (this.web3Svc.walletData.isLoggedIn) {
+			console.log('si');
+
 			this.fetchData();
-		});
+		} else {
+			console.log('no');
+
+			this.web3Svc.connectEvent.subscribe(() => {
+				this.fetchData();
+			});
+		}
 	}
 
 	// *~~*~~*~~ FORM ~~*~~*~~* //
@@ -172,8 +180,6 @@ export class StakingComponent implements OnInit {
 			next: (res: StakingResponse) => {
 				if (res.success) {
 					this.data = res.data;
-
-					console.log(this.data);
 				}
 			},
 
