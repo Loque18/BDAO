@@ -131,6 +131,12 @@ export class Web3Service {
 		this._celesteInstance.requestDisconnection();
 	}
 
+	requestChangeNetwork(network: number) {
+		if (!this.canExecute()) return;
+
+		return this._celesteInstance.requestChangeNetwork(network);
+	}
+
 	sign(msg: string): Promise<unknown> {
 		return this._celesteInstance.sign(msg);
 	}

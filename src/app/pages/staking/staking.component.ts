@@ -10,6 +10,8 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { StakingResponse } from 'src/app/shared/api/responses';
 import { StakingStats } from 'src/app/shared/models/staking/stats';
+import { ModalCoreService } from 'src/app/shared/modal/services/modal-core.service';
+import { APP_MODALS } from 'src/app/shared/static/app.modals';
 
 type Tx = {
 	amount: number;
@@ -57,7 +59,8 @@ export class StakingComponent implements OnInit {
 		protected web3Svc: Web3Service,
 		protected stakingSvc: StakingService,
 		protected toastSvc: ToastrService,
-		protected user: UserService
+		protected user: UserService,
+		private modalSvc: ModalCoreService
 	) {
 		this.titleService.setTitle('BDAO • Staking');
 	}
@@ -199,6 +202,11 @@ export class StakingComponent implements OnInit {
 
 	connect() {
 		// todo
+		this.modalSvc.openModal(APP_MODALS.WALLETS);
+	}
+
+	changeChain() {
+		this.web3Svc.requestChangeNetwork(97);
 	}
 
 	//

@@ -216,6 +216,20 @@ export class Celeste implements ICeleste {
 		this.removeWalletData();
 	}
 
+	public async requestChangeNetwork(network: number): Promise<void> {
+		if (!this._walletData.isLoggedIn) return; // if user is not logged in, do nothing
+
+		const provider = this._walletData.provider as ProviderType;
+		const strategy = StrategiesMap[provider];
+
+		this._providerContext.setStrategy(StrategiesMap[this._walletData.provider as ProviderType]);
+		console.log('calling');
+
+		await this._providerContext.requestChangeNetwork(network);
+
+		this.storeWalletData(provider, strategy);
+	}
+
 	public sign(message: string): Promise<unknown> {
 		if (!this._walletData.isLoggedIn) throw new Error('User is not logged in');
 

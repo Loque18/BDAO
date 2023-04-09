@@ -17,6 +17,7 @@ interface ICeleste {
 
 	requestConnection(providerType: 'injected' | 'linked'): Promise<void>;
 	requestDisconnection(): Promise<void>;
+	requestChangeNetwork(network: number): Promise<void>;
 	sign(message: string): Promise<unknown>;
 
 	on(eventkey: EthEvents, callback: (data: any) => void): void;

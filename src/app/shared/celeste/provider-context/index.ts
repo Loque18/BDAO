@@ -31,6 +31,10 @@ class ProviderContext {
 		return this._strategy.requestDisconnection();
 	}
 
+	requestChangeNetwork(network: number): Promise<unknown> | void {
+		return this._strategy.requestChangeNetwork(network);
+	}
+
 	getPreviosSession(): Promise<string[]> {
 		return this._strategy.getPreviosSession();
 	}
