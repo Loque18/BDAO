@@ -22,9 +22,12 @@
 		"@metamask/providers": "^10.2.1",
 		"@walletconnect/ethereum-provider": "^2.4.4",
 		"eslint": "^8.35.0",
+		"ngx-drag-scroll": "^15.0.0",
+		"ngx-owl-carousel-o": "^15.0.0",
 		"ngx-toastr": "^16.1.0",
 		"prettier": "^2.8.4",
 		"rxjs": "~7.8.0",
+		"swiper": "^9.2.0",
 		"tslib": "^2.3.0",
 		"web3": "^1.9.0",
 		"zone.js": "~0.12.0"

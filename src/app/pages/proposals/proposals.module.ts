@@ -11,7 +11,7 @@ import { CreateProposalComponent } from './create-proposal/create-proposal.compo
 
 import { ToastrModule } from 'ngx-toastr';
 import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
-
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,8 @@ import { AddressPipe } from 'src/app/shared/pipes/address/address.pipe';
 
     LayoutModule,
     ToastrModule.forRoot(),
-    AddressPipe
+    AddressPipe,
+    DragScrollModule
   ]
 })
 export class ProposalsModule { }

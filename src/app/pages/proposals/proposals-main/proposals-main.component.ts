@@ -5,6 +5,7 @@ import { AllProposalsResponse } from 'src/app/shared/api/responses';
 import { ProposalsService } from '../s/proposals.service';
 
 import { Proposal } from 'src/app/shared/models/proposal/proposal';
+import { DragScrollComponent } from 'ngx-drag-scroll';
 
 @Component({
 	selector: 'app-proposals-main',
@@ -15,6 +16,7 @@ export class ProposalsMainComponent implements OnInit {
 	loading: boolean = true;
 	error: boolean = false;
 	proposals: Proposal[] = [];
+	isTablet : boolean | undefined;
 
 	constructor(private proposalsSvc: ProposalsService) {}
 
@@ -23,6 +25,7 @@ export class ProposalsMainComponent implements OnInit {
 		this.proposalsSvc.getProposals().subscribe((res: AllProposalsResponse) => {
 			if (res.success) {
 				this.proposals = res.data as Proposal[];
+				console.log(res.data)
 			} else {
 				this.error = true;
 			}
@@ -39,21 +42,7 @@ export class ProposalsMainComponent implements OnInit {
 
 	id = 0;
 
-	slideRight(id: number): void {
-		id = id + 1;
-		console.log(id);
-		this.id = id;
-		if (this.id > 2) {
-			this.id = 0;
-		}
-	}
-
-	slideLeft(id: number): void {
-		id = id - 1;
-		console.log(id);
-		this.id = id;
-		if (this.id < 0) {
-			this.id = 2;
-		}
+	setIsTablet(){
+		this.isTablet = window.innerWidth <= 768;
 	}
 }

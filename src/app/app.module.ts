@@ -11,9 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TestComponent } from './pages/test/test.component';
 
-
 import { WalletsComponent } from './components/modals/wallets/wallets.component';
-
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 @NgModule({
   declarations: [
@@ -29,8 +28,7 @@ import { WalletsComponent } from './components/modals/wallets/wallets.component'
     ToastrModule.forRoot(),
 
     ModalModule,
-
-    
+    DragScrollModule
   ],
   bootstrap: [AppComponent]
 })

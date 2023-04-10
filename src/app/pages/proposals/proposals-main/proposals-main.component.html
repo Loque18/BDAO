@@ -15,57 +15,113 @@
 					<h1 class="text-2xl font-semibold mb-7 lg:hidden block">Proposals</h1>
 
 					<!-- proposal boxes -->
-
-					<div class="relative" *ngFor="let p of proposals; let i = index">
-						<div class="box-shadow hidden lg:block"></div>
-
-						<a
-							class="box3 !border-gray-c50 relative animation mb-8 block h-[215px]"
-							[ngClass]="i === id ? 'slide-right' : 'none'"
-							[routerLink]="['/proposals/vote', p.number]"
-						>
-							<div
-								class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
-								[ngClass]="p.status === 0 ? 'text-yellow-500' : 'text-green-500'"
-							>
-								{{ p.status === 0 ? 'PENDING' : 'ACCEPTED' }}
-							</div>
-
-							<div class="flex gap-20 justify-between h-full">
-								<div class="flex flex-col h-full">
-									<p class="text-xl font-semibold">
-										{{ p.title }}
-									</p>
-
-									<br />
-
-									<div class="flex-grow"></div>
-
-									<div class="flex gap-x-4">
-										<div
-											class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
-										>
-											#{{ p.number | number : '3.0' }}
+					<div *ngIf="isTablet">
+						<drag-scroll [scrollbar-hidden]="true" [snap-disabled]="false">
+							<div class="relative w-full" drag-scroll-item *ngFor="let item of items; let i = index">
+								<div class="box-shadow hidden lg:block"></div>
+		
+								<a
+									class="box3 !border-gray-c50 relative animation mb-8 block h-[215px]"
+									[ngClass]="i === id ? 'slide-right' : ''"
+									[routerLink]="['/proposals/vote',]"
+								>
+									<div
+										class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
+										[ngClass]="item.status === '0' ? 'text-yellow-500' : 'text-green-500'"
+									>
+										{{ item.status === '0' ? 'PENDING' : 'ACCEPTED' }}
+									</div>
+		
+									<div class="flex gap-20 justify-between h-full">
+										<div class="flex flex-col h-full">
+											<p class="text-xl font-semibold">
+												<!--{{ p.title }}-->
+											</p>
+		
+											<br />
+		
+											<div class="flex-grow"></div>
+		
+											<div class="flex gap-x-4">
+												<div
+													class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
+												>
+													#{{ item.smallText}}
+												</div>
+											</div>
+										</div>
+										<div [ngSwitch]="item.status">
+											<img
+												*ngSwitchCase="0"
+												class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+												width="90px"
+												src="/assets/icons/proposals/pending-icon.svg"
+											/>
+		
+											<img
+												*ngSwitchCase="1"
+												class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+												width="90px"
+												src="/assets/icons/proposals/accepted-icon.svg"
+											/>
 										</div>
 									</div>
-								</div>
-								<div [ngSwitch]="p.status">
-									<img
-										*ngSwitchCase="0"
-										class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-										width="90px"
-										src="/assets/icons/proposals/pending-icon.svg"
-									/>
-
-									<img
-										*ngSwitchCase="1"
-										class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
-										width="90px"
-										src="/assets/icons/proposals/accepted-icon.svg"
-									/>
-								</div>
+								</a>
 							</div>
-						</a>
+						</drag-scroll>
+					</div>
+					<div *ngIf="!isTablet">
+						<div class="relative w-full" *ngFor="let item of items; let i = index">
+							<div class="box-shadow hidden lg:block"></div>
+	
+							<a
+								class="box3 !border-gray-c50 relative animation mb-8 block h-[215px]"
+								[ngClass]="i === id ? 'slide-right' : ''"
+								[routerLink]="['/proposals/vote',]"
+							>
+								<div
+									class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
+									[ngClass]="item.status === '0' ? 'text-yellow-500' : 'text-green-500'"
+								>
+									{{ item.status === '0' ? 'PENDING' : 'ACCEPTED' }}
+								</div>
+	
+								<div class="flex gap-20 justify-between h-full">
+									<div class="flex flex-col h-full">
+										<p class="text-xl font-semibold">
+											<!--{{ p.title }}-->
+										</p>
+	
+										<br />
+	
+										<div class="flex-grow"></div>
+	
+										<div class="flex gap-x-4">
+											<div
+												class="border-3 border-secondary rounded-sm font-semibold py-3 px-2"
+											>
+												#{{ item.smallText}}
+											</div>
+										</div>
+									</div>
+									<div [ngSwitch]="item.status">
+										<img
+											*ngSwitchCase="0"
+											class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+											width="90px"
+											src="/assets/icons/proposals/pending-icon.svg"
+										/>
+	
+										<img
+											*ngSwitchCase="1"
+											class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+											width="90px"
+											src="/assets/icons/proposals/accepted-icon.svg"
+										/>
+									</div>
+								</div>
+							</a>
+						</div>
 					</div>
 				</div>
 
