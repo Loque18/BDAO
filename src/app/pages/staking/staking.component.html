@@ -217,7 +217,7 @@
 										<img src="/assets/icons/spots.svg" alt="" width="48" />
 										<div>
 											<div class="text-secondary text-2xl font-semibold">
-												${{ data.totalProfit | number : '1.2-2' }}
+												${{ data.totalProfit | number : '1.0-2' }}
 											</div>
 											<div class="text-secondary text-xl font-semibold">
 												Total Profit
@@ -244,7 +244,7 @@
 								<tr *ngFor="let r of data.rewardsHistory">
 									<td class="text-secondary">
 										<h1 class="text-xl md:text-2xl font-semibold">
-											{{ r.amount }}
+											{{ r.amount | number : '1.0-5' }}
 										</h1>
 										<h1 class="text-base md:text-xl font-medium">ETH</h1>
 									</td>
