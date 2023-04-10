@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
 
-import { AllProposalsResponse, ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
+import { ProposalsResponse, ProposalResponse, VoteResponse } from 'src/app/shared/api/responses';
 
 import { api } from 'src/app/shared/api';
 import { Proposal } from 'src/app/shared/models/proposal/proposal';
@@ -20,10 +20,10 @@ export class ProposalsService {
 	 * Get all proposals
 	 * @returns
 	 */
-	getProposals(): Observable<AllProposalsResponse> {
-		const url = api.proposals.all;
+	getProposals(address?: string): Observable<ProposalsResponse> {
+		const url = address ? api.proposals.all(address) : api.proposals.all();
 
-		return this.http.get<AllProposalsResponse>(url);
+		return this.http.get<ProposalsResponse>(url);
 		// .pipe(
 		// 	catchError(
 		// 		this.handleError<AllProposalsResponse>('getProposals', {

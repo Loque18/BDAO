@@ -40,13 +40,14 @@
 								>
 									<div
 										class="absolute -top-[3px] -left-[3px] rounded-sm py-1 px-3 bg-secondary font-semibold"
-										[ngClass]="
-											proposal.status === 0
-												? 'text-yellow-500'
-												: 'text-green-500'
-										"
 									>
-										{{ proposal.status === 0 ? 'PENDING' : 'ACCEPTED' }}
+										<ng-container [ngSwitch]="proposal.status">
+											<h1 *ngSwitchCase="0" class="text-yellow-500">
+												PENDING
+											</h1>
+											<h1 *ngSwitchCase="1" class="text-green-1">ACCEPTED</h1>
+											<h1 *ngSwitchCase="2" class="text-red-1">REJECTED</h1>
+										</ng-container>
 									</div>
 
 									<div class="flex gap-20 justify-between h-full">
@@ -79,6 +80,13 @@
 												width="90px"
 												src="/assets/icons/proposals/accepted-icon.svg"
 											/>
+
+											<img
+												*ngSwitchCase="2"
+												class="clock py-4 px-4 hidden md:block md:mr-4 xl:mr-0"
+												width="90px"
+												src="/assets/icons/proposals/rejected-icon.svg"
+											/>
 										</div>
 									</div>
 								</div>
@@ -90,7 +98,10 @@
 										<div
 											class="bg-secondary rounded px-2 py-2 text-green-1 w-16 h-16 grid place-items-center relative bottomLine cbox"
 										>
-											<i class="far fa-check-circle text-4xl"></i>
+											<img
+												src="/assets/icons/proposals/accepted-icon.svg"
+												alt=""
+											/>
 										</div>
 										<div>
 											<h1 class="text-xl font-semibold">Created</h1>
@@ -104,19 +115,65 @@
 									</div>
 									<br />
 									<div class="flex gap-x-8">
-										<div
-											class="border-3 border-gray-c50 bg-primary rounded px-2 py-2 w-16 h-16 grid place-items-center cbox"
-										>
-											<img
-												src="/assets/icons/proposals/pending-gray.svg"
-												alt=""
-											/>
-											<!-- <i class="far fa-check-circle text-4xl"></i> -->
-										</div>
-										<div class="font-semibold">
-											<h1 class="text-xl font-semibold">Executed</h1>
-											<h2 class="text-lg font-semibold">pending...</h2>
-										</div>
+										<ng-container [ngSwitch]="proposal.status">
+											<ng-container *ngSwitchCase="0">
+												<div
+													class="border-3 border-gray-c50 bg-primary rounded px-2 py-2 w-16 h-16 grid place-items-center cbox"
+												>
+													<img
+														src="/assets/icons/proposals/pending-gray.svg"
+														alt=""
+													/>
+													<!-- <i class="far fa-check-circle text-4xl"></i> -->
+												</div>
+												<div class="font-semibold">
+													<h1 class="text-xl font-semibold">Executed</h1>
+													<h2 class="text-lg font-semibold">
+														pending...
+													</h2>
+												</div>
+											</ng-container>
+											<ng-container *ngSwitchCase="1">
+												<div
+													class="bg-secondary rounded px-2 py-2 w-16 h-16 grid place-items-center"
+												>
+													<img
+														src="/assets/icons/proposals/accepted-icon.svg"
+														alt=""
+													/>
+													<!-- <i class="far fa-check-circle text-4xl"></i> -->
+												</div>
+												<div class="font-semibold">
+													<h1 class="text-xl font-semibold">Accepted</h1>
+													<h2 class="text-lg font-semibold">
+														{{
+															proposal.creationgTime * 1000
+																| date : 'dd MMM y h:mm a'
+														}}
+													</h2>
+												</div>
+											</ng-container>
+											<ng-container *ngSwitchCase="2">
+												<div
+													class="bg-secondary rounded px-2 py-2 w-16 h-16 grid place-items-center"
+												>
+													<img
+														src="/assets/icons/proposals/rejected-icon.svg"
+														alt=""
+													/>
+													<!-- <i class="far fa-check-circle text-4xl"></i> -->
+												</div>
+												<div class="font-semibold">
+													<h1 class="text-xl font-semibold">Rejected</h1>
+													<h2 class="text-lg font-semibold">
+														{{
+															proposal.creationgTime * 1000
+																| date : 'dd MMM y h:mm a'
+														}}
+													</h2>
+												</div>
+											</ng-container>
+										</ng-container>
 									</div>
 								</div>
 							</div>
@@ -217,6 +274,7 @@
 											<button
 												class="secondary-button w-full text-2xl"
 												(click)="vote(item.type, item.id)"
+												[disabled]="proposal.status !== 0"
 											>
 												{{ item.title }}
 											</button>

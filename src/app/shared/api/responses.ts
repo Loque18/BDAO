@@ -17,7 +17,7 @@ type TreasuryResponse = ApiResponse & {
 	};
 };
 
-// Proposals
+// staking
 
 type FailedStakingResponse = {
 	success: false;
@@ -33,9 +33,24 @@ type SuccessStakingResponse = {
 
 type StakingResponse = SuccessStakingResponse | FailedStakingResponse;
 
-type AllProposalsResponse = ApiResponse & {
-	data?: Proposal[];
+// All proposals
+
+type FailedProposalsResponse = {
+	success: false;
+	message: string;
+	statusCode: number;
 };
+
+type SuccessProposalsResponse = {
+	success: true;
+	data: {
+		votingWeight: 0;
+		proposals: Proposal[];
+	};
+	statusCode: number;
+};
+
+type ProposalsResponse = FailedProposalsResponse | SuccessProposalsResponse;
 
 // PROPOSALS DETAIL
 
@@ -68,4 +83,4 @@ type FailedVoteResponse = {
 
 type VoteResponse = SuccessVoteResponse | FailedVoteResponse;
 
-export { TreasuryResponse, StakingResponse, AllProposalsResponse, ProposalResponse, VoteResponse };
+export { TreasuryResponse, StakingResponse, ProposalsResponse, ProposalResponse, VoteResponse };

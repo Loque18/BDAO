@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Iproposals, items } from 'src/app/constants/proposals';
-import { AllProposalsResponse } from 'src/app/shared/api/responses';
+import { ProposalsResponse } from 'src/app/shared/api/responses';
 
 import { ProposalsService } from '../s/proposals.service';
 
 import { Proposal } from 'src/app/shared/models/proposal/proposal';
+import { Web3Service } from 'src/app/shared/services/web3.service';
 
 @Component({
 	selector: 'app-proposals-main',
@@ -15,14 +16,31 @@ export class ProposalsMainComponent implements OnInit {
 	loading: boolean = true;
 	error: boolean = false;
 	proposals: Proposal[] = [];
+	votingWeight: number = 0;
 
-	constructor(private proposalsSvc: ProposalsService) {}
+	constructor(private proposalsSvc: ProposalsService, private web3Svc: Web3Service) {}
 
 	ngOnInit(): void {
 		// get proposals
-		this.proposalsSvc.getProposals().subscribe((res: AllProposalsResponse) => {
+
+		if (!this.web3Svc.loading) {
+			this.fetch(this.web3Svc.walletData.address as string);
+		} else {
+			this.web3Svc.readyEvent.subscribe(() => {
+				if (this.web3Svc.walletData.isLoggedIn) {
+					this.fetch(this.web3Svc.walletData.address as string);
+				} else {
+					this.fetch();
+				}
+			});
+		}
+	}
+
+	fetch(address?: string) {
+		this.proposalsSvc.getProposals(address).subscribe((res: ProposalsResponse) => {
 			if (res.success) {
-				this.proposals = res.data as Proposal[];
+				this.proposals = res.data.proposals;
+				this.votingWeight = res.data.votingWeight;
 			} else {
 				this.error = true;
 			}
@@ -30,10 +48,6 @@ export class ProposalsMainComponent implements OnInit {
 			this.loading = false;
 		});
 	}
-
-	mobileText1 = 'VIP-101 Risk Parameters';
-	mobileText2 = 'Adjustments for SXP, TRX';
-	mobileText3 = 'and ETH';
 
 	items: Iproposals[] = items;
 

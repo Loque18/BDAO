@@ -74,6 +74,7 @@ export class VoteProposalComponent implements OnInit {
 
 				if (res.success) {
 					this.proposal = res.data;
+					// this.proposal.status = 0;
 
 					const v: VoteData[] = this.calc();
 
