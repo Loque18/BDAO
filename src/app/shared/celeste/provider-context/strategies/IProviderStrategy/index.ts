@@ -12,6 +12,7 @@ interface IProviderStrategy {
 
 	requestConnection(): Promise<unknown> | void;
 	requestDisconnection(): Promise<unknown> | void;
+	requestChangeNetwork(network: number): Promise<unknown> | void;
 	getPreviosSession(): Promise<string[]>;
 
 	// requestChangeNetwork(provider: any, chainId: number): Promise<void>;

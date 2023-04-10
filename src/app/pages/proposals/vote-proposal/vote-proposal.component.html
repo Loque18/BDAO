@@ -184,7 +184,7 @@
 													</h1>
 												</div>
 												<div
-													class="border-3 border-primary p-3 rounded-sm flex justify-between"
+													class="border-3 border-primary p-3 rounded-sm flex justify-between items-center"
 												>
 													<div>
 														<h1
@@ -199,8 +199,11 @@
 														</h1>
 													</div>
 
-													<a class="text-sm text-primary">
-														<i class="far fa-clone"></i>
+													<a
+														class="text-sm"
+														(click)="copyToClipboard(vote.address)"
+													>
+														<i class="far fa-clone text-primary"></i>
 													</a>
 												</div>
 											</popper-content>

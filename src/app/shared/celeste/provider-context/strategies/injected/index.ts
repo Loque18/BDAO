@@ -31,6 +31,19 @@ class InjectedProviderStrategy implements IProviderStrategy {
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	requestDisconnection(): void {}
 
+	requestChangeNetwork(network: number): void | Promise<unknown> {
+		if (!this.provider) return;
+
+		const chain = `0x${network.toString(16)}`;
+
+		console.log(chain);
+
+		return this.provider.request({
+			method: 'wallet_switchEthereumChain',
+			params: [{ chainId: chain }],
+		});
+	}
+
 	async getPreviosSession(): Promise<string[]> {
 		if (!this.provider) return [];
 

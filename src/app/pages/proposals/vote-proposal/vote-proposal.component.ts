@@ -188,4 +188,9 @@ export class VoteProposalComponent implements OnInit {
 	connectW(): void {
 		this.modalSvc.openModal(APP_MODALS.WALLETS);
 	}
+
+	copyToClipboard(msg: string): void {
+		navigator.clipboard.writeText(msg);
+		this.toastr.info('Address copied to clipboard');
+	}
 }

@@ -39,6 +39,10 @@ class LinkedProviderStrategy implements IProviderStrategy {
 		return this.provider?.disconnect();
 	}
 
+	requestChangeNetwork(): void | Promise<unknown> {
+		//
+	}
+
 	async getPreviosSession(): Promise<string[]> {
 		if (!this.provider || this.provider.accounts.length === 0) {
 			return [];

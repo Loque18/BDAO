@@ -134,13 +134,21 @@
 									</ng-container>
 
 									<ng-template #changeNetwork>
-										<button class="primary-button text-xl w-full" type="button">
+										<button
+											class="primary-button text-xl w-full"
+											type="button"
+											(click)="changeChain()"
+										>
 											Change to Eth Network
 										</button>
 									</ng-template>
 
 									<ng-template #connectBtn>
-										<button class="primary-button text-xl w-full" type="button">
+										<button
+											class="primary-button text-xl w-full"
+											type="button"
+											(click)="connect()"
+										>
 											Connect Wallet
 										</button>
 									</ng-template>
