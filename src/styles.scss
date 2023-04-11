@@ -35,3 +35,12 @@ body {
 
 	@extend .coolscroll;
 }
+
+html,
+body {
+	cursor: url(/assets/cursor.png), auto;
+}
+
+button:hover {
+	cursor: url(/assets/cursor.png), auto;
+}
