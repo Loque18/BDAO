@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Iproposals, items } from 'src/app/constants/proposals';
 import { AllProposalsResponse } from 'src/app/shared/api/responses';
 
 import { ProposalsService } from '../s/proposals.service';
 
 import { Proposal } from 'src/app/shared/models/proposal/proposal';
-import { DragScrollComponent } from 'ngx-drag-scroll';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 @Component({
 	selector: 'app-proposals-main',
@@ -17,6 +17,7 @@ export class ProposalsMainComponent implements OnInit {
 	error: boolean = false;
 	proposals: Proposal[] = [];
 	isTablet : boolean | undefined;
+	getScreenWidth: any;
 
 	constructor(private proposalsSvc: ProposalsService) {}
 
@@ -31,8 +32,21 @@ export class ProposalsMainComponent implements OnInit {
 			}
 
 			this.loading = false;
+			this.getScreenWidth = window.innerWidth;
+			if (this.getScreenWidth <= 1024){
+				this.isTablet = true
+			} else{this.isTablet = false}
 		});
+			
 	}
+	@HostListener('window:resize', ['$event'])
+	onWindowResize() {
+		this.getScreenWidth = window.innerWidth;
+		if (this.getScreenWidth <= 1024){
+			this.isTablet = true
+		}
+		else {this.isTablet = false}
+    }
 
 	mobileText1 = 'VIP-101 Risk Parameters';
 	mobileText2 = 'Adjustments for SXP, TRX';
@@ -40,9 +54,7 @@ export class ProposalsMainComponent implements OnInit {
 
 	items: Iproposals[] = items;
 
-	id = 0;
 
-	setIsTablet(){
-		this.isTablet = window.innerWidth <= 768;
-	}
+
+
 }

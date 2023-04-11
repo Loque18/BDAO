@@ -15,14 +15,13 @@
 					<h1 class="text-2xl font-semibold mb-7 lg:hidden block">Proposals</h1>
 
 					<!-- proposal boxes -->
-					<div *ngIf="isTablet">
-						<drag-scroll [scrollbar-hidden]="true" [snap-disabled]="false">
+					<div *ngIf="isTablet === true">
+						<drag-scroll [scrollbar-hidden]="true" [drag-scroll-y-disabled]="true">
 							<div class="relative w-full" drag-scroll-item *ngFor="let item of items; let i = index">
 								<div class="box-shadow hidden lg:block"></div>
 		
 								<a
 									class="box3 !border-gray-c50 relative animation mb-8 block h-[215px]"
-									[ngClass]="i === id ? 'slide-right' : ''"
 									[routerLink]="['/proposals/vote',]"
 								>
 									<div
@@ -70,13 +69,13 @@
 							</div>
 						</drag-scroll>
 					</div>
-					<div *ngIf="!isTablet">
+					<!-- disables the slider on screens bigger than 1024px -->
+					<div *ngIf="isTablet === false">
 						<div class="relative w-full" *ngFor="let item of items; let i = index">
 							<div class="box-shadow hidden lg:block"></div>
 	
 							<a
 								class="box3 !border-gray-c50 relative animation mb-8 block h-[215px]"
-								[ngClass]="i === id ? 'slide-right' : ''"
 								[routerLink]="['/proposals/vote',]"
 							>
 								<div
