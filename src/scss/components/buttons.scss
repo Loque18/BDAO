@@ -25,7 +25,7 @@
 	@apply duration-200;
 	@apply ease-in-out;
 
-	@apply hover:bg-primary;
+	@apply hover:bg-transparent;
 	@apply hover:text-secondary;
 	// @apply hover:before:opacity-100;
 
@@ -62,7 +62,7 @@
 	@apply cursor-pointer;
 	@apply text-center;
 
-	@apply bg-primary;
+	// @apply bg-primary;
 	@apply text-secondary;
 
 	@apply font-semibold;
@@ -130,7 +130,7 @@
 	@apply cursor-pointer;
 	@apply text-center;
 
-	@apply bg-primary;
+	// @apply bg-primary;
 	@apply text-secondary;
 
 	@apply font-semibold;
