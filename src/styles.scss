@@ -34,13 +34,32 @@ body {
 	// padding-top: 60px;
 
 	@extend .coolscroll;
+
+	background-image: url(/assets/bg/bg.png);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 
 html,
-body {
+body,
+button,
+input,
+select,
+textarea {
 	cursor: url(/assets/cursor.png), auto;
 }
 
-button:hover {
-	cursor: url(/assets/cursor.png), auto;
+button:hover,
+input:hover,
+select:hover,
+textarea:hover,
+a:hover {
+	cursor: url(/assets/cursor.png), pointer;
 }
+
+// button,
+// input[type='button'],
+// input[type='submit'] {
+// 	cursor: inherit;
+// }
