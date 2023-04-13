@@ -15,9 +15,9 @@
 					<h1 class="text-2xl font-semibold mb-7 lg:hidden block">Proposals</h1>
 
 					<!-- proposal boxes -->
-					<div *ngIf="isTablet === true">
-						<drag-scroll [scrollbar-hidden]="true" [drag-scroll-y-disabled]="true">
-							<div class="relative w-full" drag-scroll-item *ngFor="let item of items; let i = index">
+					<div class="lg:hidden block">
+						<drag-scroll class="h-[240px]" [scrollbar-hidden]="false" [drag-scroll-y-disabled]="true">
+							<div class="w-full pr-5 relative" drag-scroll-item *ngFor="let item of items; let i = index">
 								<div class="box-shadow hidden lg:block"></div>
 		
 								<a
@@ -70,7 +70,7 @@
 						</drag-scroll>
 					</div>
 					<!-- disables the slider on screens bigger than 1024px -->
-					<div *ngIf="isTablet === false">
+					<div class="lg:block hidden">
 						<div class="relative w-full" *ngFor="let item of items; let i = index">
 							<div class="box-shadow hidden lg:block"></div>
 	
