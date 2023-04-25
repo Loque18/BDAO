@@ -55,7 +55,15 @@ input:hover,
 select:hover,
 textarea:hover,
 a:hover {
-	cursor: url(/assets/cursor.png), pointer;
+	cursor: url(/assets/cursor.png), pointer !important;
+}
+
+a[href] {
+	cursor: url(/assets/cursor.png), pointer !important;
+}
+
+a.custom-cursor:hover {
+	cursor: url(/assets/cursor.png), pointer !important;
 }
 
 // button,
